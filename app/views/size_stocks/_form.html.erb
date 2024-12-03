@@ -1,0 +1,22 @@
+<%= form_with(model: size_stock) do |form| %>
+  <% if size_stock.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(size_stock.errors.count, "error") %> prohibited this size_stock from being saved:</h2>
+
+      <ul>
+        <% size_stock.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :stock_available, style: "display: block" %>
+    <%= form.number_field :stock_available %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

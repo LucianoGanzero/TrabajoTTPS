@@ -1,0 +1,12 @@
+<% content_for :title, "Editing size stock" %>
+
+<h1>Editing size stock</h1>
+
+<%= render "form", size_stock: @size_stock %>
+
+<br>
+
+<div>
+  <%= link_to "Show this size stock", @size_stock %> |
+  <%= link_to "Back to size stocks", size_stocks_path %>
+</div>

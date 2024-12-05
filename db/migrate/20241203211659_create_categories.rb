@@ -7,8 +7,8 @@ class CreateCategories < ActiveRecord::Migration[8.0]
     end
 
     create_table :categories_sizes, id: false do |t|
-      t.belongs_to :categories, index: true
-      t.belongs_to :sizes, index: true
+      t.belongs_to :category, index: true
+      t.belongs_to :size, index: true
     end
   end
 end

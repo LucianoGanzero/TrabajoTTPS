@@ -5,8 +5,8 @@ class User < ApplicationRecord
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   has_many :sales
-  has_one :role
+  belongs_to :role
   validates :username, presence: true, uniqueness: true
-  validates :email, presence: true, uniqueness: true
-  validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP
+  validates :email_address, presence: true, uniqueness: true
+  validates_format_of :email_address, with: URI::MailTo::EMAIL_REGEXP
 end

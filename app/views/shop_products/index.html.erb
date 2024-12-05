@@ -1,2 +1,17 @@
-<h1>ShopProducts#index</h1>
-<p>Find me in app/views/shop_products/index.html.erb</p>
+
+<div class="container pt-5">
+  <h1 class="text-center mb-5">Productos Disponibles</h1>
+  <div class="row">
+    <% @products.each do |product| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Imagen de <%= product.name %>">
+          <%= link_to shop_product_path(product), class: "card-body text-decoration-none text-dark" do %>
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text">Precio: $<%= product.unit_price %></p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

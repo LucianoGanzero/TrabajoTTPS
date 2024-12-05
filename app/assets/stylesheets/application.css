@@ -12,17 +12,18 @@
  @import "bootstrap";
 
  body {
-    margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
     color: white;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
   }
+
   .welcome-container {
     display: flex;
     justify-content: center;
@@ -44,14 +45,16 @@
   p {
     font-size: 1.5rem;
   }
+
   .container {
     height: 100%;
-    width: 100%;
-    margin: 0;
+    width: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 7em;
+    margin-bottom: 5em;
   }
 
   .login-form {
@@ -86,3 +89,39 @@
     border-color: #0d6efd; /* Color de borde cuando el input está enfocado */
     outline: none;
   }
+
+  .product-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 0;
+    margin: 0;
+  }
+
+  .elements-container {
+    width: 40%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .element-container {
+    margin-bottom: 3em;
+  }
+
+@media (max-width: 768px) { 
+  .product-container {
+    flex-direction: column;
+    align-items: center; 
+  }
+
+  .elements-container {
+    width: 60%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+  }
+}
+

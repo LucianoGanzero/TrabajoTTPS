@@ -49,7 +49,7 @@ User.create!(
 )
 
 # Crear Sizes
-clothes_size = [ 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXS' ]
+clothes_size = [  'XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL' ]
 shoes_size = [ '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47' ]
 children_shoe_size = [ '20', '21', '22', '23', '24', '25', '26', '27', '28', '30', '31', '32', '33' ]
 trousers_size = [ '28', '30', '32', '34', '36', '38', '40', '42', '44', '46', '48', '50', '52', '54', '56', '58', '60' ]
@@ -181,6 +181,9 @@ productos.each do |product_name|
   if product.name.downcase.include?('pantalón') || product.name.downcase.include?('jeans')
     product_category = categories.find { |cat| cat.name == 'Pantalones' }
     selected_sizes = trousers_size
+  elsif product.name.downcase.include?('niño') || product.name.downcase.include?('niña') || product.name.downcase.include?('infantil')
+    product_category = categories.find { |cat| cat.name == 'Calzado Infantil' }
+    selected_sizes = children_shoe_size
   elsif product.name.downcase.include?('zapatilla') || product.name.downcase.include?('calzado')
     product_category = categories.find { |cat| cat.name == 'Calzado' }
     selected_sizes = shoes_size

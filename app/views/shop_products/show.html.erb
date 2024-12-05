@@ -4,7 +4,27 @@
 <div class="product-container">
     <div style="width: 50%; margin-bottom: 2em">
         <div class="text-center">
+            <% if @product.images.attached? %>
+            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                <% @product.images.each_with_index do |image, index| %>
+                    <div class="carousel-item <%= 'active' if index == 0 %>">
+                    <%= image_tag image, class: "d-block w-100", alt: "Imagen de #{@product.name}" %>
+                    </div>
+                <% end %>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <% else %>
             <img src="https://via.placeholder.com/600x400" alt="Imagen no disponible" class="img-fluid" />
+            <% end %>
         </div>
 
         <p class="mt-4"><%= @product.description %></p>

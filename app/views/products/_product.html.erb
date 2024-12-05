@@ -15,11 +15,6 @@
   </p>
 
   <p>
-    <strong>Available stock:</strong>
-    <%= product.available_stock %>
-  </p>
-
-  <p>
     <strong>Entry date:</strong>
     <%= product.entry_date %>
   </p>
@@ -28,5 +23,19 @@
     <strong>Deactivation date:</strong>
     <%= product.deactivation_date %>
   </p>
+
+  <% if product.images.attached? %>
+  <div class="product-images">
+    <p><strong>Images</strong></p>
+    <div class="row">
+      <% product.images.each do |image| %>
+        <div class="col-md-3">
+          <%= image_tag(image, size: "200x200") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 
 </div>

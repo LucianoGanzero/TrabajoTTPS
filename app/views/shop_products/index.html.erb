@@ -5,7 +5,11 @@
     <% @products.each do |product| %>
       <div class="col-md-4 mb-4">
         <div class="card h-100">
-          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Imagen de <%= product.name %>">
+          <% if product.images.attached? %>
+            <%= image_tag product.images.first, class: "card-img-top", alt: "Imagen de #{product.name}" %>
+          <% else %>
+            <%= image_tag "https://via.placeholder.com/150", class: "card-img-top", alt: "Imagen de #{product.name}" %>
+          <% end %>
           <%= link_to shop_product_path(product), class: "card-body text-decoration-none text-dark" do %>
             <h5 class="card-title"><%= product.name %></h5>
             <p class="card-text">Precio: $<%= product.unit_price %></p>

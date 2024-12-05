@@ -109,6 +109,16 @@
   .element-container {
     margin-bottom: 3em;
   }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: black; /* Color de la flecha */
+    width: 3em; /* Tamaño de la flecha */
+    height: 3em; /* Tamaño de la flecha */
+    border-radius: 30%;
+  }
+
+  
 
 @media (max-width: 768px) { 
   .product-container {

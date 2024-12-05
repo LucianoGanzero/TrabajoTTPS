@@ -1,7 +1,8 @@
-<div class="container mt-5">
+<div class="container pt-5">
+  
   <%= tag.div(flash[:alert], class: "alert alert-danger") if flash[:alert] %>
   <%= tag.div(flash[:notice], class: "alert alert-success") if flash[:notice] %>
-
+  <h1>Inicio de sesión</h1>
   <%= form_with url: session_path, class: "needs-validation" do |form| %>
     <div class="form-group mb-3">
       <%= form.label :email_address, "Email", class: "form-label mt-4" %>

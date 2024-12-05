@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bienvenidos a Avivas</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        color: white;
+        height: 100vh;
+        background: url('<%= @background_image %>') no-repeat center center fixed;
+        overflow: hidden;
+        background-size: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="welcome-container">
+      <div class="welcome-text">
+        <h1>Bienvenidos a Avivas</h1>
+        <p>Tu mejor elección para ropa deportiva</p>
+      </div>
+    </div>
+  </body>
+</html>

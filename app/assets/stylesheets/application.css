@@ -8,3 +8,81 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ @import "bootstrap";
+
+ body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+  }
+  .welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .welcome-text {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+  }
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: white;
+  }
+  p {
+    font-size: 1.5rem;
+  }
+  .container {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-form {
+    width: 100%;
+    max-width: 400px; /* Máximo ancho del formulario */
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .form-control:focus {
+    border-color: #0d6efd; /* Color de borde cuando el input está enfocado */
+    outline: none;
+  }

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  root "welcome#index"
+  resource :session
+  resources :passwords, param: :token
+
+  resources :shop_products, only: [ :index, :show ]
   resources :size_stocks
   resources :roles
   resources :users

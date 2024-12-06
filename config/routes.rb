@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
 
   resources :shop_products, only: [ :index, :show ]
+  resources :dashboard, only: [ :index ]
   resources :size_stocks
   resources :roles
   resources :users

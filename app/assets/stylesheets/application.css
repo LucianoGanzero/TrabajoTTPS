@@ -9,8 +9,6 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
- @import "bootstrap";
-
  html, body {
   height: 100%;
   margin: 0;
@@ -20,6 +18,7 @@
     padding: 0;
     font-family: 'Arial', sans-serif;
     color: white;
+    background-color: #fafafa !important;
     width: 100%;
     background-size: cover;
     background-position: center;
@@ -163,7 +162,31 @@
     height: 3em; 
     border-radius: 30%;
   }
+  
 
+  .chip {
+  display: inline-block;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  padding: 5px 10px;
+  margin: 5px;
+  font-size: 14px;
+  cursor: default;
+}
+
+.chip-close {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 16px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.stock-btn {
+  font-size: 1rem !important;
+}
   
 
 @media (max-width: 768px) { 

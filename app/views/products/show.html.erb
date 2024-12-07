@@ -1,10 +1,160 @@
-<p style="color: green"><%= notice %></p>
+<div class="container pt-5 pb-5">
+  
+  <h1 class="text-center mb-5">Articulo #<%= @product.id %></h1>
 
-<%= render @product %>
+<div class="product-container">
+  
+    <div style="width: 50%; margin-bottom: 2em">
+        <div class="text-center">
+            <% if @product.images.attached? %>
+            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                <% @product.images.each_with_index do |image, index| %>
+                    <div class="carousel-item <%= 'active' if index == 0 %>">
+                    <%= image_tag image, class: "d-block w-100", alt: "Imagen de #{@product.name}" %>
+                    </div>
+                <% end %>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <% else %>
+            <img src="https://via.placeholder.com/600x400" alt="Imagen no disponible" class="img-fluid" />
+            <% end %>
+        </div>
 
-<div>
-  <%= link_to "Edit this product", edit_product_path(@product) %> |
-  <%= link_to "Back to products", products_path %>
+         
+          <div class="text-center mt-5">
+            <%= link_to "Editar", edit_product_path(@product), class:"btn btn-primary" %>
 
-  <%= button_to "Destroy this product", @product, method: :delete %>
+          </div>
+      </div>
+
+      <div class="elements-container">
+
+          <h4>Nombre</h4>
+          <p><%= @product.name %></p>
+
+          <h4 class="mt-3">Descripcion</h4>
+          <p ><%= @product.description %></p>
+
+          <h4 class="mt-3">Precio unitario</h4>
+          <p><%= number_to_currency(@product.unit_price) %></p>
+
+          <h4 class="mt-3">Marca</h4>
+          <p ><%= @product.brand.name %></p>
+
+          <h4 class="mt-3">Colores</h4>
+          <p>
+          <% if @product.colors.any? %>
+            <% @product.colors.each do |color| %>
+            <span class="chip">
+              <span style="display: inline-block; margin-right: 10px;">
+                <span style="background-color: <%= color.code %>; width: 15px; height: 15px; display: inline-block; border: 1px solid #000; vertical-align: middle;"></span>
+                <%= color.name %>
+              </span>
+              <%= link_to 'X', disassociate_product_color_path(@product, color), data: { turbo_method: :patch }, class: "chip-close text-decoration-none"%>
+              </span>
+            <% end %>
+          <% else %>
+            <span>El producto no tiene colores asociados</span>
+          <% end %>
+          </p>
+
+
+          <h4 class="mt-3">Etiquetas</h4>
+          <p>
+            <% if @product.categories.any? %>
+              <% @product.categories.each do |category| %>
+                <span class="chip">
+                  <%= category.name %>
+                  <%= link_to 'X', disassociate_product_category_path(@product, category), data: { turbo_method: :patch }, class: "chip-close text-decoration-none"%>
+                </span>
+              <% end %>
+            <% else %>
+              <span>El producto no tiene etiquetas asociadas</span>
+            <% end %>
+          </p>
+      </div>
+  
+        
+    </div>
+
+  <div class="mt-5" style="width: 100%;">
+  <h3 class="text-center">Tabla de stocks</h3>
+  <div class="row" style="display: flex; justify-content: space-evenly">
+    <div class="col-md-5">
+      <table class="table table-bordered table-striped table-hover mb-5">
+        <thead>
+          <tr>
+            <th>Talle</th>
+            <th>Stock</th>
+            <th>Quitar</th>
+            <th>Agregar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @product.size_stocks.first(@product.size_stocks.size / 2).each do |size_stock| %>
+            <tr class="<%= 'table-danger' if size_stock.stock_available == 0 %>">
+              <td><%= size_stock.size.size %></td>
+              <td id="size_stock_<%= size_stock.id %>"><%= size_stock.stock_available %></td>              
+              <td><%= link_to '-', decrement_size_stock_path(size_stock), data: { turbo_method: :patch, turbo_stream: true }, class: "btn btn-outline-primary btn-sm stock-btn" %></td>
+              <td><%= link_to '+', increment_size_stock_path(size_stock), data: { turbo_method: :patch, turbo_stream: true }, class: "btn btn-outline-primary btn-sm stock-btn" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-5">
+      <table class="table table-bordered table-striped table-hover mb-5">
+        <thead>
+          <tr>
+            <th>Talle</th>
+            <th>Stock</th>
+            <th>Quitar</th>
+            <th>Agregar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @product.size_stocks.last(@product.size_stocks.size / 2).each do |size_stock| %>
+            <tr class="<%= 'table-danger' if size_stock.stock_available == 0 %>">
+              <td><%= size_stock.size.size %></td>
+              <td id="size_stock_<%= size_stock.id %>"><%= size_stock.stock_available %></td>
+              <td><%= link_to '-', decrement_size_stock_path(size_stock), data: { turbo_method: :patch, turbo_stream: true }, class: "btn btn-outline-primary btn-sm stock-btn" %></td>
+              <td><%= link_to '+', increment_size_stock_path(size_stock), data: { turbo_method: :patch, turbo_stream: true }, class: "btn btn-outline-primary btn-sm stock-btn" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
+    <div class="mt-4">
+        <%= link_to 'Volver', products_path, class: 'btn btn-outline-dark' %>
+    </div>
+
+    
+</div>
+
+<script>
+  // Incrementar y decrementar cantidad
+  // document.getElementById('increaseQuantity').addEventListener('click', function() {
+  //   const quantityInput = document.getElementById('quantity');
+  //   quantityInput.value = parseInt(quantityInput.value) + 1;
+  // });
+
+  // document.getElementById('decreaseQuantity').addEventListener('click', function() {
+  //   const quantityInput = document.getElementById('quantity');
+  //   if (parseInt(quantityInput.value) > 0) {
+  //     quantityInput.value = parseInt(quantityInput.value) - 1;
+  //   }
+  // });
+
+</script>

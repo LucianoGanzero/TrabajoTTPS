@@ -57,6 +57,17 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def disassociate
+    product = Product.find(params[:product_id])
+    category = Category.find(params[:id])
+
+    if product.categories.delete(category)
+      redirect_to product_path(product), notice: "La etiqueta '#{category.name}' se desasoció del producto."
+    else
+      redirect_to product_path(product), alert: "No se pudo desasociar la etiqueta '#{category.name}' del producto."
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category

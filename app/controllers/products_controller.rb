@@ -3,7 +3,8 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @active_products = Product.active
+    @deactivated_products = Product.deactivated
   end
 
   # GET /products/1 or /products/1.json
@@ -54,6 +55,26 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to products_path, status: :see_other, notice: "Product was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def deactivate
+    @product = Product.find(params[:id])
+
+    if @product.update(deactivated: true, deactivation_date: Date.today)
+      redirect_to products_path, notice: "Producto discontinuado correctamente."
+    else
+      redirect_to products_path, alert: "Hubo un problema al discontinuar el producto."
+    end
+  end
+
+  def activate
+    @product = Product.find(params[:id])
+
+    if @product.update(deactivated: false)
+      redirect_to products_path, notice: "Producto activado correctamente."
+    else
+      redirect_to products_path, alert: "Hubo un problema al activar el producto."
     end
   end
 

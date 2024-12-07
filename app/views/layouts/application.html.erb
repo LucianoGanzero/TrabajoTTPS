@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+        <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -83,10 +88,21 @@
   <body>
 
     <div class="main-content">
+      <div class="text-center mt-3">
+        <% if notice %>
+        <div class="alert alert-success alert-dismissible fade show d-inline-block w-auto text-center" role="alert" id="notice-message">
+          <%= notice %>
+        </div>
+        <% end %>
+        <% if alert %>
+          <div class="alert alert-warning alert-dismissible fade show d-inline-block w-auto text-center" role="alert" id="alert-message">
+            <%= alert %>
+          </div>
+        <% end %>
+      </div>
     <%= yield %>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
 
   </body>
   <footer class="bg-dark fixed-bottom text-center text-white d-flex align-items-center justify-content-center py-1">    

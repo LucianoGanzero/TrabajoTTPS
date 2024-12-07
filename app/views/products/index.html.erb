@@ -1,16 +1,82 @@
-<p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Products" %>
-
-<h1>Products</h1>
-
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
+<div class="container pt-5 pb-5">
+  <% if notice %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" id="notice-message">
+      <%= notice %>
+    </div>
   <% end %>
-</div>
+  <h1 class="text-center mb-5">Productos Activos</h1>
+ <% if @active_products.empty? %>
+    <p class="text-center mb-4">No hay productos activos.</p>
+  <% else %>
+  <table class="table table-bordered table-striped table-hover mb-5">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock total</th>
+        <th>Imágenes</th>
+        <th>Fecha de Entrada</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @active_products.each do |product| %>
+        <tr>
+          <td style="padding-right: 0.1px"><%= link_to "Ver", product_path(product),  class:"btn btn-primary btn-sm" %></td>
+          <td><%= product.name %></td>
+          <td class="text-end"><%= number_to_currency(product.unit_price) %></td>
+          <td class="text-end"><%= product.size_stocks.sum { |size| size.stock_available } %></td>
+          <td class="text-end"><%= product.images.count %></td>
+          <td><%= product.entry_date.strftime('%d/%m/%Y') %></td>
+          <td style="padding-right: 0.01px">
+            <%= form_with model: product, url: deactivate_product_path(product), method: :patch, local: true do |form| %>
+              <%= form.submit "Discontinuar", class: "btn btn-outline-warning btn-sm" %>
+            <% end %>
+          </td>
+        </tr>
+      
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
 
-<%= link_to "New product", new_product_path %>
+  <%= link_to "Agregar producto", new_product_path, class:"btn btn-lg btn-primary" %>
+
+  <h1 class="text-center mb-5 mt-5">Productos Discontinuados</h1>
+  <% if @deactivated_products.empty? %>
+    <p class="text-center mb-4">No hay productos discontinuados.</p>
+  <% else %>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Imágenes</th>
+        <th>Fecha de Alta</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @deactivated_products.each do |product| %>
+        <tr>
+          <td style="padding-right: 0.1px"><%= link_to "Ver", product_path(product),  class:"btn btn-primary btn-sm" %></td>
+          <td><%= product.name %></td>
+          <td class="text-end"><%= number_to_currency(product.unit_price) %></td>
+          <td class="text-end"><%= product.images.count %></td>
+          <td><%= product.entry_date.strftime('%d/%m/%Y') %></td>
+          <td style="padding-right: 0.01px">
+            <%= form_with model: product, url: activate_product_path(product), method: :patch, local: true do |form| %>
+              <%= form.submit "Reactivar", class: "btn btn-outline-success btn-sm" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+
+  
+</div>

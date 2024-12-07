@@ -57,6 +57,17 @@ class ColorsController < ApplicationController
     end
   end
 
+  def disassociate
+    product = Product.find(params[:product_id])
+    color = Color.find(params[:id])
+
+    if product.colors.delete(color)
+      redirect_to product_path(product), notice: "El color '#{color.name}' se desasoció del producto."
+    else
+      redirect_to product_path(product), alert: "No se pudo desasociar el color '#{color.name}' del producto."
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_color

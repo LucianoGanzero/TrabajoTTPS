@@ -1,5 +1,5 @@
 class SizeStocksController < ApplicationController
-  before_action :set_size_stock, only: %i[ show edit update destroy ]
+  before_action :set_size_stock, only: %i[ show edit update destroy increment decrement ]
 
   # GET /size_stocks or /size_stocks.json
   def index
@@ -56,6 +56,34 @@ class SizeStocksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # PATCH /size_stocks/:id/increment
+  def increment
+    @size_stock.increment!(:stock_available)
+
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.update("size_stock_#{@size_stock.id}", partial: "size_stocks/size_stock", locals: { size_stock: @size_stock })
+      }
+    end
+  end
+
+  # PATCH /size_stocks/:id/decrement
+  def decrement
+    if @size_stock.stock_available > 0
+      if @size_stock.decrement!(:stock_available)
+        respond_to do |format|
+          format.turbo_stream {
+            render turbo_stream: turbo_stream.update("size_stock_#{@size_stock.id}", partial: "size_stocks/size_stock", locals: { size_stock: @size_stock })          }
+        end
+      else
+        redirect_to product_path(@size_stock.product), alert: "Hubo un problema al actualizar el stock."
+      end
+    else
+      redirect_to product_path(@size_stock.product), alert: "El stock no puede ser menor que 0."
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

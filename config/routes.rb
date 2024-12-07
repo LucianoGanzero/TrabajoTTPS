@@ -5,7 +5,12 @@ Rails.application.routes.draw do
 
   resources :shop_products, only: [ :index, :show ]
   resources :dashboard, only: [ :index ]
-  resources :size_stocks
+  resources :size_stocks do
+    member do
+      patch :increment
+      patch :decrement
+    end
+  end
   resources :roles
   resources :users
   resources :sales
@@ -13,7 +18,18 @@ Rails.application.routes.draw do
   resources :colors
   resources :sizes
   resources :categories
-  resources :products
+  resources :products do
+    resources :categories, only: [ :update ] do
+      patch :disassociate, on: :member
+    end
+    resources :colors, only: [ :update ] do
+      patch :disassociate, on: :member
+    end
+    member do
+      patch :deactivate
+      patch :activate
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

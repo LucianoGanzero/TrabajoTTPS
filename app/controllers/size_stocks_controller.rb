@@ -59,28 +59,36 @@ class SizeStocksController < ApplicationController
 
   # PATCH /size_stocks/:id/increment
   def increment
-    @size_stock.increment!(:stock_available)
+    if @size_stock.product.deactivated
+      redirect_back fallback_location: root_path, alert: "No se puede modificar el stock de un producto discontinuado."
+    else
+      @size_stock.increment!(:stock_available)
 
-    respond_to do |format|
-      format.turbo_stream {
-        render turbo_stream: turbo_stream.update("size_stock_#{@size_stock.id}", partial: "size_stocks/size_stock", locals: { size_stock: @size_stock })
-      }
+      respond_to do |format|
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.update("size_stock_#{@size_stock.id}", partial: "size_stocks/size_stock", locals: { size_stock: @size_stock })
+        }
+      end
     end
   end
 
   # PATCH /size_stocks/:id/decrement
   def decrement
-    if @size_stock.stock_available > 0
-      if @size_stock.decrement!(:stock_available)
-        respond_to do |format|
-          format.turbo_stream {
-            render turbo_stream: turbo_stream.update("size_stock_#{@size_stock.id}", partial: "size_stocks/size_stock", locals: { size_stock: @size_stock })          }
+    if @size_stock.product.deactivated
+      redirect_back fallback_location: root_path, alert: "No se puede modificar el stock de un producto discontinuado."
+    else
+      if @size_stock.stock_available > 0
+        if @size_stock.decrement!(:stock_available)
+          respond_to do |format|
+            format.turbo_stream {
+              render turbo_stream: turbo_stream.update("size_stock_#{@size_stock.id}", partial: "size_stocks/size_stock", locals: { size_stock: @size_stock })          }
+          end
+        else
+          redirect_to product_path(@size_stock.product), alert: "Hubo un problema al actualizar el stock."
         end
       else
-        redirect_to product_path(@size_stock.product), alert: "Hubo un problema al actualizar el stock."
+        redirect_to product_path(@size_stock.product), alert: "El stock no puede ser menor que 0."
       end
-    else
-      redirect_to product_path(@size_stock.product), alert: "El stock no puede ser menor que 0."
     end
   end
 

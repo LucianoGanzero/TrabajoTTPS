@@ -187,7 +187,43 @@
 .stock-btn {
   font-size: 1rem !important;
 }
-  
+
+/* Limitar el ancho de cada grupo de checkboxes */
+.checkbox-group {
+  max-width: 100%;  /* Asegura que los checkboxes no se expandan más de lo necesario */
+  display: flex;
+  flex-wrap: wrap;  /* Permite que los checkboxes se vayan a la siguiente línea */
+  gap: 0;  /* Elimina el espacio entre los elementos dentro del contenedor */
+}
+
+/* Eliminar márgenes y rellenos en cada checkbox y label */
+.checkbox-group .form-check {
+  margin: 0;  /* Elimina el margen entre los checkboxes */
+  padding: 0; /* Elimina el relleno */
+}
+
+/* Asegurarse de que el label y el checkbox estén pegados */
+.checkbox-group .btn-check {
+  margin: 0;  /* Elimina cualquier margen alrededor del checkbox */
+}
+
+/* Estilo por defecto (sin selección) para los checkboxes de color */
+.checkbox-group .color-checkbox:not(:checked) + label {
+  background-color: transparent;  /* Fondo transparente por defecto */
+}
+
+/* Estilo cuando el checkbox de color está seleccionado */
+.checkbox-group .color-checkbox:checked + label {
+  background-color: var(--color); /* Color de fondo según el color de cada checkbox */
+  color: white;                   /* Texto blanco cuando está seleccionado */
+}
+
+/* Se asegura de que los colores se apliquen desde el atributo data-color */
+.checkbox-group .color-checkbox:checked + label {
+  background-color: unset;
+  color: unset;
+}
+
 
 @media (max-width: 768px) { 
   .product-container {

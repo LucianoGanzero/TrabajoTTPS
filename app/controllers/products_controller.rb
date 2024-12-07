@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: "Product was successfully created." }
+        format.html { redirect_to @product, notice: "El producto se creo correctamente" }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -61,13 +61,19 @@ class ProductsController < ApplicationController
   def deactivate
     @product = Product.find(params[:id])
 
-    if @product.update(deactivated: true, deactivation_date: Date.today)
-      redirect_to products_path, notice: "Producto discontinuado correctamente."
-    else
-      redirect_to products_path, alert: "Hubo un problema al discontinuar el producto."
-    end
-  end
+    ActiveRecord::Base.transaction do
+      @product.size_stocks.update_all(stock_available: 0)
 
+      if @product.update(deactivated: true, deactivation_date: Date.today)
+        redirect_to products_path, notice: "Producto discontinuado correctamente."
+      else
+        raise ActiveRecord::Rollback
+      end
+    end
+
+  rescue => e
+    redirect_to products_path, alert: "Hubo un problema al discontinuar el producto: #{e.message}"
+  end
   def activate
     @product = Product.find(params[:id])
 
@@ -86,6 +92,9 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.expect(product: [ :name, :description, :unit_price, :entry_date, :deactivation_date, images: [] ])
+      params.require(:product).permit(
+        :name, :description, :unit_price, :entry_date, :deactivation_date, :brand_id,
+        size_ids: [], category_ids: [], color_ids: [], images: []
+      )
     end
 end

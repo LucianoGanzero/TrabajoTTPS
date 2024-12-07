@@ -9,6 +9,15 @@
 #   end
 
 # db/seeds.rb
+# Eliminar todo antes de ejecutar
+User.destroy_all
+Category.destroy_all
+Product.destroy_all
+Role.destroy_all
+Size.destroy_all
+Color.destroy_all
+Brand.destroy_all
+SizeStock.destroy_all
 
 # Crear Roles
 roles = [ 'Administrador', 'Gerente', 'Empleado' ]

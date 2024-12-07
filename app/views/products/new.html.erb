@@ -1,11 +1,13 @@
-<% content_for :title, "New product" %>
-
-<h1>New product</h1>
-
+<% content_for :title, "Nuevo producto" %>
+<div class="container">
+<h1>Nuevo producto</h1>
+<div style="width: 60%; justify-content: center">
 <%= render "form", product: @product %>
-
+</div>
 <br>
 
-<div>
-  <%= link_to "Back to products", products_path %>
+<div class="mt-4">
+  <%= link_to "Volver a productos", products_path %>
+</div>
+
 </div>

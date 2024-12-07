@@ -11,42 +11,106 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.textarea :description %>
-  </div>
-
-  <div>
-    <%= form.label :unit_price, style: "display: block" %>
-    <%= form.text_field :unit_price %>
-  </div>
-
-  <div>
-    <%= form.label :available_stock, style: "display: block" %>
-    <%= form.number_field :available_stock %>
-  </div>
-
-  <div>
-    <%= form.label :entry_date, style: "display: block" %>
-    <%= form.datetime_field :entry_date %>
-  </div>
-
-  <div>
-    <%= form.label :deactivation_date, style: "display: block" %>
-    <%= form.datetime_field :deactivation_date %>
+  <div class="form-group">
+    <%= form.label :name, "Nombre", for:"name", class: "form-label mt-4" %>
+    <%= form.text_field :name, class:"form-control", id:"name" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :images, "Images" %>
+    <%= form.label :description, "Descripción", for:"description", class: "form-label mt-4"%>
+    <%= form.textarea :description, class:"form-control", id:"description", rows:"3"%>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :unit_price, "Precio unitario ",for:"unitPrice", class: "form-label mt-4" %>
+    <%= form.number_field :unit_price, step: 0.01, class: "form-control", id:"unitPrice" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :entry_date, "Fecha de entrada", for:"entryDate", class: "form-label mt-4" %>
+    <%= form.date_field :entry_date, class: "form-control", id:"entryDate" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :brand_id, "Marca", class: "form-label mt-4" %>
+    <%= form.collection_select :brand_id, Brand.all, :id, :name, { prompt: "Seleccione una marca" }, { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :images, "Imagenes", class: "form-label mt-4" %>
     <%= form.file_field :images, multiple: true, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+<div class="form-group">
+  <%= form.label :category_ids, "Categorías", class: "form-label mt-4" %>
+  <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Categorías">
+    <%= form.collection_check_boxes :category_ids, Category.order(:name), :id, :name do |b| %>
+      <div class="form-check form-check-inline">
+        <%= b.check_box(class: "btn-check", id: "category_#{b.object.id}") %>
+        <label class="btn btn-outline-primary" for="category_<%= b.object.id %>">
+          <%= b.object.name %>
+        </label>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="form-group">
+    <%= form.label :size_ids, "Talles", class: "form-label mt-4" %>
+    <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Talles">
+      <%= form.collection_check_boxes :size_ids, Size.numeric_sizes, :id, :size do |b| %>
+        <div class="form-check form-check-inline">
+          <%= b.check_box(class: "btn-check", id: "size_#{b.object.id}") %>
+          <label class="btn btn-outline-primary" for="size_<%= b.object.id %>">
+            <%= b.object.size %>
+          </label>
+        </div>
+      <% end %>
+
+      <span class="w-100"></span>
+
+
+      <%= form.collection_check_boxes :size_ids, Size.letter_sizes, :id, :size do |b| %>
+        <div class="form-check form-check-inline">
+          <%= b.check_box(class: "btn-check", id: "size_#{b.object.id}") %>
+          <label class="btn btn-outline-primary" for="size_<%= b.object.id %>">
+            <%= b.object.size %>
+          </label>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+<div class="form-group">
+  <%= form.label :color_ids, "Colores", class: "form-label mt-4" %>
+  <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Colores">
+    <%= form.collection_check_boxes :color_ids, Color.order(:name), :id, :name do |b| %>
+      <div class="form-check form-check-inline">
+        <%= b.check_box(class: "btn-check color-checkbox", id: "color_#{b.object.id}", data: { color: b.object.code }) %>
+        <label class="btn btn-outline-primary color-label" for="color_<%= b.object.id %>" data-color="<%= b.object.code %>">
+          <%= b.object.name %>
+        </label>
+      </div>
+    <% end %>
+  </div>
+</div>
+  <div class="mt-4 text-center">
+    <%= form.submit (product.persisted? ? "Actualizar producto" : "Crear producto"), class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script>
+document.querySelectorAll('.color-checkbox').forEach(function (checkbox) {
+  checkbox.addEventListener('change', function () {
+    let label = checkbox.nextElementSibling;  // Seleccionamos el label asociado al checkbox
+    let color = checkbox.getAttribute('data-color');  // Obtenemos el código de color desde el data-color
+    if (checkbox.checked) {
+      label.style.backgroundColor = color;  // Cambiar el color de fondo del label
+      label.style.borderColor = color;  // Cambiar el borde
+    } else {
+      label.style.backgroundColor = '';  // Eliminar el color de fondo si no está marcado
+      label.style.borderColor = '';  // Eliminar el borde
+    }
+  });
+});
+</script>

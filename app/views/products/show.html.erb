@@ -104,8 +104,16 @@
             <tr class="<%= 'table-danger' if size_stock.stock_available == 0 %>">
               <td><%= size_stock.size.size %></td>
               <td id="size_stock_<%= size_stock.id %>"><%= size_stock.stock_available %></td>              
-              <td><%= link_to '-', decrement_size_stock_path(size_stock), data: { turbo_method: :patch, turbo_stream: true }, class: "btn btn-outline-primary btn-sm stock-btn" %></td>
-              <td><%= link_to '+', increment_size_stock_path(size_stock), data: { turbo_method: :patch, turbo_stream: true }, class: "btn btn-outline-primary btn-sm stock-btn" %></td>
+              <td><%= link_to '-', 
+              decrement_size_stock_path(size_stock), 
+              data: { turbo_method: :patch, turbo_stream: true }, 
+              class: "btn btn-outline-primary btn-sm stock-btn",
+              disabled: @product.deactivated %></td>
+              <td><%= link_to '+', 
+              increment_size_stock_path(size_stock), 
+              data: { turbo_method: :patch, turbo_stream: true }, 
+              class: "btn btn-outline-primary btn-sm stock-btn",
+              disabled: @product.deactivated %></td>
             </tr>
           <% end %>
         </tbody>
@@ -126,8 +134,16 @@
             <tr class="<%= 'table-danger' if size_stock.stock_available == 0 %>">
               <td><%= size_stock.size.size %></td>
               <td id="size_stock_<%= size_stock.id %>"><%= size_stock.stock_available %></td>
-              <td><%= link_to '-', decrement_size_stock_path(size_stock), data: { turbo_method: :patch, turbo_stream: true }, class: "btn btn-outline-primary btn-sm stock-btn" %></td>
-              <td><%= link_to '+', increment_size_stock_path(size_stock), data: { turbo_method: :patch, turbo_stream: true }, class: "btn btn-outline-primary btn-sm stock-btn" %></td>
+              <td><%= link_to '-',
+               decrement_size_stock_path(size_stock), 
+               data: { turbo_method: :patch, turbo_stream: true }, 
+               class: "btn btn-outline-primary btn-sm stock-btn",
+               disabled: @product.deactivated %></td>
+              <td><%= link_to '+', 
+              increment_size_stock_path(size_stock), 
+              data: { turbo_method: :patch, turbo_stream: true }, 
+              class: "btn btn-outline-primary btn-sm stock-btn",
+              disabled: @product.deactivated %></td>
             </tr>
           <% end %>
         </tbody>

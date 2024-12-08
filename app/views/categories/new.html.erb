@@ -1,11 +1,14 @@
-<% content_for :title, "New category" %>
 
-<h1>New category</h1>
-
+<% content_for :title, "Nueva categoría" %>
+<div class="container">
+<h1>Nueva categoría</h1>
+<div style="width: 60%; justify-content: center">
 <%= render "form", category: @category %>
-
+</div>
 <br>
 
-<div>
-  <%= link_to "Back to categories", categories_path %>
+<div class="mt-4">
+  <%= link_to "Volver a gestión", store_management_path %>
+</div>
+
 </div>

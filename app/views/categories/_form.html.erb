@@ -11,12 +11,12 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name, "Nombre", for:"name", class: "form-label mt-4" %>
+    <%= form.text_field :name, class:"form-control", id:"name" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mt-4 text-center">
+    <%= form.submit (category.persisted? ? "Actualizar categoria" : "Crear categoría"), class: "btn btn-primary" %>
   </div>
-<% end %>
+<% end %> 

@@ -1,14 +1,12 @@
 <div class="container">
     <h1 class="text-center mb-4">Dashboard</h1>
     <div class="dashboard-container">
-        <!-- Primera fila -->
         <div class="gap-3 mb-4" style="display: flex; width: 100%">
             <%= link_to 'Inventario', products_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
             <%= link_to 'Ventas', sales_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
         </div>
-        <!-- Segunda fila -->
         <div class="gap-3" style="display: flex; width: 100%">
-            <%= link_to 'Gestión de Tienda', categories_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
+            <%= link_to 'Gestión de Tienda', store_management_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
             <% if Current.user.role.name != 'Empleado' %>
                 <%= link_to 'Usuarios', users_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
             <% end %>

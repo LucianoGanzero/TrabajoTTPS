@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :shop_products, only: [ :index, :show ]
   resources :dashboard, only: [ :index ]
+  get "store_management", to: "dashboard#store_management", as: :store_management
   resources :size_stocks do
     member do
       patch :increment

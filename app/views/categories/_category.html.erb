@@ -1,7 +1,15 @@
 <div id="<%= dom_id category %>">
-  <p>
-    <strong>Name:</strong>
-    <%= category.name %>
-  </p>
+  <h4>Nombre</h4>
+  <p><%= category.name %></p>
 
+  <h4 class="text-center mt-5">Productos asociados</h2>
+  <% if category.products.any? %>
+    <ul>
+      <% category.products.each do |product| %>
+        <li><%= product.name %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No hay productos asociados a esta categoría.</p>
+  <% end %>
 </div>

@@ -11,17 +11,18 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name, "Nombre", for:"name", class: "form-label mt-4" %>
+    <%= form.text_field :name, class:"form-control", id:"name" %>
   </div>
 
-  <div>
-    <%= form.label :code, style: "display: block" %>
-    <%= form.text_field :code %>
+  <div class="form-group">
+    <%= form.label :code, "Color", for: "code", class: "form-label mt-4" %>
+    <%= form.color_field :code, class: "form-control", id: "code", value: color.code %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mt-4 text-center">
+    <%= form.submit (color.persisted? ? "Actualizar color" : "Crear color"), class: "btn btn-primary" %>
   </div>
 <% end %>
+ 

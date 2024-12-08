@@ -1,11 +1,13 @@
-<% content_for :title, "New color" %>
-
-<h1>New color</h1>
-
+<% content_for :title, "Nuevo color" %>
+<div class="container">
+<h1>Nuevo color</h1>
+<div style="width: 60%; justify-content: center">
 <%= render "form", color: @color %>
-
+</div>
 <br>
 
-<div>
-  <%= link_to "Back to colors", colors_path %>
+<div class="mt-4">
+  <%= link_to "Volver a gestión", store_management_path %>
+</div>
+
 </div>

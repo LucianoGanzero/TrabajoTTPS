@@ -1,10 +1,16 @@
-<p style="color: green"><%= notice %></p>
+ <div class="container">
+  
+  <h1 class="text-center mb-5">Color #<%= @color.id %></h1>
 
-<%= render @color %>
+  <%= render @color  %>
 
-<div>
-  <%= link_to "Edit this color", edit_color_path(@color) %> |
-  <%= link_to "Back to colors", colors_path %>
-
-  <%= button_to "Destroy this color", @color, method: :delete %>
-</div>
+<div class="mt-5 " style="width: 30%;">
+  <div style="display: flex; justify-content: space-evenly;">
+    <%= link_to "Editar", edit_color_path(@color), class:"btn btn-primary" %> 
+    <%= link_to "Volver a gestión", store_management_path, class:"btn btn-primary" %>
+  </div>
+  <div class="text-center mt-5">
+    <%= button_to "Eliminar color", @color, method: :delete, class:"btn btn-outline-danger" %>
+  </div>
+  </div>
+ </div>

@@ -1,15 +1,11 @@
 <%= form_with(model: product) do |form| %>
-  <% if product.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-      <ul>
-        <% product.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <% if @product.errors.any? %>
+      <div class="alert alert-danger alert-dismissible fade show d-inline-block w-auto text-center" role="alert" id="error-message">
+          <% @product.errors.full_messages.each do |message| %>
+            <p><%= message %></p>
+          <% end %>
+      </div>
+    <% end %>
 
   <div class="form-group">
     <%= form.label :name, "Nombre", for:"name", class: "form-label mt-4" %>
@@ -42,12 +38,26 @@
   </div>
 
 <div class="form-group">
-  <%= form.label :category_ids, "Categorías", class: "form-label mt-4" %>
-  <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Categorías">
-    <%= form.collection_check_boxes :category_ids, Category.order(:name), :id, :name do |b| %>
+  <%= form.label :category_ids, "Categorías con talles", class: "form-label mt-4" %>
+  <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Categorías con talles">
+    <%= form.collection_check_boxes :category_ids, Category.with_sizes, :id, :name do |b| %>
       <div class="form-check form-check-inline">
-        <%= b.check_box(class: "btn-check", id: "category_#{b.object.id}") %>
-        <label class="btn btn-outline-primary" for="category_<%= b.object.id %>">
+        <%= b.check_box(class: "btn-check", id: "category_without_sizes_#{b.object.id}") %>
+        <label class="btn btn-outline-primary" for="category_without_sizes_<%= b.object.id %>">
+          <%= b.object.name %>
+        </label>
+      </div>
+    <% end %>
+  </div>
+  <small id="sizeHel" class="form-text text-muted d-block mt-2">Debe seleccionar solo una de estas categorías para determinar los talles asociados al producto.</small>
+</div>
+
+<div class="form-group">
+  <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Categorías sin talles">
+    <%= form.collection_check_boxes :category_ids, Category.without_sizes, :id, :name do |b| %>
+      <div class="form-check form-check-inline">
+        <%= b.check_box(class: "btn-check", id: "category_without_sizes_#{b.object.id}") %>
+        <label class="btn btn-outline-primary" for="category_without_sizes_<%= b.object.id %>">
           <%= b.object.name %>
         </label>
       </div>
@@ -55,45 +65,20 @@
   </div>
 </div>
 
-<div class="form-group">
-    <%= form.label :size_ids, "Talles", class: "form-label mt-4" %>
-    <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Talles">
-      <%= form.collection_check_boxes :size_ids, Size.numeric_sizes, :id, :size do |b| %>
+
+  <div class="form-group">
+    <%= form.label :color_ids, "Colores", class: "form-label mt-4" %>
+    <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Colores">
+      <%= form.collection_check_boxes :color_ids, Color.order(:name), :id, :name do |b| %>
         <div class="form-check form-check-inline">
-          <%= b.check_box(class: "btn-check", id: "size_#{b.object.id}") %>
-          <label class="btn btn-outline-primary" for="size_<%= b.object.id %>">
-            <%= b.object.size %>
-          </label>
-        </div>
-      <% end %>
-
-      <span class="w-100"></span>
-
-
-      <%= form.collection_check_boxes :size_ids, Size.letter_sizes, :id, :size do |b| %>
-        <div class="form-check form-check-inline">
-          <%= b.check_box(class: "btn-check", id: "size_#{b.object.id}") %>
-          <label class="btn btn-outline-primary" for="size_<%= b.object.id %>">
-            <%= b.object.size %>
+          <%= b.check_box(class: "btn-check color-checkbox", id: "color_#{b.object.id}", data: { color: b.object.code }) %>
+          <label class="btn btn-outline-primary color-label" for="color_<%= b.object.id %>" data-color="<%= b.object.code %>">
+            <%= b.object.name %>
           </label>
         </div>
       <% end %>
     </div>
   </div>
-
-<div class="form-group">
-  <%= form.label :color_ids, "Colores", class: "form-label mt-4" %>
-  <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Colores">
-    <%= form.collection_check_boxes :color_ids, Color.order(:name), :id, :name do |b| %>
-      <div class="form-check form-check-inline">
-        <%= b.check_box(class: "btn-check color-checkbox", id: "color_#{b.object.id}", data: { color: b.object.code }) %>
-        <label class="btn btn-outline-primary color-label" for="color_<%= b.object.id %>" data-color="<%= b.object.code %>">
-          <%= b.object.name %>
-        </label>
-      </div>
-    <% end %>
-  </div>
-</div>
   <div class="mt-4 text-center">
     <%= form.submit (product.persisted? ? "Actualizar producto" : "Crear producto"), class: "btn btn-primary" %>
   </div>
@@ -113,4 +98,6 @@ document.querySelectorAll('.color-checkbox').forEach(function (checkbox) {
     }
   });
 });
+
+
 </script>

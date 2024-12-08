@@ -80,8 +80,7 @@ end
 
 # Asociar Categorías con Talles
 pantalones = Category.find_by(name: 'Pantalones')
-buzos = Category.find_by(name: 'Buzos')
-remeras = Category.find_by(name: 'Remeras')
+indumentaria = Category.find_by(name: 'Indumentaria')
 calzado = Category.find_by(name: 'Calzado')
 calzado_infantil = Category.find_by(name: 'Calzado Infantil')
 
@@ -93,12 +92,11 @@ trousers_size.each do |size|
   end
 end
 
-# Asociar buzos y remeras con todos los talles de ropa (clothes_size)
+# Asociar indumentaria con todos los talles de ropa (clothes_size)
 clothes_size.each do |size|
   size_record = Size.find_by(size: size)
   if size_record
-    remeras.sizes << size_record unless remeras.sizes.include?(size_record)
-    buzos.sizes << size_record unless buzos.sizes.include?(size_record)
+    indumentaria.sizes << size_record unless indumentaria.sizes.include?(size_record)
   end
 end
 

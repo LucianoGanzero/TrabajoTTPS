@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
+        create_size_stocks(@product)
         format.html { redirect_to @product, notice: "El producto se creo correctamente" }
         format.json { render :show, status: :created, location: @product }
       else
@@ -85,6 +86,21 @@ class ProductsController < ApplicationController
   end
 
   private
+    # Método para crear SizeStocks
+    def create_size_stocks(product)
+      category = product.categories.with_sizes.first
+
+      if category
+        # Crear un SizeStock para cada tamaño de la categoría
+        category.sizes.each do |size|
+          SizeStock.create(product: product, size: size, stock_available: 0)
+        end
+      else
+        # Si no se encuentra una categoría con talles asociados, agregar error al producto
+        product.errors.add(:category_ids, "Debe haber al menos una categoría con talles asociados.")
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params.expect(:id))

@@ -8,4 +8,18 @@ class Product < ApplicationRecord
 
   scope :active, -> { where(deactivated: false) }
   scope :deactivated, -> { where(deactivated: true) }
+
+  validate :validate_only_one_category_with_sizes
+
+  private
+
+  def validate_only_one_category_with_sizes
+    # Obtén todas las categorías seleccionadas
+    categories_with_sizes = categories.select { |category| category.has_sizes? }
+    puts categories_with_sizes
+    # Verifica que haya exactamente una categoría con talles
+    if categories_with_sizes.count != 1
+      errors.add(:category_ids, "Debe haber exactamente una categoría con talles asociados.")
+    end
+  end
 end

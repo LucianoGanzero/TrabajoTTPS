@@ -1,5 +1,8 @@
 class Size < ApplicationRecord
   has_and_belongs_to_many :categories
+  has_many :size_stock, dependent: :destroy
+
+  validates :size, presence: { message: "El nombre es obligatorio" }, uniqueness: { case_sensitive: false, message: "El talle debe ser único" }
 
   # Scope para talles numéricos
   scope :numeric_sizes, -> { all.select { |size| size.size =~ /\d/ }.sort_by(&:size) }

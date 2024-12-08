@@ -1,11 +1,9 @@
 <%= form_with(model: product) do |form| %>
   <% if @product.errors.any? %>
-      <div class="alert alert-danger alert-dismissible fade show d-inline-block w-auto text-center" role="alert" id="error-message">
-          <% @product.errors.full_messages.each do |message| %>
-            <p><%= message %></p>
-          <% end %>
-      </div>
-    <% end %>
+    <div class="alert alert-danger alert-dismissible fade show d-inline-block w-auto text-center" role="alert" id="error-message">
+      <%= @product.errors[:product].to_sentence %>
+    </div>
+  <% end %>
 
   <div class="form-group">
     <%= form.label :name, "Nombre", for:"name", class: "form-label mt-4" %>
@@ -42,17 +40,15 @@
   <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Categorías con talles">
     <%= form.collection_check_boxes :category_ids, Category.with_sizes, :id, :name do |b| %>
       <div class="form-check form-check-inline">
-        <%= b.check_box(class: "btn-check", id: "category_without_sizes_#{b.object.id}") %>
-        <label class="btn btn-outline-primary" for="category_without_sizes_<%= b.object.id %>">
+        <%= b.check_box(class: "btn-check", id: "category_with_sizes_#{b.object.id}") %>
+        <label class="btn btn-outline-primary" for="category_with_sizes_<%= b.object.id %>">
           <%= b.object.name %>
         </label>
       </div>
     <% end %>
   </div>
   <small id="sizeHel" class="form-text text-muted d-block mt-2">Debe seleccionar solo una de estas categorías para determinar los talles asociados al producto.</small>
-</div>
 
-<div class="form-group">
   <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Categorías sin talles">
     <%= form.collection_check_boxes :category_ids, Category.without_sizes, :id, :name do |b| %>
       <div class="form-check form-check-inline">

@@ -154,7 +154,7 @@ productos = [
 
 # Obtener marcas y categorías
 brands = Brand.all
-categories = Category.where(name: [ 'Pantalones', 'Buzos', 'Remeras', 'Calzado', 'Calzado Infantil' ])
+categories = Category.where(name: [ 'Pantalones', 'Indumentaria', 'Calzado', 'Calzado Infantil' ])
 
 productos.each do |product_name|
   description = Faker::Lorem.paragraph
@@ -195,10 +195,10 @@ productos.each do |product_name|
     product_category = categories.find { |cat| cat.name == 'Calzado' }
     selected_sizes = shoes_size
   elsif product.name.downcase.include?('buzo') || product.name.downcase.include?('sudadera')
-    product_category = categories.find { |cat| cat.name == 'Buzos' }
+    product_category = categories.find { |cat| cat.name == 'Indumentaria' }
     selected_sizes = clothes_size
   elsif product.name.downcase.include?('camiseta') || product.name.downcase.include?('remera')
-    product_category = categories.find { |cat| cat.name == 'Remeras' }
+    product_category = categories.find { |cat| cat.name == 'Indumentaria' }
     selected_sizes = clothes_size
   elsif product.name.downcase.include?('botines')
     product_category = categories.find { |cat| cat.name == 'Calzado' }

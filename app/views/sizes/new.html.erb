@@ -1,11 +1,13 @@
-<% content_for :title, "New size" %>
-
-<h1>New size</h1>
-
+<% content_for :title, "Nuevo talle" %>
+<div class="container">
+<h1>Nuevo talle</h1>
+<div style="width: 60%; justify-content: center">
 <%= render "form", size: @size %>
-
+</div>
 <br>
 
-<div>
-  <%= link_to "Back to sizes", sizes_path %>
+<div class="mt-4">
+  <%= link_to "Volver a gestión", store_management_path %>
+</div>
+
 </div>

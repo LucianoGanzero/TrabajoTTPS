@@ -4,23 +4,31 @@
   <div class="d-flex justify-content-between flex-wrap">
     <div class="me-5" style="flex: 1; min-width: 40%;">
       <h2 class="text-center">Categorías</h2>
-      <table class="table table-bordered table-striped mb-4">
+      <table class="table table-bordered table-striped">
         <thead>
           <tr>
             <th>Nombre</th>
             <th>Productos</th>
+            <th>Talles</th>
           </tr>
         </thead>
         <tbody>
           <% @categories.each do |category| %>
             <tr class="<%= 'table-warning' if category.products.count == 0 %>">
-              <td><%= link_to category.name, category_path(category), class: "btn btn-link", style: "padding: 0; margin: 0;"%></td>
+              <td><%= link_to category.name, category_path(category), class: "btn btn-link text-start", style: "padding: 0; margin: 0;"%></td>
               <td class="text-end"><%= category.products.count %></td>
-              
+              <td class="text-center">
+                <% if category.sizes.count > 0 %>
+                    <span class="text-success">&#10004;</span> 
+                <% else %>
+                    <span class="text-danger">&#10008;</span> 
+                <% end %>
+                </td>
             </tr>
           <% end %>
         </tbody>
       </table>
+      <small id="sizeHel" class="form-text text-muted d-block mb-4">*Las categorías con talles son excluyentes entre si.</small>
       <div class="text-center">
         <%= link_to "Agregar categoría", new_category_path, class: "btn btn-primary mb-5 text-center" %>
       </div>
@@ -60,16 +68,16 @@
   <h2>Talles</h2>
   <div style="display: flex; flex-wrap: wrap;">
     <% @number_sizes.each do |size| %>
-      <div class="p-2 border m-2" style="min-width: 100px; text-align: center;">
+      <%= link_to size_path(size), class: "btn btn-outline-primary p-2 border m-2", style: "min-width: 100px; text-align: center;" do %>
         <%= size.size %>
-      </div>
+      <% end %>
     <% end %>
   </div>
   <div class="mb-5" style="width: 100%; display: flex; flex-wrap: wrap; justify-content: flex-start; text-align: left;">
     <% @letter_sizes.each do |size| %>
-      <div class="p-2 border m-2" style="min-width: 100px; text-align: center;">
+      <%= link_to size_path(size), class: "btn btn-outline-primary p-2 border m-2", style: "min-width: 100px; text-align: center;" do %>
         <%= size.size %>
-      </div>
+      <% end %>
     <% end %>
   </div>
   <%= link_to "Agregar talle", new_size_path, class:"btn btn-primary mb-4" %>

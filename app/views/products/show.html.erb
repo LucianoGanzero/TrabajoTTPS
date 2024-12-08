@@ -86,6 +86,8 @@
         
     </div>
 
+  <% size_stocks = @product.size_stocks.sort_by { |ss| Size.size_sort_key(ss.size.size) } %>
+  <% mid_point = (size_stocks.size / 2.0).ceil %>
   <div class="mt-5" style="width: 100%;">
   <h3 class="text-center">Tabla de stocks</h3>
   <div class="row" style="display: flex; justify-content: space-evenly">
@@ -100,7 +102,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @product.size_stocks.first(@product.size_stocks.size / 2).each do |size_stock| %>
+          <% size_stocks.slice(0, mid_point).each do |size_stock| %>
             <tr class="<%= 'table-danger' if size_stock.stock_available == 0 %>">
               <td><%= size_stock.size.size %></td>
               <td id="size_stock_<%= size_stock.id %>"><%= size_stock.stock_available %></td>              
@@ -130,7 +132,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @product.size_stocks.last(@product.size_stocks.size / 2).each do |size_stock| %>
+          <% size_stocks.slice(mid_point, size_stocks.size - mid_point).each do |size_stock| %>
             <tr class="<%= 'table-danger' if size_stock.stock_available == 0 %>">
               <td><%= size_stock.size.size %></td>
               <td id="size_stock_<%= size_stock.id %>"><%= size_stock.stock_available %></td>

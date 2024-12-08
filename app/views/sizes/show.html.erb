@@ -1,10 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<div class="container pt-5 pb-5">
+  
+  <h1 class="text-center mb-5">Talle #<%= @size.id %></h1>
 
-<%= render @size %>
+  <%= render @size %>
 
-<div>
-  <%= link_to "Edit this size", edit_size_path(@size) %> |
-  <%= link_to "Back to sizes", sizes_path %>
-
-  <%= button_to "Destroy this size", @size, method: :delete %>
+  <div class="mt-5 " style="width: 30%;">
+    <div style="display: flex; justify-content: space-evenly;">
+      <%= link_to "Volver a gestión", store_management_path, class:"btn btn-primary" %>
+    </div>
+    <div class="text-center mt-5">
+      <%= button_to "Eliminar talle", @size, method: :delete, class:"btn btn-outline-danger" %>
+      <small id="sizeHel" class="form-text text-muted d-block mb-4">Eliminar el talle eliminará las entradas de stock de ese talle en todos los productos.</small>
+    </div>
+  </div>
 </div>

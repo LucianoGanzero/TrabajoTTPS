@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   root "welcome#index"
   resource :session
   resources :passwords, param: :token
+  # Shopping cart guide: https://www.youtube.com/watch?v=SPokmOwiM7E
+  get "cart", to: "cart#show"
+  post "cart/add"
+  post "cart/remove"
 
   resources :shop_products, only: [ :index, :show ]
   resources :dashboard, only: [ :index ]

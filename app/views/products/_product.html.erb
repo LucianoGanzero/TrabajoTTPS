@@ -1,41 +1,14 @@
 <div id="<%= dom_id product %>">
-  <p>
+  <div style="display: flex; justify-content: space-between; margin: 0em 5em">
     <strong>Name:</strong>
     <%= product.name %>
-  </p>
 
-  <p>
     <strong>Description:</strong>
     <%= product.description %>
-  </p>
 
-  <p>
     <strong>Unit price:</strong>
     <%= product.unit_price %>
-  </p>
-
-  <p>
-    <strong>Entry date:</strong>
-    <%= product.entry_date %>
-  </p>
-
-  <p>
-    <strong>Deactivation date:</strong>
-    <%= product.deactivation_date %>
-  </p>
-
-  <% if product.images.attached? %>
-  <div class="product-images">
-    <p><strong>Images</strong></p>
-    <div class="row">
-      <% product.images.each do |image| %>
-        <div class="col-md-3">
-          <%= image_tag(image, size: "200x200") %>
-        </div>
-      <% end %>
-    </div>
   </div>
-<% end %>
-
+  
 
 </div>

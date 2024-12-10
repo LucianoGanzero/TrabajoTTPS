@@ -32,37 +32,47 @@
         <h3 class="mt-3"><%= number_to_currency(@product.unit_price) %></h3>
     </div>
 
-    <div class="elements-container">
-        <div class="element-container">
+    
+
+        <div class="elements-container">
+            <%= form_with(url: cart_add_path) do |f| %>
+            <%= f.hidden_field :id, value: @product.id %>
+            <div class="element-container">
             <h3>Talles</h3>
             <div class="d-flex flex-wrap mt-4" role="group" aria-label="Basic radio toggle button group">
-            <% @product.size_stocks.each do |size_stock| %>
-                <input type="radio" class="btn-check" name="size" id="size_<%= size_stock.id %>" autocomplete="off" checked="" <%= "disabled" if size_stock.stock_available == 0 %>>
+                <% @product.size_stocks.each do |size_stock| %>
+                <%= f.radio_button :size, size_stock.size.id, 
+                    id: "size_#{size_stock.id}", 
+                    class: "btn-check", 
+                    autocomplete: "off", 
+                    checked: size_stock.stock_available > 0 %>
                 <label class="btn btn-outline-primary" for="size_<%= size_stock.id %>">
-                <%= size_stock.size.size %> 
+                    <%= size_stock.size.size %>
                 </label>
-            <% end %>
+                <% end %>
             </div>
-        </div>
-  
-        <div class="element-container">
-            <h3>Cantidad</h3>
-            <div class="d-flex mt-3">
-                <div>
-                    <button class="btn btn-outline-secondary" type="button" id="decreaseQuantity">-</button>
-                </div>
-                <div style="width: 60px;">
-                    <input type="text" class="form-control text-center" id="quantity" value="0" min="0" style="width: 60px; height: 40px; padding: 0 10px;" />
-                </div>
-                <div>
-                    <button class="btn btn-outline-secondary" type="button" id="increaseQuantity">+</button>
-                </div>
             </div>
-        </div>
 
-        <div class="mt-4">
-            <button class="btn btn-lg btn-primary" id="addToCart">Agregar al carrito</button>
-        </div>
+            <div class="element-container">
+                <h3>Cantidad</h3>
+                <div class="d-flex mt-3">
+                    <div>
+                    <button class="btn btn-outline-secondary" type="button" id="decreaseQuantity-<%= @product.id %>">-</button>
+                    </div>
+                    <div style="width: 60px;">
+                    <input type="text" class="form-control text-center" id="quantity-<%= @product.id %>" value="0" min="1" style="width: 60px; height: 40px; padding: 0 10px;" />
+                    </div>
+                    <div>
+                    <button class="btn btn-outline-secondary" type="button" id="increaseQuantity-<%= @product.id %>">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <%= f.hidden_field :quantity, id: "hiddenQuantity-#{@product.id}", value: 0, min: 1 %>
+                <%= f.submit "Agregar al carrito", class: "btn btn-lg btn-primary" %>
+            </div>
+            <% end %>
         </div>
     </div>
 
@@ -72,27 +82,32 @@
 
 </div>
 <script>
-  // Incrementar y decrementar cantidad
-  document.getElementById('increaseQuantity').addEventListener('click', function() {
-    const quantityInput = document.getElementById('quantity');
-    quantityInput.value = parseInt(quantityInput.value) + 1;
-  });
-
-  document.getElementById('decreaseQuantity').addEventListener('click', function() {
-    const quantityInput = document.getElementById('quantity');
-    if (parseInt(quantityInput.value) > 0) {
+document.querySelectorAll('.btn-outline-secondary').forEach(button => {
+  button.addEventListener('click', function () {
+    // Extraer el ID del producto desde el ID del botón
+    const productId = this.id.split('-')[1];
+    const quantityInput = document.getElementById(`quantity-${productId}`);
+    const hiddenQuantity = document.getElementById(`hiddenQuantity-${productId}`);
+    
+    if (this.id.startsWith('increaseQuantity')) {
+      // Incrementar cantidad
+      quantityInput.value = parseInt(quantityInput.value) + 1;
+    } else if (this.id.startsWith('decreaseQuantity') && parseInt(quantityInput.value) > 0) {
+      // Decrementar cantidad si es mayor a 0
       quantityInput.value = parseInt(quantityInput.value) - 1;
     }
-  });
 
-  // Agregar al carrito (puedes adaptar esto a tu lógica de carrito)
-  document.getElementById('addToCart').addEventListener('click', function() {
-    const quantity = document.getElementById('quantity').value;
-    const size = document.querySelector('input[name="size"]:checked');
-    if (size && quantity > 0) {
-      alert(`Producto: ${size.nextElementSibling.innerText}, Cantidad: ${quantity}`);
-    } else {
-      alert("Selecciona un talle y cantidad válida.");
-    }
+    // Sincronizar el campo oculto
+    hiddenQuantity.value = quantityInput.value;
   });
+});
+
+// Sincronizar manualmente el campo oculto si se edita directamente
+document.querySelectorAll('[id^="quantity-"]').forEach(input => {
+  input.addEventListener('input', function () {
+    const productId = this.id.split('-')[1];
+    const hiddenQuantity = document.getElementById(`hiddenQuantity-${productId}`);
+    hiddenQuantity.value = this.value;
+  });
+});
 </script>

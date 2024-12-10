@@ -1,0 +1,40 @@
+class CartController < ApplicationController
+  def show
+    @render_cart = false
+  end
+
+  def add
+    @product = Product.find_by(id: params[:id])
+    @size = Size.find_by(id: params[:size])
+    quantity = params[:quantity].to_i
+    current_order = @cart.orders.find_by(product_id: @product.id, size_id: @size.id)
+    if current_order && quantity > 0
+      current_order.update(quantity:)
+    elsif quantity <= 0
+      current_order.destroy
+    else
+      @cart.orders.create(product: @product, size: @size, quantity:)
+    end
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [ turbo_stream.replace("cart",
+                              partial: "cart/cart",
+                              locals: { cart: @cart }),
+                              turbo_stream.replace(@product) ]
+      end
+    end
+  end
+
+  def remove
+    Order.find_by(id: params[:id]).destroy
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [ turbo_stream.replace("cart",
+                              partial: "cart/cart",
+                              locals: { cart: @cart }
+                              ) ]
+      end
+    end
+  end
+end

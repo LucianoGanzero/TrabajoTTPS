@@ -1,0 +1,30 @@
+<% @cart.orders.each do |order| %>
+    <% product = order.product %>
+    <div id="<%= "cart-#{product.id}" %>">
+        <div style="display: flex; justify-content: space-between; margin: 0em 5em">
+            <strong>Nombre:</strong>
+            <%= product.name %>
+
+            <strong>Precio unitario:</strong>
+            <%= product.unit_price %>
+
+            <strong>Talle:</strong>
+            <%= order.size.size %>
+
+            <%= form_with(url: cart_add_path) do |f| %>
+                <%= f.hidden_field :id, value: product.id %>
+                <%= f.number_field :quantity, id: "cart-quantity-#{product.id}" , value: order.quantity, min: 0 %>
+                <%= f.submit "Agregar", class: "btn btn-sm btn-primary"%>
+            <% end %>
+
+            <%= form_with(url: cart_remove_path) do |f| %>
+                <%= f.hidden_field :id, value: order.id %>
+                <%= f.submit "X", class: "btn btn-sm btn-primary"%>
+            <% end %>
+            <strong>Total</strong>
+            <%= order.total%>
+        </div>
+    </div>
+
+
+<% end %>

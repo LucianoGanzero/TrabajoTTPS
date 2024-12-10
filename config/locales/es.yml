@@ -1,0 +1,41 @@
+es:
+  and: "y"
+  errors:
+    messages:
+      blank: "no puede estar vacío"
+      invalid: "no es válido"
+      taken: "ya está en uso"
+      required: "es obligatorio"
+  activerecord:
+    attributes:
+      user:
+        username: "Nombre de usuario"
+        email_address: "Correo electrónico"
+        phone: "Teléfono"
+        entry_date: "Fecha de entrada"
+        password: "Contraseña"
+        role: "Rol"
+  users:
+    alerts:
+      restrict: "No tienes permiso para gestionar usuarios"
+      restrict_manager: "No tienes permiso para actualizar Administradores"
+      create_admin: "No tienes permiso para crear usuarios administradores"
+    buttons:
+      show: "Ir al usuario"
+      back: "Volver a usuarios"
+      edit: "Actualizar usuario"
+      create: "Crear usuario"
+    create:
+      success: "El usuario se creó correctamente"
+      admin_error: "Solo un administrador puede asignar el rol de Administrador."
+    edit:
+      success: "El usuario se actualizó correctamente"
+    destroy:
+      success: "El usuario fue correctamente desactivado"
+    
+    phone:
+      size: "El número de teléfono no puede tener más de 10 dígitos"
+      digits: "Solo se permiten números"
+      presence: "El número de teléfono es obligatorio"
+    email:
+      format: "El formato del correo electrónico es incorrecto"

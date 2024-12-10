@@ -101,6 +101,7 @@
           </div>
         <% end %>
       </div>
+      <%= render partial: "cart/cart" if @render_cart %>
     <%= yield %>
     </div>
 

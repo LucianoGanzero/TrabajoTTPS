@@ -1,16 +1,49 @@
-<p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Users" %>
+<div class="container pt-5 pb-5">
+  <% content_for :title, "Usuarios" %>
 
-<h1>Users</h1>
-
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
+  <h1 class="text-center mb-5">usuarios</h1>
+ <% if @users.empty? %>
+    <p class="text-center mb-4">No hay usuarios activos.</p>
+  <% else %>
+  <table class="table table-bordered table-striped table-hover mb-5">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Telefono</th>
+        <th>Ventas</th>
+        <th>Fecha de entrada</th>
+        <th>Rol</th>
+        <th>Activo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to user.username, user_path(user), class: "btn btn-link", style: "padding: 0; margin: 0;"%></td>
+          <td><%= user.email_address %></td>
+          <td class="text-end"><%= user.phone.present? ? user.phone : "-" %></td>
+          <td class="text-end"><%= user.sales.count %></td>
+          <td><%= user.entry_date.strftime('%d/%m/%Y') %></td>
+          <td><%= user.role.name %></td>
+          <td class="text-center">
+                <% if user.active %>
+                    <span class="text-success">&#10004;</span> 
+                <% else %>
+                    <span class="text-danger">&#10008;</span> 
+                <% end %>
+            </td>
+        </tr>
+      
+      <% end %>
+    </tbody>
+  </table>
   <% end %>
-</div>
 
-<%= link_to "New user", new_user_path %>
+  <%= link_to "Agregar usuario", new_user_path, class:"btn btn-lg btn-primary" %>
+
+  <div class="mt-4">
+  <%= link_to "Volver al dashboard", dashboard_index_path %>
+</div>
+</div>

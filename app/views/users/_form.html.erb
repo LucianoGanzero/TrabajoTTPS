@@ -1,47 +1,40 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username %>
+<%= form_with(model: @user) do |form| %>
+  <div class="d-flex justify-content-center mt-5 position-absolute" style="z-index: 1; top: 50px; left: 50%; transform: translateX(-50%);">
+    <% if @user.errors.any? %>
+      <div class="alert alert-danger alert-dismissible fade show d-inline-block" role="alert" id="alert-message">
+        <%= @user.errors.full_messages.to_sentence %>
+      </div>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+  <div class="form-group">
+    <%= form.label :username, "Nombre de usuario", class: "form-label mt-4" %>
+    <%= form.text_field :username, class: "form-control", id: "username" %>
+    <small id="usernameHelp" class="form-text text-muted">Requerido.</small>
   </div>
 
-  <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
+  <div class="form-group">
+    <%= form.label :email_address, "Email", class: "form-label mt-4" %>
+    <%= form.email_field :email_address, class: "form-control", id: "email_address" %>
+    <small id="emailHelp" class="form-text text-muted">Requerido.</small>
   </div>
 
-  <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.text_field :password %>
+  <div class="form-group">
+    <%= form.label :phone, "Teléfono", class: "form-label mt-4" %>
+    <%= form.text_field :phone, class: "form-control", id: "phone" %>
   </div>
 
-  <div>
-    <%= form.label :entry_date, style: "display: block" %>
-    <%= form.datetime_field :entry_date %>
+  <div class="form-group">
+    <%= form.label :entry_date, "Fecha de entrada", class: "form-label mt-4" %>
+    <%= form.date_field :entry_date, class: "form-control", id: "entry_date" %>
   </div>
 
-  <div>
-    <%= form.label :active, style: "display: block" %>
-    <%= form.checkbox :active %>
+  <div class="form-group">
+    <%= form.label :role_id, "Rol", class: "form-label mt-4" %>
+    <%= form.collection_select :role_id, @available_roles, :id, :name, { prompt: "Seleccione un rol" }, { class: "form-control", id: "role_id" } %>  
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mt-4 text-center">
+    <%= form.submit (@user.persisted? ? I18n.t("users.buttons.edit") : I18n.t("users.buttons.create")), class: "btn btn-primary" %>
   </div>
 <% end %>

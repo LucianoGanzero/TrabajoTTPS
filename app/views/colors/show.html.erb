@@ -7,10 +7,12 @@
 <div class="mt-5 " style="width: 30%;">
   <div style="display: flex; justify-content: space-evenly;">
     <%= link_to "Editar", edit_color_path(@color), class:"btn btn-primary" %> 
-    <%= link_to "Volver a gestión", store_management_path, class:"btn btn-primary" %>
+    <%= button_to "Eliminar color", @color, method: :delete, class:"btn btn-outline-danger" %>
+
   </div>
   <div class="text-center mt-5">
-    <%= button_to "Eliminar color", @color, method: :delete, class:"btn btn-outline-danger" %>
+
+    <%= link_to "Volver a gestión", store_management_path, class:"btn btn-link" %>
   </div>
   </div>
  </div>

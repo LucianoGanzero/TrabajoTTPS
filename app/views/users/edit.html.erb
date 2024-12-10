@@ -1,12 +1,14 @@
-<% content_for :title, "Editing user" %>
-
-<h1>Editing user</h1>
-
+<% content_for :title, "Actualizar usuario" %>
+<div class="container">
+<h1>Actualizar usuario</h1>
+<div style="width: 60%; justify-content: center">
 <%= render "form", user: @user %>
-
+</div>
 <br>
 
-<div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
+<div class="mt-4">
+  <%= link_to I18n.t("users.buttons.show"), @user %> |
+  <%= link_to I18n.t("users.buttons.back"), users_path %>
+</div>
+
 </div>

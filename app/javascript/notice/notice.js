@@ -1,35 +1,21 @@
 document.addEventListener("turbo:load", function() {
+  // Selecciona todos los elementos de alerta
   var noticeMessage = document.getElementById("notice-message");
-
-  if (noticeMessage) {
-    // Cerrar la alerta después de 3 segundos
-    setTimeout(function() {
-      var alert = new bootstrap.Alert(noticeMessage);
-      alert.close(); // Cierra la alerta de Bootstrap
-    }, 3000); // 3 segundos
-  }
-});
-
-document.addEventListener("turbo:load", function() {
   var alertMessage = document.getElementById("alert-message");
+  var errorMessage = document.getElementById("error-message");
 
-  if (alertMessage) {
-    // Cerrar la alerta después de 3 segundos
-    setTimeout(function() {
-      var alert = new bootstrap.Alert(alertMessage);
-      alert.close(); // Cierra la alerta de Bootstrap
-    }, 3000); // 3 segundos
+  // Función para cerrar la alerta
+  function closeAlert(alertElement) {
+    if (alertElement) {
+      setTimeout(function() {
+        var alert = new bootstrap.Alert(alertElement);
+        alert.close();
+      }, 3000); // 3 segundos
+    }
   }
-});
 
-document.addEventListener("turbo:load", function() {
-  var alertMessage = document.getElementById("error-message");
-
-  if (alertMessage) {
-    // Cerrar la alerta después de 3 segundos
-    setTimeout(function() {
-      var alert = new bootstrap.Alert(alertMessage);
-      alert.close(); // Cierra la alerta de Bootstrap
-    }, 3000); // 3 segundos
-  }
+  // Cierra las alertas de manera unificada
+  closeAlert(noticeMessage);
+  closeAlert(alertMessage);
+  closeAlert(errorMessage);
 });

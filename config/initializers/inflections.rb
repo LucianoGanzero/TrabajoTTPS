@@ -14,3 +14,17 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym "RESTful"
 # end
+
+ActiveSupport::Inflector.inflections(:es) do |inflect|
+  # Regla para pluralizar palabras que terminan en "l"
+  inflect.plural(/l$/i, "les")
+  inflect.singular(/les$/i, "l")
+
+  # Regla para pluralizar palabras que terminan en "n"
+  inflect.plural(/n$/i, "nes")
+  inflect.singular(/nes$/i, "n")
+
+  # Regla para pluralizar palabras que terminan en "r"
+  inflect.plural(/r$/i, "res")
+  inflect.singular(/res$/i, "r")
+end

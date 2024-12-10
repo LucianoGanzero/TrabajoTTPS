@@ -35,6 +35,7 @@ User.create!(
   password_digest: BCrypt::Password.create('123456'),
   username: 'Lucianito',
   entry_date: Date.today,
+  phone: '22322222',
   active: true,
   role: admin_role
 )
@@ -45,6 +46,7 @@ User.create!(
   username: 'Gerente123',
   entry_date: Date.today,
   active: true,
+  phone: '223212345',
   role: gerente_role
 )
 
@@ -54,6 +56,7 @@ User.create!(
   username: 'Empleado456',
   entry_date: Date.today,
   active: true,
+  phone: '223212345',
   role: empleado_role
 )
 

@@ -352,6 +352,9 @@ GEM
     unicode-emoji (4.0.4)
     uri (1.0.2)
     useragent (0.16.10)
+    valid_email2 (7.0.0)
+      activemodel (>= 6.0)
+      mail (~> 2.5)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -405,6 +408,7 @@ DEPENDENCIES
   thruster
   turbo-rails
   tzinfo-data
+  valid_email2
   web-console
 
 BUNDLED WITH

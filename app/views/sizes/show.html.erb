@@ -5,12 +5,13 @@
   <%= render @size %>
 
   <div class="mt-5 " style="width: 30%;">
-    <div style="display: flex; justify-content: space-evenly;">
-      <%= link_to "Volver a gestión", store_management_path, class:"btn btn-primary" %>
-    </div>
+    
     <div class="text-center mt-5">
       <%= button_to "Eliminar talle", @size, method: :delete, class:"btn btn-outline-danger" %>
       <small id="sizeHel" class="form-text text-muted d-block mb-4">Eliminar el talle eliminará las entradas de stock de ese talle en todos los productos.</small>
+    </div>
+    <div style="display: flex; justify-content: space-evenly;">
+      <%= link_to "Volver a gestión", store_management_path, class:"btn btn-link" %>
     </div>
   </div>
 </div>

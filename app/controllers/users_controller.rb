@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :set_available_roles, only: [ :new, :create, :update, :edit ]
   before_action :restrict_employee_access
   before_action :restrict_manager_access, only: [ :update, :edit, :destroy ]
+  before_action :set_render_cart
 
   # GET /users or /users.json
   def index
@@ -82,6 +83,9 @@ class UsersController < ApplicationController
   end
 
   private
+    def set_render_cart
+      @render_cart = false
+    end
     def restrict_employee_access
       if Current.user.role.name == "Empleado"
         redirect_to dashboard_index_path, alert: I18n.t("users.alerts.restrict")

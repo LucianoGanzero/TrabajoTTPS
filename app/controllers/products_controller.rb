@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_render_cart
 
   # GET /products or /products.json
   def index
@@ -86,6 +87,9 @@ class ProductsController < ApplicationController
   end
 
   private
+    def set_render_cart
+      @render_cart = false
+    end
     # Método para crear SizeStocks
     def create_size_stocks(product)
       category = product.categories.with_sizes.first

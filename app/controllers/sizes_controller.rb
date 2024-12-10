@@ -1,5 +1,6 @@
 class SizesController < ApplicationController
   before_action :set_size, only: %i[ show edit update destroy ]
+  before_action :set_render_cart
 
   # GET /sizes or /sizes.json
   def index
@@ -58,6 +59,9 @@ class SizesController < ApplicationController
   end
 
   private
+    def set_render_cart
+      @render_cart = false
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_size
       @size = Size.find(params.expect(:id))

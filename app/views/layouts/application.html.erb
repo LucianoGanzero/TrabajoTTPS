@@ -37,9 +37,7 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<%= root_path %>">Home
-            <span class="visually-hidden">(current)</span>
-          </a>
+          <%= link_to 'Home', root_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
           <%= link_to 'Productos', shop_products_path, class: 'nav-link' %>
@@ -50,16 +48,33 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Sobre nosotros</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
+        <% if @render_cart %>
+         <li class="nav-item dropdown">
+          <a 
+            class="nav-link dropdown-toggle" 
+            href="#" 
+            id="cartDropdown" 
+            role="button" 
+            data-bs-toggle="dropdown" 
+            aria-expanded="false">
+            🛒 Carrito <%= render partial: "cart/cart_count" %>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end p-3" style="min-width: 400px;" aria-labelledby="cartDropdown">
+            <h5 class="dropdown-header">Tu carrito</h5>
+            <hr class="dropdown-divider">
+            <div class="d-flex justify-content-between text-muted fw-bold px-2">
+              <span class="text-truncate" style="width: 30%;">Nombre</span>
+              <span style="width: 20%;">P. Uni.</span>
+              <span style="width: 15%;">Cant.</span>
+              <span style="width: 15%;">Talle</span>
+              <span style="width: 20%;">Total</span>
+             
+            </div>
+            <hr class="dropdown-divider">
+            <%= render partial: "cart/cart" %>
+          </ul>
         </li>
+        <% end %>
       </ul>
       <div class="d-flex">
         <% if authenticated? %>
@@ -101,7 +116,7 @@
           </div>
         <% end %>
       </div>
-      <%= render partial: "cart/cart" if @render_cart %>
+      
     <%= yield %>
     </div>
 

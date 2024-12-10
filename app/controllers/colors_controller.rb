@@ -1,5 +1,6 @@
 class ColorsController < ApplicationController
   before_action :set_color, only: %i[ show edit update destroy ]
+  before_action :set_render_cart
 
   # GET /colors or /colors.json
   def index
@@ -69,6 +70,9 @@ class ColorsController < ApplicationController
   end
 
   private
+    def set_render_cart
+      @render_cart = false
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_color
       @color = Color.find(params.expect(:id))

@@ -4,7 +4,7 @@ class CartController < ApplicationController
 
   def show
     @render_cart = false
-    @cart = Cart.find(params[:cart_id])
+    @cart = Cart.find(params[:id])
   end
 
   def confirm
@@ -68,6 +68,7 @@ class CartController < ApplicationController
       @cart.orders.create(product: @product, size: @size, quantity:)
     end
 
+    flash[:notice] = "El producto #{@product.name} se añadió a tu carrito."
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
@@ -77,6 +78,7 @@ class CartController < ApplicationController
           turbo_stream.replace("cart_count",
                               partial: "cart/cart_count",
                               locals: { cart: @cart }),
+          turbo_stream.replace("flash_messages", partial: "layouts/flash"),
           turbo_stream.replace(@product) ]
       end
     end

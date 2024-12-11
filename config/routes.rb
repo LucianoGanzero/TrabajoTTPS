@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
   # Shopping cart guide: https://www.youtube.com/watch?v=SPokmOwiM7E
-  get "cart", to: "cart#show"
+  get "cart/:id", to: "cart#show", as: "cart"
   post "cart/add"
   post "cart/remove"
   post "cart/confirm", to: "cart#confirm", as: "confirm_cart"

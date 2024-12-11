@@ -45,7 +45,7 @@
                     id: "size_#{size_stock.id}", 
                     class: "btn-check", 
                     autocomplete: "off", 
-                    checked: size_stock.stock_available > 0 %>
+                    disabled: size_stock.stock_available == 0 %>
                 <label class="btn btn-outline-primary" for="size_<%= size_stock.id %>">
                     <%= size_stock.size.size %>
                 </label>

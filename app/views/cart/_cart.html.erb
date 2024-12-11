@@ -3,7 +3,7 @@
         <%= render "cart/orders" %>
         <div class="mt-3" style="display: flex; justify-content: space-between; align-items: flex-end">
             <p style="margin: 0;">Total: <%= @cart.total %></p>
-            <%= link_to I18n.t("cart.buttons.buy"), cart_path(cart_id: @cart.id), class: "btn btn-outline-success" %>
+            <%= link_to I18n.t("cart.buttons.buy"), cart_path(@cart.id), class: "btn btn-outline-success", data: { turbo: false } %>
         </div>
     <% else %>
         <p><%= I18n.t("cart.messages.empty")%></p>

@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   end
   resources :roles
   resources :users
-  resources :sales
+  resources :sales do
+    patch "assign_salesman", on: :member
+  end
   resources :product_solds
   resources :colors
   resources :sizes

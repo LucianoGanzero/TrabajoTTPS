@@ -1,16 +1,122 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Sales" %>
-
-<h1>Sales</h1>
-
-<div id="sales">
-  <% @sales.each do |sale| %>
-    <%= render sale %>
-    <p>
-      <%= link_to "Show this sale", sale %>
-    </p>
+<div class="container pt-5 pb-5">
+  <h1 class="text-center mb-5">Ventas Históricas</h1>
+  <% if @assigned_sales.empty? %>
+    <p class="text-center mb-4">No hay ventas históricas.</p>
+  <% else %>
+    <table class="table table-bordered table-striped table-hover mb-5">
+      <thead>
+        <tr>
+          <th>N° Venta</th>
+          <th>Cantidad de Productos</th>
+          <th>Total</th>
+          <th>Cliente</th>
+          <th>Vendedor</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @assigned_sales.each do |sale| %>
+          <tr>
+            <td><%= sale.id %></td>
+            <td class="text-end"><%= sale.product_solds.count %></td>
+            <td class="text-end"><%= number_to_currency(sale.total_price) %></td>
+            <td><%= sale.client %></td>
+            <td><%= sale.salesman.username if sale.salesman.present? %></td>
+            <td><%= sale.sale_date.strftime('%d/%m/%Y') if sale.sale_date.present? %></td>
+            <td><%= sale.sale_date.strftime('%H:%M') if sale.sale_date.present? %></td>
+            <td style="padding-right: 0.01px">
+              <%= form_with model: sale, url: sale_path(sale), method: :delete, local: true do |form| %>
+                <%= form.submit "Cancelar Venta", class: "btn btn-outline-danger btn-sm", data: { confirm: "¿Estás seguro de que deseas cancelar esta venta?" } %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% end %>
-</div>
 
-<%= link_to "New sale", new_sale_path %>
+  <%= link_to "Agregar venta", new_sale_path, class: "btn btn-primary" %>
+
+  <h1 class="text-center mb-5 mt-5">Ventas Sin Asignar</h1>
+  <% if @unassigned_sales.empty? %>
+    <p class="text-center mb-4">No hay ventas sin asignar.</p>
+  <% else %>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>N° Venta</th>
+          <th>Cantidad de Productos</th>
+          <th>Total</th>
+          <th>Cliente</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @unassigned_sales.each do |sale| %>
+          <tr>
+            <td><%= sale.id %></td>
+            <td class="text-end"><%= sale.product_solds.count %></td>
+            <td class="text-end"><%= number_to_currency(sale.total_price) %></td>
+            <td><%= sale.client %></td>
+            <td><%= sale.sale_date.strftime('%d/%m/%Y') if sale.sale_date.present? %></td>
+            <td><%= sale.sale_date.strftime('%H:%M') if sale.sale_date.present? %></td>
+            <td style="padding-right: 0.01px">
+              <%= form_with model: sale, url: assign_salesman_sale_path(sale), method: :patch, local: true do |form| %>
+                <%= form.hidden_field :salesman_id, value: Current.user.id %>
+                <%= form.submit "Asignar Vendedor", class: "btn btn-outline-primary btn-sm" %>
+              <% end %>              
+            </td>
+            <td>
+              <%= form_with model: sale, url: sale_path(sale), method: :delete, local: true do |form| %>
+                <%= form.submit "Cancelar Venta", class: "btn btn-outline-danger btn-sm", data: { confirm: "¿Estás seguro de que deseas cancelar esta venta?" } %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  
+  <h1 class="text-center mb-5 mt-5">Ventas Canceladas</h1>
+  <% if @cancelled_sales.empty? %>
+    <p class="text-center mb-4">No hay ventas canceladas.</p>
+  <% else %>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>N° Venta</th>
+          <th>Cantidad de Productos</th>
+          <th>Total</th>
+          <th>Cliente</th>
+          <th>Vendedor</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Fecha de Cancelación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cancelled_sales.each do |sale| %>
+          <tr>
+            <td><%= sale.id %></td>
+            <td class="text-end"><%= sale.product_solds.count %></td>
+            <td class="text-end"><%= number_to_currency(sale.total_price) %></td>
+            <td><%= sale.client %></td>
+            <td><%= sale.salesman.username if sale.salesman.present? %></td>
+            <td><%= sale.sale_date.strftime('%d/%m/%Y') if sale.sale_date.present? %></td>
+            <td><%= sale.sale_date.strftime('%H:%M') if sale.sale_date.present? %></td>
+            <td><%= sale.cancel_date.strftime('%d/%m/%Y %H:%M') if sale.cancel_date.present? %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <div class="mt-4">
+    <%= link_to "Volver al dashboard", dashboard_index_path %>
+  </div>
+</div>

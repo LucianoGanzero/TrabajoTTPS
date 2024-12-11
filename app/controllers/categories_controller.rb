@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show edit update destroy ]
   before_action :set_render_cart
+  skip_before_action :initialize_cart
 
   # GET /categories or /categories.json
   def index

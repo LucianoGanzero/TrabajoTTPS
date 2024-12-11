@@ -18,7 +18,8 @@ class CartController < ApplicationController
       begin
         sale = Sale.create!(
           total_price: @cart.total,
-          client: client_name
+          client: client_name,
+          sale_date: DateTime.now
         )
       rescue ActiveRecord::RecordInvalid => e
         Rails.logger.error "Error de validación en la creación de la venta: #{e.message}"
@@ -78,7 +79,6 @@ class CartController < ApplicationController
           turbo_stream.replace("cart_count",
                               partial: "cart/cart_count",
                               locals: { cart: @cart }),
-          turbo_stream.replace("flash_messages", partial: "layouts/flash"),
           turbo_stream.replace(@product) ]
       end
     end

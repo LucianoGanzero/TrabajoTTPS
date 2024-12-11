@@ -1,6 +1,7 @@
 class ColorsController < ApplicationController
   before_action :set_color, only: %i[ show edit update destroy ]
   before_action :set_render_cart
+  skip_before_action :initialize_cart
 
   # GET /colors or /colors.json
   def index

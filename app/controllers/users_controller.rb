@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :restrict_employee_access
   before_action :restrict_manager_access, only: [ :update, :edit, :destroy ]
   before_action :set_render_cart
+  skip_before_action :initialize_cart
 
   # GET /users or /users.json
   def index

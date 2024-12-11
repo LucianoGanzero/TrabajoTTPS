@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   before_action :set_render_cart
+  skip_before_action :initialize_cart
   def index
   end
 

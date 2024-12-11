@@ -1,7 +1,49 @@
 class CartController < ApplicationController
   allow_unauthenticated_access
+  skip_before_action :initialize_cart, only: [ :confirm, :show ]
+
   def show
     @render_cart = false
+    @cart = Cart.find(params[:cart_id])
+  end
+
+  def confirm
+    @cart = Cart.find(params[:cart_id])
+    client_name = "#{params[:first_name]} #{params[:last_name]}"
+    error_message = @cart.complete_purchase(params)
+
+    if error_message != true
+      redirect_to cart_path(@cart), alert: error_message
+    else
+      begin
+        sale = Sale.create!(
+          total_price: @cart.total,
+          client: client_name
+        )
+      rescue ActiveRecord::RecordInvalid => e
+        Rails.logger.error "Error de validación en la creación de la venta: #{e.message}"
+        Rails.logger.error "Errores en la venta: #{sale.errors.full_messages}" if sale
+        return "Error de validación: #{e.message}"
+      rescue StandardError => e
+        Rails.logger.error "Error desconocido al crear la venta: #{e.message}"
+        return "Error desconocido: #{e.message}"
+      end
+
+      @cart.orders.each do |order|
+        ProductSold.create!(
+          sale: sale,
+          product: order.product,
+          size: order.size,
+          quantity: order.quantity,
+          sell_price: order.product.unit_price
+        )
+      end
+
+      @cart.orders.destroy_all
+      @cart.destroy
+
+      redirect_to root_path, notice: I18n.t("cart.messages.success")
+    end
   end
 
   def add

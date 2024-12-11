@@ -1,2 +1,105 @@
-<h1>Cart#show</h1>
-<p>Find me in app/views/cart/show.html.erb</p>
+<div style="width: 80%; display:flex; flex-direction: column; justify-content: center; align-items: center; margin: auto" class="text-center pt-5 pb-5">
+  <h1><%= I18n.t("cart.titles.checkout") %></h1>
+  
+  <% if @cart.orders.count > 0 %>
+    <div class="row">
+      <% @cart.orders.each do |order| %>
+        <% product = order.product %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <% if product.images.attached? %>
+                <% if product.images.many? %>
+                <div id="productCarousel-<%= product.id %>" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                    <% product.images.each_with_index do |image, index| %>
+                        <div class="carousel-item <%= 'active' if index.zero? %>">
+                        <%= image_tag image, class: "d-block w-100", alt: "Imagen de #{product.name}" %>
+                        </div>
+                    <% end %>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel-<%= product.id %>" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel-<%= product.id %>" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <% else %>
+                <%= image_tag product.images.first, class: "d-block w-100 img-fluid", alt: "Imagen de #{product.name}" %>
+                <% end %>
+            <% else %>
+                <img src="https://via.placeholder.com/600x400" alt="Imagen no disponible" class="img-fluid" />
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= number_to_currency(product.unit_price) %></h6>
+              <p class="card-text">
+                <strong>Cantidad:</strong> <%= order.quantity %><br>
+                <strong>Talle:</strong> <%= order.size.size %><br>
+                <strong>Total:</strong> <%= number_to_currency(order.total) %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p><%= I18n.t("cart.messages.empty") %></p>
+  <% end %>
+
+  <p class="text-primary-emphasis">Total: <%= number_to_currency(@cart.total) %></p>
+
+  <div class="card shadow p-4" style="border-radius: 10px; width: 60%">
+  <h4 class="card-title">Datos del cliente</h4>
+  <%= form_with url: confirm_cart_path, method: :post do |f| %>
+    <%= f.hidden_field :cart_id, value: @cart.id %>
+    <div class="mb-3">
+      <%= f.label :first_name, I18n.t("cart.labels.first_name"), class: "form-label text-start", style: "width: 100%;" %>
+      <%= f.text_field :first_name, required: true, class: "form-control" %>
+    </div>
+    
+    <div class="mb-3">
+      <%= f.label :last_name, I18n.t("cart.labels.last_name"), class: "form-label text-start", style: "width: 100%;" %>
+      <%= f.text_field :last_name, required: true, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :dni, I18n.t("cart.labels.dni"), class: "form-label text-start", style: "width: 100%;" %>
+      <%= f.text_field :dni, required: true, class: "form-control" %>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="mb-3">
+      <%= f.label :phone, I18n.t("cart.labels.phone"), class: "form-label text-start", style: "width: 100%;" %>
+      <%= f.text_field :phone, required: true, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :address, I18n.t("cart.labels.address"), class: "form-label text-start", style: "width: 100%;" %>
+      <%= f.text_field :address, required: true, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :payment_method, I18n.t("cart.labels.payment_method"), class: "form-label text-start", style: "width: 100%;" %>
+      <div class="btn-group" role="group" aria-label="Método de pago">
+        <%= f.radio_button :payment_method, "cash", id: "payment_method_cash", class: "btn-check", autocomplete: "off" %>
+        <%= f.label :payment_method_cash, "Efectivo", class: "btn btn-outline-primary" %>
+
+        <%= f.radio_button :payment_method, "transfer", id: "payment_method_transfer", class: "btn-check", autocomplete: "off" %>
+        <%= f.label :payment_method_transfer, "Transferencia", class: "btn btn-outline-primary" %>
+
+        <%= f.radio_button :payment_method, "debit_credit", id: "payment_method_debit_credit", class: "btn-check", autocomplete: "off" %>
+        <%= f.label :payment_method_debit_credit, "Débito / Crédito", class: "btn btn-outline-primary" %>
+    </div>
+    </div>
+
+
+    <div class="text-center">
+      <%= f.submit I18n.t("cart.buttons.confirm"), class: "btn btn-success" %>
+    </div>
+
+  <% end %>
+</div>
+</div>

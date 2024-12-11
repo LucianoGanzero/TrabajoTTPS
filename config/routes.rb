@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "cart", to: "cart#show"
   post "cart/add"
   post "cart/remove"
+  post "cart/confirm", to: "cart#confirm", as: "confirm_cart"
+
 
   resources :shop_products, only: [ :index, :show ]
   resources :dashboard, only: [ :index ]

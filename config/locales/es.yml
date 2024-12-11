@@ -6,6 +6,7 @@ es:
       invalid: "no es válido"
       taken: "ya está en uso"
       required: "es obligatorio"
+      record_invalid: "es invalido"
   activerecord:
     attributes:
       user:
@@ -39,3 +40,21 @@ es:
       presence: "El número de teléfono es obligatorio"
     email:
       format: "El formato del correo electrónico es incorrecto"
+  cart:
+    titles:
+      checkout: "Checkout"
+    messages:
+      empty: "Tu carrito está vacio"
+      review: "Este es el contenido de tu carrito"
+      success: "Felicidades! Tu compra se acreditó"
+    labels:
+      name: "Nombre"
+      address: "Dirección"
+      first_name: "Nombre"
+      last_name: "Apellido"
+      dni: "DNI"
+      payment_method: "Metodo de pago"
+      phone: "Telefono"
+    buttons:
+      buy: "Comprar"
+      confirm: "Confirmar"

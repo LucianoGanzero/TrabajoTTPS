@@ -1,27 +1,94 @@
-
-<div class="container pt-5 pb-5">
+<div class="shop-container pt-5 pb-5">
   <h1 class="text-center mb-5">Productos Disponibles</h1>
-  <div class="row">
-    <% @products.each do |product| %>
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header"><%= product.name %></h4>
-          <% if product.images.attached? %>
-            <%= image_tag product.images.first, class: "card-img-top", alt: "Imagen de #{product.name}" %>
-          <% else %>
-            <%= image_tag "https://via.placeholder.com/150", class: "card-img-top", alt: "Imagen de #{product.name}" %>
+  
+  <div style="width: 100%; align-items: right; margin: 0;>
+  <%= form_with url: shop_products_path, method: :get, local: true do %>
+    <div class="input-group mb-3 ml-5"> 
+      <%= text_field_tag :query, params[:query], class: "form-control search-input", placeholder: "Buscar productos por nombre o descripción" %> 
+      <div class="input-group-append search-button"> 
+        <%= submit_tag "Buscar", class: "btn btn-primary" %> 
+        </div> 
+      </div>
+  <% end %>
+  </div>
+
+  <div style="display: flex; width:100%; justify-content:space-between; gap:2;">
+    <div class="col-md-3 sticky-top" style="width: 20%">
+        <h4>Categorías</h4>
+        <ul class="list-group mb-3">
+          <% @categories.each do |category| %>
+            <li class="list-group-item <%= 'active' if params[:category].to_i == category.id %>">
+              <%= link_to category.name, shop_products_path(request.query_parameters.merge(category: category.id, page: nil)), class:"text-decoration-none #{'active-link' if params[:category].to_i == category.id}" %>
+              <% if params[:category].to_i == category.id %>
+                <%= link_to 'x', shop_products_path(request.query_parameters.except(:category, :page)), class: 'remove-filter' %>
+              <% end %>
+            </li>
           <% end %>
-          <%= link_to shop_product_path(product), class: "text-decoration-none" do %>
-            <div class="card-body">
-              <p class="card-text">Precio: <%= number_to_currency(product.unit_price) %></p>
+        </ul>
+
+        <h4>Colores</h4>
+        <ul class="list-group mb-3">
+          <% @colors.each do |color| %>
+            <li class="list-group-item <%= 'active' if params[:color].to_i == color.id %>">
+              <%= link_to color.name, shop_products_path(request.query_parameters.merge(color: color.id, page: nil)), class:"text-decoration-none #{'active-link' if params[:color].to_i == color.id}" %>
+              <% if params[:color].to_i == color.id %>
+                <%= link_to 'x', shop_products_path(request.query_parameters.except(:color, :page)), class: 'remove-filter' %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+
+        <h4>Marcas</h4>
+        <ul class="list-group mb-3">
+          <% @brands.each do |brand| %>
+            <li class="list-group-item <%= 'active' if params[:brand].to_i == brand.id %>">
+              <%= link_to brand.name, shop_products_path(request.query_parameters.merge(brand: brand.id, page: nil)), class:"text-decoration-none #{'active-link' if params[:brand].to_i == brand.id}" %>
+              <% if params[:brand].to_i == brand.id %>
+                <%= link_to 'x', shop_products_path(request.query_parameters.except(:brand, :page)), class: 'remove-filter' %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+    </div>
+
+    <div class="row" style="width: 80%">
+      <div class="col-md-12">
+        <% if @products.any? %>
+          <div class="row">
+            <% @products.each do |product| %>
+              <div class="<%= @products.size == 1 ? 'col-md-8 offset-md-2' : 'col-md-4' %> mb-4 product-card">
+                <div class="card h-100">
+                  <h4 class="card-header"><%= product.name %></h4>
+                  <% if product.images.attached? %>
+                    <%= image_tag product.images.first, class: "card-img-top", alt: "Imagen de #{product.name}" %>
+                  <% else %>
+                    <%= image_tag "https://via.placeholder.com/150", class: "card-img-top", alt: "Imagen de #{product.name}" %>
+                  <% end %>
+                  <%= link_to shop_product_path(product), class: "text-decoration-none" do %>
+                    <div class="card-body">
+                      <p class="card-text">Precio: <%= number_to_currency(product.unit_price) %></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><%= product.description %></li>
+                      <li class="list-group-item">Stock total: <%= product.stock_total %></li>
+                    </ul>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <p>No hay productos disponibles.</p>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><%= product.description %></p>
-              <li class="list-group-item">Stock total: <%= product.stock_total %></li>
-            </ul>
-          <% end %>
+          </div>
+        <% end %>
+
+        <div class="d-flex justify-content-center">
+          <%= paginate @products, theme: 'bootstrap-5' %>
         </div>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

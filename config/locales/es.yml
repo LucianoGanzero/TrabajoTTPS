@@ -1,4 +1,10 @@
 es:
+  views:
+    pagination:
+      next: ">"
+      last: ">>"
+      first: "<<"
+      prev: "<"
   and: "y"
   errors:
     messages:

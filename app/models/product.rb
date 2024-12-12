@@ -1,4 +1,9 @@
 class Product < ApplicationRecord
+  include AlgoliaSearch
+  algoliasearch do
+    attribute :name, :description, :unit_price
+  end
+
   has_many :orders
   has_many :carts, through: :orders
 

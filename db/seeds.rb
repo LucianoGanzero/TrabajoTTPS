@@ -229,6 +229,4 @@ productos.each do |product_name|
   end
 end
 
-
-
 puts "Seeding completed!"

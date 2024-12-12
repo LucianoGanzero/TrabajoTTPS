@@ -74,6 +74,17 @@
     margin-bottom: 2em;
   }
 
+  .shop-container {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:auto;
+    margin-bottom: 2em;
+  }
+
   .login-form {
     width: 100%;
     max-width: 400px; /* Máximo ancho del formulario */
@@ -189,44 +200,95 @@
   font-size: 1rem !important;
 }
 
-/* Limitar el ancho de cada grupo de checkboxes */
 .checkbox-group {
-  max-width: 100%;  /* Asegura que los checkboxes no se expandan más de lo necesario */
+  max-width: 100%;  
   display: flex;
-  flex-wrap: wrap;  /* Permite que los checkboxes se vayan a la siguiente línea */
-  gap: 0;  /* Elimina el espacio entre los elementos dentro del contenedor */
+  flex-wrap: wrap; 
+  gap: 0; 
 }
 
-/* Eliminar márgenes y rellenos en cada checkbox y label */
 .checkbox-group .form-check {
-  margin: 0;  /* Elimina el margen entre los checkboxes */
-  padding: 0; /* Elimina el relleno */
+  margin: 0;  
+  padding: 0; 
 }
 
-/* Asegurarse de que el label y el checkbox estén pegados */
 .checkbox-group .btn-check {
-  margin: 0;  /* Elimina cualquier margen alrededor del checkbox */
+  margin: 0;  
 }
 
-/* Estilo por defecto (sin selección) para los checkboxes de color */
 .checkbox-group .color-checkbox:not(:checked) + label {
-  background-color: transparent;  /* Fondo transparente por defecto */
+  background-color: transparent;  
 }
 
-/* Estilo cuando el checkbox de color está seleccionado */
 .checkbox-group .color-checkbox:checked + label {
-  background-color: var(--color); /* Color de fondo según el color de cada checkbox */
-  color: white;                   /* Texto blanco cuando está seleccionado */
+  background-color: var(--color); 
+  color: white;                   
 }
 
-/* Se asegura de que los colores se apliquen desde el atributo data-color */
 .checkbox-group .color-checkbox:checked + label {
   background-color: unset;
   color: unset;
 }
 
+.product-card {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.search-input { 
+  width: 70% !important; 
+  display: inline-block; 
+  vertical-align: middle; 
+  margin:0;
+} 
+.search-button { 
+  display: inline-block; 
+  vertical-align: middle; 
+  margin:0;
+} 
+.input-group { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  width: 80% !important;
+  margin: 0;
+}
+.sticky-top { 
+  position: -webkit-sticky; 
+  position: sticky; 
+  top: 0; 
+  z-index: 10; 
+}
+
+.active-link { 
+  color: white !important;
+  font-weight: bold; 
+} 
+.remove-filter { 
+  float: right; 
+  color: white; 
+  text-decoration: none; 
+} 
+.remove-filter:hover { 
+  color: #ff6666; 
+}
+
+@media (min-width: 1200px) {
+  .product-card {
+    flex: 0 0 33.3333%;
+    max-width: 33.3333%;
+  }
+}
+
+
+
 
 @media (max-width: 768px) { 
+  .product-card {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
   .product-container {
     flex-direction: column;
     align-items: center; 

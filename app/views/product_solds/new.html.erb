@@ -1,11 +1,45 @@
-<% content_for :title, "New product sold" %>
 
-<h1>New product sold</h1>
+<% content_for :title, "Agregar productos" %>
+<div class="container">
+  <h1>Agregar productos</h1>
+  <div style="width: 60%; justify-content: center">
+    <%= render "form", product_sold: @product_sold %>
+  </div>
 
-<%= render "form", product_sold: @product_sold %>
+  <br>
 
-<br>
+  <%= turbo_frame_tag "product-solds-table" do %> 
+    <%= render "product_solds_table", product_solds: @sale.product_solds %> 
+  <% end %>
 
-<div>
-  <%= link_to "Back to product solds", product_solds_path %>
+  <div>
+    <p class="text-primary-emphasis text-start">Total de la venta: <%= number_to_currency(@sale.total_price)%></p>
+  </div>
+  <div class="mt-4">
+    <%= link_to "Volver a ventas", sales_path %>
+  </div>
+
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("click", event => {
+    if (event.target.matches("input[type='submit'][data-product-id]")) {
+      event.preventDefault();
+
+      const button = event.target;
+      const productId = button.dataset.productId;
+      const sizeSelect = document.querySelector(`select[data-size-select-id='${productId}']`);
+      const quantityInput = document.querySelector(`input[data-quantity-id='${productId}']`);
+
+      const sizeField = document.querySelector(`#size_field_${productId}`);
+      const quantityField = document.querySelector(`#quantity_field_${productId}`);
+
+      sizeField.value = sizeSelect.value;
+      quantityField.value = quantityInput.value;
+
+      button.closest("form").submit();
+    }
+  });
+});
+</script>

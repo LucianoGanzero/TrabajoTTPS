@@ -1,10 +1,18 @@
-<p style="color: green"><%= notice %></p>
 
-<%= render @sale %>
+ <div class="container">
+  
+  <h1 class="text-center mb-5">Venta #<%= @sale.id %></h1>
 
-<div>
-  <%= link_to "Edit this sale", edit_sale_path(@sale) %> |
-  <%= link_to "Back to sales", sales_path %>
+  <%= render @sale  %>
 
-  <%= button_to "Destroy this sale", @sale, method: :delete %>
-</div>
+<div class="mt-5 " style="width: 30%;">
+  <div style="display: flex; justify-content: center;">
+    <%= button_to "Cancelar venta", @sale, method: :delete, class:"btn btn-outline-danger" %>
+
+  </div>
+  <div class="text-center mt-5">
+
+    <%= link_to "Volver a ventas", sales_path, class:"btn btn-link" %>
+  </div>
+  </div>
+ </div>

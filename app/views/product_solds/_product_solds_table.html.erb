@@ -1,0 +1,27 @@
+<div class=" text-center mt-5">
+    <h3>Productos añadidos</h3>
+    <% if product_solds.any? %>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Talle</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% product_solds.each do |product_sold| %>
+            <tr>
+            <td><%= product_sold.product.name %></td>
+            <td><%= product_sold.size.size %></td>
+            <td><%= product_sold.quantity %></td>
+            <td><%= number_to_currency(product_sold.total) %></td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+    <% else %>
+    <p>Esta venta aún no tiene productos.</p>
+    <% end %>
+</div>

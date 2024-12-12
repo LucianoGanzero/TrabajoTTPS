@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   end
   resources :roles
   resources :users
-  resources :sales do
+  resources :sales, except: [ :edit, :update ] do
+    resources :product_solds, only: [ :new, :create ]
+    get :search_products, on: :collection
     patch "assign_salesman", on: :member
   end
   resources :product_solds

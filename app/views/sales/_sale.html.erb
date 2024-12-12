@@ -1,12 +1,29 @@
-<div id="<%= dom_id sale %>">
-  <p>
-    <strong>Total price:</strong>
-    <%= sale.total_price %>
-  </p>
+<div id="<%= dom_id @sale %>">
+  <h4 class="mt-3">Cliente</h4>
+  <p><%= @sale.client %></p>
 
-  <p>
-    <strong>Client:</strong>
-    <%= sale.client %>
-  </p>
+  <h4 class="mt-3">Vendedor</h4>
+  <% if @sale.salesman.present?%>    
+    <p><%= @sale.salesman.username %> </p>
+  <% else %>
+    <p>Sin asignar</p>
+  <% end %>
 
+  <h4 class="mt-3">Fecha de la venta</h4>
+  <p><%= @sale.sale_date.strftime("%d/%m/%Y %H:%M") if @sale.sale_date.present? %> </p>
+
+  <h4>Precio total</h4>
+  <p><%= number_to_currency(@sale.total_price) %></p>
+
+  <% if @sale.cancelled %>
+    <h4 class="mt-3">Estado de la venta</h4>
+    <p>Cancelada</p>
+
+    <h4 class="mt-3">Fecha de cancelación</h4>
+    <p><%= @sale.cancel_date.strftime("%d/%m/%Y %H:%M") %> </p>
+  <% end %>
+
+  <%= turbo_frame_tag "product-solds-table" do %>
+    <%= render "product_solds/product_solds_table", product_solds: @sale.product_solds %>
+  <% end %>
 </div>

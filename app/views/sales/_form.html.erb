@@ -1,27 +1,14 @@
-<%= form_with(model: sale) do |form| %>
-  <% if sale.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
-
-      <ul>
-        <% sale.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :total_price, style: "display: block" %>
-    <%= form.text_field :total_price %>
+<%= form_with model: @sale, url: sales_path, method: :post do |f| %> 
+  <div class="form-group"> <%= f.label :client, "Nombre del Cliente" %> 
+    <%= f.text_field :client, class: "form-control", placeholder: "Ingrese el nombre del cliente" %> 
+  </div> 
+  <div class="form-group"> <%= f.label :sale_date, "Fecha de la Venta" %> 
+    <%= f.datetime_field :sale_date, class: "form-control" %> 
   </div>
-
   <div>
-    <%= form.label :client, style: "display: block" %>
-    <%= form.text_field :client %>
+    
   </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <div class="form-group mt-4"> 
+    <%= f.submit "Crear Venta", class: "btn btn-primary" %> 
+  </div> 
 <% end %>

@@ -19,7 +19,7 @@
       <tbody>
         <% @assigned_sales.each do |sale| %>
           <tr>
-            <td><%= sale.id %></td>
+            <td><%= link_to sale.id, sale_path(sale) %></td>
             <td class="text-end"><%= sale.product_solds.count %></td>
             <td class="text-end"><%= number_to_currency(sale.total_price) %></td>
             <td><%= sale.client %></td>
@@ -59,7 +59,7 @@
       <tbody>
         <% @unassigned_sales.each do |sale| %>
           <tr>
-            <td><%= sale.id %></td>
+            <td><%= link_to sale.id, sale_path(sale) %></td>
             <td class="text-end"><%= sale.product_solds.count %></td>
             <td class="text-end"><%= number_to_currency(sale.total_price) %></td>
             <td><%= sale.client %></td>
@@ -102,7 +102,7 @@
       <tbody>
         <% @cancelled_sales.each do |sale| %>
           <tr>
-            <td><%= sale.id %></td>
+            <td><%= link_to sale.id, sale_path(sale) %></td>
             <td class="text-end"><%= sale.product_solds.count %></td>
             <td class="text-end"><%= number_to_currency(sale.total_price) %></td>
             <td><%= sale.client %></td>
@@ -117,6 +117,6 @@
   <% end %>
 
   <div class="mt-4">
-    <%= link_to "Volver al dashboard", dashboard_index_path %>
+    <%= link_to "Volver al dashboard", dashboard_index_path, class:"btn btn-link" %>
   </div>
 </div>

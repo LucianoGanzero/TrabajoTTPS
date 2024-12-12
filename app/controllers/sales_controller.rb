@@ -20,36 +20,32 @@ class SalesController < ApplicationController
   end
 
   # GET /sales/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /sales or /sales.json
   def create
     @sale = Sale.new(sale_params)
-
-    respond_to do |format|
-      if @sale.save
-        format.html { redirect_to @sale, notice: "Sale was successfully created." }
-        format.json { render :show, status: :created, location: @sale }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @sale.errors, status: :unprocessable_entity }
-      end
+    @sale.salesman = Current.user
+    if @sale.save
+      redirect_to new_sale_product_sold_path(@sale)
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /sales/1 or /sales/1.json
-  def update
-    respond_to do |format|
-      if @sale.update(sale_params)
-        format.html { redirect_to @sale, notice: "Sale was successfully updated." }
-        format.json { render :show, status: :ok, location: @sale }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @sale.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # # PATCH/PUT /sales/1 or /sales/1.json
+  # def update
+  #   respond_to do |format|
+  #     if @sale.update(sale_params)
+  #       format.html { redirect_to @sale, notice: "Sale was successfully updated." }
+  #       format.json { render :show, status: :ok, location: @sale }
+  #     else
+  #       format.html { render :edit, status: :unprocessable_entity }
+  #       format.json { render json: @sale.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH /sales/assign_salesman
   def assign_salesman
@@ -60,6 +56,19 @@ class SalesController < ApplicationController
     else
       redirect_to sales_path, alert: "Error al asignar vendedor."
     end
+  end
+
+
+  def search_products
+    logger.debug "Received search query: #{params[:search]}"
+    @sale = Sale.find(params[:sale_id])
+    if params[:search].blank?
+      render turbo_stream: turbo_stream.replace("product-results", partial: "sales/results", locals: { products: [] })
+      return
+    end
+
+    @products = Product.where("name LIKE ?", "%#{params[:search]}%")
+    render partial: "sales/results", locals: { products: @products, sale: @sale }
   end
 
   # DELETE /sales/1 or /sales/1.json
@@ -104,6 +113,6 @@ class SalesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def sale_params
-      params.expect(sale: [ :total_price, :client ])
+      params.expect(sale: [ :total_price, :client, :sale_date ])
     end
 end

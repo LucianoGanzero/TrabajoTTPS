@@ -1,14 +1,8 @@
-<div class="text-center">
 <%= form_with url: "/sales/search_products", method: :get, data: { turbo_frame: "product-results", controller: "search", action: "input->search#search" } do %>
-  <%= hidden_field_tag :sale_id, @sale.id %>  <!-- Este campo oculto pasará el sale_id -->
   <div class="form-group">
-    <%= label_tag :search, "Buscar producto", class: "text-start" %>
+    <%= label_tag :search, "Buscar producto" %>
     <%= text_field_tag :search, nil, id: "product-search", class: "form-control", placeholder: "Buscar por nombre de producto", autocomplete: "off", data: { search_target: "input" } %>
   </div>
 <% end %>
 <%= turbo_frame_tag "product-results" do %>
-  <!-- Aquí se cargan los resultados -->
 <% end %>
-
-<%= link_to "Terminar", sale_path(@sale), class: "btn btn-success mt-4" %>
-</div>

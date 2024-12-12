@@ -17,6 +17,10 @@ class Product < ApplicationRecord
 
   validate :validate_only_one_category_with_sizes
 
+  def stock_total
+    self.size_stocks.sum { |size_stock| size_stock.stock_available }
+  end
+
   private
 
   def validate_only_one_category_with_sizes

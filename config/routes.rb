@@ -12,24 +12,24 @@ Rails.application.routes.draw do
   resources :shop_products, only: [ :index, :show ]
   resources :dashboard, only: [ :index ]
   get "store_management", to: "dashboard#store_management", as: :store_management
-  resources :size_stocks do
+  resources :size_stocks, except: [ :index, :new,:show, :edit, :update, :destroy ] do
     member do
       patch :increment
       patch :decrement
     end
   end
-  resources :roles
+  #resources :roles
   resources :users
   resources :sales, except: [ :edit, :update ] do
     resources :product_solds, only: [ :new, :create ]
     get :search_products, on: :collection
     patch "assign_salesman", on: :member
   end
-  resources :product_solds
-  resources :colors
-  resources :sizes
-  resources :categories
-  resources :products do
+  resources :product_solds, except: [ :index, :show, :edit, :update, :destroy ]
+  resources :colors, except: [ :index ]
+  resources :sizes, except: [ :index ]
+  resources :categories, except: [ :index ]
+  resources :products, except: [ :destroy ] do
     resources :categories, only: [ :update ] do
       patch :disassociate, on: :member
     end
@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       patch :activate
     end
   end
+  match '*path', to: 'application#not_found', via: :all
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

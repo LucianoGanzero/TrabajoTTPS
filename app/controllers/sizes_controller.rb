@@ -3,11 +3,6 @@ class SizesController < ApplicationController
   before_action :set_render_cart
   skip_before_action :initialize_cart
 
-  # GET /sizes or /sizes.json
-  def index
-    @sizes = Size.all
-  end
-
   # GET /sizes/1 or /sizes/1.json
   def show
   end

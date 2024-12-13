@@ -3,11 +3,6 @@ class ColorsController < ApplicationController
   before_action :set_render_cart
   skip_before_action :initialize_cart
 
-  # GET /colors or /colors.json
-  def index
-    @colors = Color.all
-  end
-
   # GET /colors/1 or /colors/1.json
   def show
   end

@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @product.save
         create_size_stocks(@product)
-        format.html { redirect_to @product, notice: I18n.t('products.messages.success')}
+        format.html { redirect_to @product, notice: I18n.t("products.messages.success") }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: I18n.t('products.messages.update') }
+        format.html { redirect_to @product, notice: I18n.t("products.messages.update") }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
     @product.destroy!
 
     respond_to do |format|
-      format.html { redirect_to products_path, status: :see_other, notice: I18n.t('products.messages.destroy') }
+      format.html { redirect_to products_path, status: :see_other, notice: I18n.t("products.messages.destroy") }
       format.json { head :no_content }
     end
   end
@@ -67,22 +67,22 @@ class ProductsController < ApplicationController
       @product.size_stocks.update_all(stock_available: 0)
 
       if @product.update(deactivated: true, deactivation_date: Date.today)
-        redirect_to products_path, notice: I18n.t('products.messages.deactivate')
+        redirect_to products_path, notice: I18n.t("products.messages.deactivate")
       else
         raise ActiveRecord::Rollback
       end
     end
 
   rescue => e
-    redirect_to products_path, alert: I18n.t('products.messages.deactivate_error', message: e.message)
+    redirect_to products_path, alert: I18n.t("products.messages.deactivate_error", message: e.message)
   end
   def activate
     @product = Product.find(params[:id])
 
     if @product.update(deactivated: false)
-      redirect_to products_path, notice: I18n.t('products.messages.activate')
+      redirect_to products_path, notice: I18n.t("products.messages.activate")
     else
-      redirect_to products_path, alert: I18n.t('products.messages.activate_error')
+      redirect_to products_path, alert: I18n.t("products.messages.activate_error")
     end
   end
 
@@ -101,7 +101,7 @@ class ProductsController < ApplicationController
         end
       else
         # Si no se encuentra una categoría con talles asociados, agregar error al producto
-        product.errors.add(:category_ids, I18n.t('products.messages.category_error'))
+        product.errors.add(:category_ids, I18n.t("products.messages.category_error"))
       end
     end
 

@@ -13,7 +13,7 @@ class ShopProductsController < ApplicationController
     end
 
     if params[:category].present?
-      base_scope = base_scope.joins(:categories).where(categories: { id: params[:categories].split(",") })
+      base_scope = base_scope.joins(:categories).where(categories: { id: params[:category].split(",") })
     end
 
     if params[:color].present?

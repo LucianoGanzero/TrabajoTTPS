@@ -1,5 +1,5 @@
 class SalesController < ApplicationController
-  before_action :set_sale, only: %i[ show edit update destroy ]
+  before_action :set_sale, only: %i[ show destroy ]
   before_action :set_render_cart
   skip_before_action :initialize_cart
 

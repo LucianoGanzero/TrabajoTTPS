@@ -25,6 +25,8 @@ roles.each do |role_name|
   Role.create(name: role_name)
 end
 
+puts "Roles creados!"
+
 # Crear Usuarios
 admin_role = Role.find_by(name: 'Administrador')
 gerente_role = Role.find_by(name: 'Gerente')
@@ -60,6 +62,8 @@ User.create!(
   role: empleado_role
 )
 
+puts "Usuarios creados!"
+
 # Crear Sizes
 clothes_size = [  'XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL' ]
 shoes_size = [ '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47' ]
@@ -75,11 +79,14 @@ children_shoe_size.each { |size| Size.find_or_create_by(size: size) }
 # Crear talles para pantalones
 trousers_size.each { |size| Size.find_or_create_by(size: size) }
 
+puts "Talles creados!"
 # Crear Categorías
 categories = [ 'Hombre', 'Mujer', 'Niño', 'Pantalones', 'Buzos', 'Remeras', 'Calzado', 'Indumentaria', 'Calzado Infantil', 'Futbol', 'Basket', 'Running' ]
 categories.each do |category_name|
   Category.create(name: category_name)
 end
+
+puts "Categorias creadas!"
 
 # Asociar Categorías con Talles
 pantalones = Category.find_by(name: 'Pantalones')
@@ -87,7 +94,6 @@ indumentaria = Category.find_by(name: 'Indumentaria')
 calzado = Category.find_by(name: 'Calzado')
 calzado_infantil = Category.find_by(name: 'Calzado Infantil')
 
-# Asociar pantalones con todos los talles de pantalones
 trousers_size.each do |size|
   size_record = Size.find_by(size: size)
   if size_record
@@ -95,7 +101,6 @@ trousers_size.each do |size|
   end
 end
 
-# Asociar indumentaria con todos los talles de ropa (clothes_size)
 clothes_size.each do |size|
   size_record = Size.find_by(size: size)
   if size_record
@@ -103,7 +108,6 @@ clothes_size.each do |size|
   end
 end
 
-# Asociar calzado con todos los talles de zapatos (shoes_size)
 shoes_size.each do |size|
   size_record = Size.find_by(size: size)
   if size_record
@@ -111,7 +115,6 @@ shoes_size.each do |size|
   end
 end
 
-# Asociar calzado infantil con todos los talles de zapatos infantiles (children_shoe_size)
 children_shoe_size.each do |size|
   size_record = Size.find_by(size: size)
   if size_record
@@ -137,6 +140,8 @@ colors.each do |color|
   Color.create(name: color[:name], code: color[:code])
 end
 
+puts "Colores creados!"
+
 # Crear Marcas
 brands = [
   'Nike', 'Adidas', 'Puma', 'Reebok', 'Under Armour', 'New Balance', 'Levi\'s', 'Wrangler', 'H&M', 'Zara'
@@ -146,8 +151,8 @@ brands.each do |brand_name|
   Brand.create(name: brand_name)
 end
 
+puts "Marcas creadas!"
 
-# Crear productos con nombres específicos
 productos = [
   'Remera deportiva Nike', 'Buzo con capucha Adidas', 'Pantalón de entrenamiento Puma', 'Zapatilla running Asics',
   'Zapatilla de niño Nike', 'Botines futbol Adidas', 'Botines de niño Puma', 'Camiseta de fútbol Barcelona',
@@ -181,7 +186,7 @@ productos.each do |product_name|
   )
 
   # Asociar colores al azar
-  product_colors = colors.sample(2).map { |color| color[:name] }  # Elegir 2 colores al azar
+  product_colors = colors.sample(2).map { |color| color[:name] }
   product_colors.each do |color_name|
     color = Color.find_or_create_by(name: color_name)
     product.colors << color
@@ -207,13 +212,17 @@ productos.each do |product_name|
     product_category = categories.find { |cat| cat.name == 'Calzado' }
     selected_sizes = shoes_size
   else
-    # Default category
     product_category = categories.find { |cat| cat.name == 'Calzado' }
     selected_sizes = shoes_size
   end
 
   # Asociar con la categoría
   product.categories << product_category
+
+  image_paths = Dir[Rails.root.join("app/assets/images/seed/#{product_name}/*")] 
+  image_paths.each do |image_path| 
+    product.images.attach(io: File.open(image_path), filename: File.basename(image_path)) 
+  end
 
   # Inicializar stock por talla, asegurando que solo se asocien talles válidos para cada categoría
   selected_sizes.each do |size|
@@ -222,11 +231,14 @@ productos.each do |product_name|
         SizeStock.create!(
           product: product,
           size: category_size,
-          stock_available: rand(0..10)  # Stock aleatorio entre 0 y 10
+          stock_available: rand(0..10) 
         )
       end
     end
   end
 end
+
+puts "Productos creados!"
+Product.reindex!
 
 puts "Seeding completed!"

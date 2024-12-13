@@ -12,13 +12,13 @@ Rails.application.routes.draw do
   resources :shop_products, only: [ :index, :show ]
   resources :dashboard, only: [ :index ]
   get "store_management", to: "dashboard#store_management", as: :store_management
-  resources :size_stocks, except: [ :index, :new,:show, :edit, :update, :destroy ] do
+  resources :size_stocks, except: [ :index, :new, :show, :edit, :update, :destroy ] do
     member do
       patch :increment
       patch :decrement
     end
   end
-  #resources :roles
+  # resources :roles
   resources :users
   resources :sales, except: [ :edit, :update ] do
     resources :product_solds, only: [ :new, :create ]
@@ -41,7 +41,11 @@ Rails.application.routes.draw do
       patch :activate
     end
   end
-  match '*path', to: 'application#not_found', via: :all
+  # Tengo que agregar esto para filtrar algunas rutas, sino por ejemplo, las consultas a active storage me las filtra y no me devuelve las imagenes
+  match "*path", to: "application#not_found", via: :all, constraints: lambda { |req|
+  !req.path.start_with?("/assets/", "/packs/", "/images/", "/stylesheets/", "/javascripts/", "/favicon.ico", "/rails")
+}
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

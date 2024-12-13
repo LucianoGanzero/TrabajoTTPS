@@ -219,9 +219,9 @@ productos.each do |product_name|
   # Asociar con la categoría
   product.categories << product_category
 
-  image_paths = Dir[Rails.root.join("app/assets/images/seed/#{product_name}/*")] 
-  image_paths.each do |image_path| 
-    product.images.attach(io: File.open(image_path), filename: File.basename(image_path)) 
+  image_paths = Dir[Rails.root.join("app/assets/images/seed/#{product_name}/*")]
+  image_paths.each do |image_path|
+    product.images.attach(io: File.open(image_path), filename: File.basename(image_path))
   end
 
   # Inicializar stock por talla, asegurando que solo se asocien talles válidos para cada categoría
@@ -231,7 +231,7 @@ productos.each do |product_name|
         SizeStock.create!(
           product: product,
           size: category_size,
-          stock_available: rand(0..10) 
+          stock_available: rand(0..10)
         )
       end
     end
@@ -239,6 +239,7 @@ productos.each do |product_name|
 end
 
 puts "Productos creados!"
+
 Product.reindex!
 
 puts "Seeding completed!"

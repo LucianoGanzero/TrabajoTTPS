@@ -1,17 +1,17 @@
 <div class="container">
   
-  <h1 class="text-center mb-5">Categoría #<%= @category.id %></h1>
+  <h1 class="text-center mb-5"><%=I18n.t("categories.category")%> #<%=@category.id %></h1>
 
   <%= render @category %>
 
 <div class="mt-5 " style="width: 30%;">
   <div style="display: flex; justify-content: space-evenly;">
-    <%= link_to "Editar", edit_category_path(@category), class:"btn btn-primary" %> 
-    <%= button_to "Eliminar categoría", @category, method: :delete, class:"btn btn-outline-danger" %>
+    <%= link_to I18n.t("update"), edit_category_path(@category), class:"btn btn-primary" %> 
+    <%= button_to I18n.t("categories.destroy"), @category, method: :delete, class:"btn btn-outline-danger" %>
     
   </div>
   <div class="text-center mt-5">
-    <%= link_to "Volver a gestión", store_management_path, class:"btn btn-link" %>
+    <%= link_to I18n.t("buttons.back_to_manage"), store_management_path, class:"btn btn-link" %>
   </div>
   </div>
  </div>

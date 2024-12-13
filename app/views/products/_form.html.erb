@@ -6,37 +6,37 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :name, "Nombre", for:"name", class: "form-label mt-4" %>
+    <%= form.label :name, I18n.t("products.attributes.name"), for:"name", class: "form-label mt-4" %>
     <%= form.text_field :name, class:"form-control", id:"name" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :description, "Descripción", for:"description", class: "form-label mt-4"%>
+    <%= form.label :description, I18n.t("products.attributes.description"), for:"description", class: "form-label mt-4"%>
     <%= form.textarea :description, class:"form-control", id:"description", rows:"3"%>
   </div>
 
   <div class="form-group">
-    <%= form.label :unit_price, "Precio unitario ",for:"unitPrice", class: "form-label mt-4" %>
+    <%= form.label :unit_price, I18n.t("products.attributes.unit_price"),for:"unitPrice", class: "form-label mt-4" %>
     <%= form.number_field :unit_price, step: 0.01, class: "form-control", id:"unitPrice" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :entry_date, "Fecha de entrada", for:"entryDate", class: "form-label mt-4" %>
+    <%= form.label :entry_date, I18n.t("products.attributes.entry_date"), for:"entryDate", class: "form-label mt-4" %>
     <%= form.date_field :entry_date, class: "form-control", id:"entryDate" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :brand_id, "Marca", class: "form-label mt-4" %>
+    <%= form.label :brand_id, I18n.t("products.attributes.brand"), class: "form-label mt-4" %>
     <%= form.collection_select :brand_id, Brand.all, :id, :name, { prompt: "Seleccione una marca" }, { class: "form-control" } %>
   </div>
 
   <div class="form-group">
-    <%= form.label :images, "Imagenes", class: "form-label mt-4" %>
+    <%= form.label :images, I18n.t("products.attributes.images"), class: "form-label mt-4" %>
     <%= form.file_field :images, multiple: true, class: "form-control" %>
   </div>
 
 <div class="form-group">
-  <%= form.label :category_ids, "Categorías con talles", class: "form-label mt-4" %>
+  <%= form.label :category_ids, I18n.t("products.attributes.category_sizes"), class: "form-label mt-4" %>
   <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Categorías con talles">
     <%= form.collection_check_boxes :category_ids, Category.with_sizes, :id, :name do |b| %>
       <div class="form-check form-check-inline">
@@ -47,7 +47,7 @@
       </div>
     <% end %>
   </div>
-  <small id="sizeHel" class="form-text text-muted d-block mt-2">Debe seleccionar solo una de estas categorías para determinar los talles asociados al producto.</small>
+  <small id="sizeHel" class="form-text text-muted d-block mt-2"><%= I18n.t("products.attributes.category_sizes")%></small>
 
   <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Categorías sin talles">
     <%= form.collection_check_boxes :category_ids, Category.without_sizes, :id, :name do |b| %>
@@ -63,7 +63,7 @@
 
 
   <div class="form-group">
-    <%= form.label :color_ids, "Colores", class: "form-label mt-4" %>
+    <%= form.label :color_ids, I18n.t("colors.colors"), class: "form-label mt-4" %>
     <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Colores">
       <%= form.collection_check_boxes :color_ids, Color.order(:name), :id, :name do |b| %>
         <div class="form-check form-check-inline">
@@ -76,21 +76,21 @@
     </div>
   </div>
   <div class="mt-4 text-center">
-    <%= form.submit (product.persisted? ? "Actualizar producto" : "Crear producto"), class: "btn btn-primary" %>
+    <%= form.submit (product.persisted? ? I18n.t("products.update") : I18n.t("products.create") ), class: "btn btn-primary" %>
   </div>
 <% end %>
 
 <script>
 document.querySelectorAll('.color-checkbox').forEach(function (checkbox) {
   checkbox.addEventListener('change', function () {
-    let label = checkbox.nextElementSibling;  // Seleccionamos el label asociado al checkbox
-    let color = checkbox.getAttribute('data-color');  // Obtenemos el código de color desde el data-color
+    let label = checkbox.nextElementSibling;  
+    let color = checkbox.getAttribute('data-color');  
     if (checkbox.checked) {
-      label.style.backgroundColor = color;  // Cambiar el color de fondo del label
-      label.style.borderColor = color;  // Cambiar el borde
+      label.style.backgroundColor = color;  
+      label.style.borderColor = color;  
     } else {
-      label.style.backgroundColor = '';  // Eliminar el color de fondo si no está marcado
-      label.style.borderColor = '';  // Eliminar el borde
+      label.style.backgroundColor = '';  
+      label.style.borderColor = '';
     }
   });
 });

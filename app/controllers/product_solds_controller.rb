@@ -1,5 +1,5 @@
 class ProductSoldsController < ApplicationController
-  before_action :set_product_sold, only: %i[ show edit update destroy ]
+  # before_action :set_product_sold, only: %i[ show edit update destroy ]
   before_action :set_render_cart
   skip_before_action :initialize_cart
 
@@ -52,7 +52,7 @@ class ProductSoldsController < ApplicationController
         @sale.update_total_price
 
         respond_to do |format|
-          format.html { redirect_to new_sale_product_sold_path(@sale), notice: "Producto añadido con éxito." }
+          format.html { redirect_to new_sale_product_sold_path(@sale), notice:  I18n.t('product_solds.messages.success')}
           format.turbo_stream do
             render turbo_stream: [
               turbo_stream.replace(
@@ -65,8 +65,8 @@ class ProductSoldsController < ApplicationController
         end
       else
         respond_to do |format|
-          format.html { redirect_to new_sale_product_sold_path(@sale), alert: "No hay suficiente stock de ese producto en ese talle." }
-          format.turbo_stream { render turbo_stream: turbo_stream.append(:flash, partial: "layouts/flash", locals: { alert: "No hay suficiente stock de ese producto en ese talle." }) }
+          format.html { redirect_to new_sale_product_sold_path(@sale), alert:  I18n.t('product_solds.messages.insufficient_stock')}
+          format.turbo_stream { render turbo_stream: turbo_stream.append(:flash, partial: "layouts/flash", locals: { alert: I18n.t('product_solds.messages.insufficient_stock') }) }
         end
       end
     rescue => e

@@ -1,6 +1,6 @@
-<% content_for :title, "Editar producto" %>
+<% content_for :title, I18n.t("products.edit")  %>
 <div class="container">
-<h1>Editar producto</h1>
+<h1><%= I18n.t("products.edit") %></h1>
 <div style="width: 60%; justify-content: center">
 
 <%= render "form", product: @product %>
@@ -8,6 +8,6 @@
 <br>
 
 <div class="text-center mt-4">
-  <%= link_to "Mostrar producto", @product %> |
-  <%= link_to "Volver a productos", products_path %>
+  <%= link_to I18n.t("products.show") , @product %> |
+  <%= link_to I18n.t("products.back") , products_path %>
 </div>

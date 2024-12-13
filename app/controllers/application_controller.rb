@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :initialize_cart
 
   def not_found 
-    render template: 'errors/not_found', status: 404 
+    render 'errors/not_found', status: 404
   end
 
   def set_render_cart

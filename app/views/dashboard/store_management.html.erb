@@ -1,15 +1,15 @@
 <div class="container mt-5">
-  <h1 class="text-center mb-5">Gestión de Tienda</h1>
+  <h1 class="text-center mb-5"><%= I18n.t("buttons.store_management") %></h1>
 
   <div class="d-flex justify-content-between flex-wrap">
     <div class="me-5" style="flex: 1; min-width: 40%;">
-      <h2 class="text-center">Categorías</h2>
+      <h2 class="text-center"><%= I18n.t("categories.categories") %></h2>
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Productos</th>
-            <th>Talles</th>
+            <th><%= I18n.t("categories.attributes.name") %></th>
+            <th><%= I18n.t("categories.attributes.sizes") %></th>
+            <th><%= I18n.t("products.products") %></th>
           </tr>
         </thead>
         <tbody>
@@ -28,20 +28,20 @@
           <% end %>
         </tbody>
       </table>
-      <small id="sizeHel" class="form-text text-muted d-block mb-4">*Las categorías con talles son excluyentes entre si.</small>
+      <small id="sizeHel" class="form-text text-muted d-block mb-4"><%= I18n.t("categories.messages.sizes") %></small>
       <div class="text-center">
-        <%= link_to "Agregar categoría", new_category_path, class: "btn btn-primary mb-5 text-center" %>
+        <%= link_to I18n.t("categories.add"), new_category_path, class: "btn btn-primary mb-5 text-center" %>
       </div>
     </div>
 
     <div class="ms-5" style="flex: 1; min-width: 45%;">
-      <h2 class="text-center">Colores</h2>
+      <h2 class="text-center"><%= I18n.t("colors.colors") %></h2>
       <table class="table table-bordered table-striped mb-4">
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Código</th>
-            <th>Productos</th>
+            <th><%= I18n.t("colors.attributes.name") %></th>
+            <th><%= I18n.t("colors.attributes.code") %></th>
+            <th><%= I18n.t("products.products") %></th>
           </tr>
         </thead>
         <tbody>
@@ -60,12 +60,12 @@
         </tbody>
       </table>
       <div class="text-center">
-        <%= link_to "Agregar color", new_color_path, class: "btn btn-primary mb-5" %>
+        <%= link_to I18n.t("colors.add"), new_color_path, class: "btn btn-primary mb-5" %>
       </div>
     </div>
   </div>
 
-  <h2>Talles</h2>
+  <h2><%= I18n.t("sizes.sizes") %></h2>
   <div style="display: flex; flex-wrap: wrap;">
     <% @number_sizes.each do |size| %>
       <%= link_to size_path(size), class: "btn btn-outline-primary p-2 border m-2", style: "min-width: 100px; text-align: center;" do %>
@@ -80,8 +80,8 @@
       <% end %>
     <% end %>
   </div>
-  <%= link_to "Agregar talle", new_size_path, class:"btn btn-primary mb-4" %>
+  <%= link_to I18n.t("sizes.add"), new_size_path, class:"btn btn-primary mb-4" %>
   <div class="mb-4">
-  <%= link_to "Volver al dashboard", dashboard_index_path %>
+  <%= link_to I18n.t("buttons.back_to_dashboard"), dashboard_index_path %>
 </div>
 </div>

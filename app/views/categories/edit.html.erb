@@ -1,14 +1,14 @@
 
-<% content_for :title, "Actualizar categoría" %>
+<% content_for :title, I18n.t("categories.update") %>
 <div class="container">
-<h1>Actualizar categoría</h1>
+<h1><%=I18n.t("categories.update")%></h1>
 <div style="width: 60%; justify-content: center">
 <%= render "form", category: @category %>
 </div>
 <br>
 
 <div class="mt-4">
-  <%= link_to "Volver a gestión", store_management_path %>
+  <%= link_to I18n.t("buttons.back_to_manage"), store_management_path %>
 </div>
 
 </div>

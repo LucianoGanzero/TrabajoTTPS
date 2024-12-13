@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :name, "Nombre", for:"name", class: "form-label mt-4" %>
+    <%= form.label :name, I18n.t("categories.attributes.name"), for:"name", class: "form-label mt-4" %>
     <%= form.text_field :name, class:"form-control", id:"name" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :size_ids, "Talles asociados", class: "form-label mt-4" %>
+    <%= form.label :size_ids, I18n.t("categories.attributes.sizes"), class: "form-label mt-4" %>
     <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Talles">
       <%= form.collection_check_boxes :size_ids, Size.numeric_sizes, :id, :size do |b| %>
         <div class="form-check form-check-inline">
@@ -42,11 +42,11 @@
     </div>
   </div>
   <% if category.persisted?%>
-    <small id="sizeHel" class="form-text text-muted d-block mb-4">*Al modificar los talles asociados a una categoria, se crearán/eliminarán entradas de stock para todos los productos asociados.</small>
+    <small id="sizeHel" class="form-text text-muted d-block mb-4"><%=I18n.t("categories.messages.modify_sizes")%></small>
   <% end %>
 
   <div class="mt-4 text-center">
-    <%= form.submit (category.persisted? ? "Actualizar categoria" : "Crear categoría"), class: "btn btn-primary" %>
+    <%= form.submit (category.persisted? ? I18n.t("categories.update") : I18n.t("categories.create")), class: "btn btn-primary" %>
   </div>
 <% end %> 
  

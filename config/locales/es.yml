@@ -6,7 +6,11 @@ es:
       first: "<<"
       prev: "<"
   and: "y"
+  update: "Editar"
   errors:
+    not_found:
+      title: "Pagina no encontrada"
+      message: "Lo sentimos, la página que estás buscando no existe."
     messages:
       blank: "no puede estar vacío"
       invalid: "no es válido"
@@ -22,6 +26,16 @@ es:
         entry_date: "Fecha de entrada"
         password: "Contraseña"
         role: "Rol"
+  buttons:
+    back_to_dashboard: "Volver al dashboard"
+    back_to_manage: "Volver a gestión"
+    back_to_home: "Volver a la pagina principal"
+    back_to_sales: "Volver a ventas"
+    sales: "Ventas"
+    users: "Usuarios"
+    store_management: "Gestión de tienda"
+    inventory: "Inventario"
+    end: "Terminar"
   users:
     alerts:
       restrict: "No tienes permiso para gestionar usuarios"
@@ -38,8 +52,7 @@ es:
     edit:
       success: "El usuario se actualizó correctamente"
     destroy:
-      success: "El usuario fue correctamente desactivado"
-    
+      success: "El usuario fue correctamente desactivado"    
     phone:
       size: "El número de teléfono no puede tener más de 10 dígitos"
       digits: "Solo se permiten números"
@@ -53,6 +66,8 @@ es:
       empty: "Tu carrito está vacio"
       review: "Este es el contenido de tu carrito"
       success: "Felicidades! Tu compra se acreditó"
+      insufficient_stock: "Stock insuficiente para %{quantity} unidades de %{product_name} (%{size})."
+      add_product: "El producto %{product_name} se añadió a tu carrito."
     labels:
       name: "Nombre"
       address: "Dirección"
@@ -64,3 +79,123 @@ es:
     buttons:
       buy: "Comprar"
       confirm: "Confirmar"
+    payment_methods:
+      cash: "Efectivo"
+      transfer: "Trasferencia"
+      card: "Debito / Credito"
+  categories:
+    categories: "Categorías"
+    category: "Categoría"
+    update: "Actualizar categoría"
+    create: "Crear categoría"
+    add: "Agregar categoría"
+    destroy: "Eliminar categoría"
+    messages:
+      success: "La categoría se creó correctamente"
+      edit_success: "La categoría se actualizó correctamente"
+      destroy_success: "La categoría se eliminó con exito"
+      dissasociate_success: "La etiqueta '%{category_name}' se desasoció del producto."
+      dissasociate_fail: "No se pudo desasociar la etiqueta '#{category_name}' del producto."
+      products_empty: "No hay productos asociados a esta categoría."
+      sizes: "*Las categorías con talles son excluyentes entre si."
+      modify_sizes: "*Al modificar los talles asociados a una categoria, se crearán/eliminarán entradas de stock para todos los productos asociados."
+    attributes:
+      name: "Nombre"
+      sizes: "Talles"
+      products: "Productos asociados"      
+  colors:
+    colors: "Colores"
+    color: "Color"
+    update: "Actualizar color"
+    create: "Nuevo color"
+    add: "Agregar color"
+    destroy: "Eliminar color"
+    attributes:
+      name: "Nombre"
+      code: "Código"
+      products: "Productos asociados"
+    messages:
+      success: "El color se creó correctamente"
+      edit_success: "El color se actualizó correctamente"
+      destroy_success: "El color se eliminó con exito"
+      dissasociate_success: "El color '%{color_name}' se desasoció del producto."
+      dissasociate_fail: "No se pudo desasociar el color '#{color_name}' del producto."
+      products_empty: "No hay productos asociados a este color."
+  product_solds:
+    add: "Agregar productos"
+    label:
+      search: "Buscar producto"
+      search_by: "Buscar por nombre de producto"
+    attributes:
+      products: "Productos añadidos"
+      quantity: "Cantidad"
+      sell_price: "Precio"
+      total: "Total de la venta"
+    messages:
+      success: "Producto añadido con éxito."
+      insufficient_stock: "No hay suficiente stock de ese producto en ese talle."
+      empty: "Esta venta aun no tiene productos."
+  products:
+    products: "Productos"
+    product: "Producto"
+    update: "Actualizar producto"
+    create: "Crear producto"
+    new: "Nuevo producto"
+    edit: "Editar producto"
+    show: "Mostrar producto"
+    back: "Volver a productos"
+    add: "Agregar producto"
+    active:
+      title: "Productos activos"
+      empty: "No hay productos activos"
+    inactive:
+      title: "Productos activos"
+      empty: "No hay productos activos"
+    buttons:
+      watch: "Ver"
+      suspend: "Discontinuar"
+      reactivate: "Reactivar"
+    messages:
+      success: "El producto se creo correctamente"
+      update: "El producto se actualizó correctamente"
+      destroy: "El producto se eliminó con exito"
+      deactivate: "Producto discontinuado correctamente."
+      deactivate_error: "Hubo un problema al discontinuar el producto: %{message}"
+      activate: "Producto activado correctamente."
+      activate_error: "Hubo un problema al activar el producto."
+      category_error: "Debe haber al menos una categoría con talles asociados."
+      category_size: "Debe seleccionar solo una de estas categorías para determinar los talles asociados al producto."
+    attributes:
+      name: "Nombre"
+      description: "Descripción"
+      unit_price: "Precio unitario"
+      price: "Precio"
+      entry_date: "Fecha de alta"
+      brand: "Marca"
+      images: "Imagenes"
+      stock: "Stock total"
+      category_size: "Categorías con talles"
+      category_without_size: "Categorias sin talles"
+  sales:
+    messages:
+      salesman: "Vendedor asignado correctamente."
+      salesman_error: "Error al asignar vendedor."
+      cancel: "Venta cancelada y stocks actualizados correctamente."
+      cancel_error: "Error al cancelar la venta: %{message}"
+  sessions:
+    messages:
+      try_again: "Intenta nuevamente mas tarde"
+      error: "El mail o la contraseña son incorrectos"
+  size_stock:
+    messages:
+      error: "No se puede modificar el stock de un producto discontinuado."
+      decrement: "El stock no puede ser menor que 0."
+      problem: "Hubo un problema al actualizar el stock."
+  sizes:
+    sizes: "Talles"
+    size: "Talle"
+    add: "Agregar talle"
+    messages:
+      success: "El talle se creo correctamente"
+      update: "El talle se actualizó correctamente"
+      destroy: "El talle se eliminó con exito"

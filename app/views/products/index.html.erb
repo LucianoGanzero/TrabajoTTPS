@@ -1,25 +1,25 @@
 
 <div class="container pt-5 pb-5">
-  <h1 class="text-center mb-5">Productos Activos</h1>
+  <h1 class="text-center mb-5"><%=I18n.t("products.active.title") %></h1>
  <% if @active_products.empty? %>
-    <p class="text-center mb-4">No hay productos activos.</p>
+    <p class="text-center mb-4"><%=I18n.t("products.active.empty") %></p>
   <% else %>
   <table class="table table-bordered table-striped table-hover mb-5">
     <thead>
       <tr>
         <th></th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Stock total</th>
-        <th>Imágenes</th>
-        <th>Fecha de Entrada</th>
+        <th><%=I18n.t("products.attributes.name") %></th>
+        <th><%=I18n.t("products.attributes.price") %></th>
+        <th><%=I18n.t("products.attributes.stock") %></th>
+        <th><%=I18n.t("products.attributes.images") %></th>
+        <th><%=I18n.t("products.attributes.entry_date") %></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <% @active_products.each do |product| %>
         <tr>
-          <td style="padding-right: 0.1px"><%= link_to "Ver", product_path(product),  class:"btn btn-primary btn-sm" %></td>
+          <td style="padding-right: 0.1px"><%= link_to I18n.t("products.buttons.watch"), product_path(product),  class:"btn btn-primary btn-sm" %></td>
           <td><%= product.name %></td>
           <td class="text-end"><%= number_to_currency(product.unit_price) %></td>
           <td class="text-end"><%= product.size_stocks.sum { |size| size.stock_available } %></td>
@@ -27,7 +27,7 @@
           <td><%= product.entry_date.strftime('%d/%m/%Y') %></td>
           <td style="padding-right: 0.01px">
             <%= form_with model: product, url: deactivate_product_path(product), method: :patch, local: true do |form| %>
-              <%= form.submit "Discontinuar", class: "btn btn-outline-warning btn-sm" %>
+              <%= form.submit I18n.t("products.buttons.suspend"), class: "btn btn-outline-warning btn-sm" %>
             <% end %>
           </td>
         </tr>
@@ -37,20 +37,20 @@
   </table>
   <% end %>
 
-  <%= link_to "Agregar producto", new_product_path, class:"btn btn-lg btn-primary" %>
+  <%= link_to I18n.t("products.add"), new_product_path, class:"btn btn-lg btn-primary" %>
 
-  <h1 class="text-center mb-5 mt-5">Productos Discontinuados</h1>
+  <h1 class="text-center mb-5 mt-5"><%=I18n.t("products.inactive.title") %></h1>
   <% if @deactivated_products.empty? %>
-    <p class="text-center mb-4">No hay productos discontinuados.</p>
+    <p class="text-center mb-4"><%=I18n.t("products.inactive.title") %></p>
   <% else %>
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
         <th></th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Imágenes</th>
-        <th>Fecha de Alta</th>
+        <th><%=I18n.t("products.attributes.name") %></th>
+        <th><%=I18n.t("products.attributes.price") %></th>
+        <th><%=I18n.t("products.attributes.images") %></th>
+        <th><%=I18n.t("products.attributes.entry_date") %></th>
         <th></th>
       </tr>
     </thead>
@@ -64,7 +64,7 @@
           <td><%= product.entry_date.strftime('%d/%m/%Y') %></td>
           <td style="padding-right: 0.01px">
             <%= form_with model: product, url: activate_product_path(product), method: :patch, local: true do |form| %>
-              <%= form.submit "Reactivar", class: "btn btn-outline-success btn-sm" %>
+              <%= form.submit I18n.t("products.buttons.reactivate"), class: "btn btn-outline-success btn-sm" %>
             <% end %>
           </td>
         </tr>
@@ -74,6 +74,6 @@
   <% end %>
 
   <div class="mt-4">
-  <%= link_to "Volver al dashboard", dashboard_index_path %>
+  <%= link_to I18n.t("buttons.back_to_dashboard"), dashboard_index_path %>
 </div>
 </div>

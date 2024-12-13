@@ -85,13 +85,13 @@
       <%= f.label :payment_method, I18n.t("cart.labels.payment_method"), class: "form-label text-start", style: "width: 100%;" %>
       <div class="btn-group" role="group" aria-label="Método de pago">
         <%= f.radio_button :payment_method, "cash", id: "payment_method_cash", class: "btn-check", autocomplete: "off" %>
-        <%= f.label :payment_method_cash, "Efectivo", class: "btn btn-outline-primary" %>
+        <%= f.label :payment_method_cash, I18n.t("cart.labels.payment_method.cash"),, class: "btn btn-outline-primary" %>
 
         <%= f.radio_button :payment_method, "transfer", id: "payment_method_transfer", class: "btn-check", autocomplete: "off" %>
-        <%= f.label :payment_method_transfer, "Transferencia", class: "btn btn-outline-primary" %>
+        <%= f.label :payment_method_transfer, I18n.t("cart.labels.payment_method.transfer"), class: "btn btn-outline-primary" %>
 
         <%= f.radio_button :payment_method, "debit_credit", id: "payment_method_debit_credit", class: "btn-check", autocomplete: "off" %>
-        <%= f.label :payment_method_debit_credit, "Débito / Crédito", class: "btn btn-outline-primary" %>
+        <%= f.label :payment_method_debit_credit, I18n.t("cart.labels.payment_method.card"), class: "btn btn-outline-primary" %>
     </div>
     </div>
 

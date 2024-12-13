@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
       if @category.save
         @category.size_ids = params[:category][:size_ids]
         @category.save
-        format.html { redirect_to store_management_path, notice: "La categoria se creó correctamente" }
+        format.html { redirect_to store_management_path, notice: I18n.t('categories.messages.success') }
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -64,7 +64,7 @@ class CategoriesController < ApplicationController
         @category.size_ids = params[:category][:size_ids]
 
         @category.save
-        format.html { redirect_to store_management_path, notice: "La categoria se actualizó correctamente" }
+        format.html { redirect_to store_management_path, notice: I18n.t('categories.messages.edit_success') }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -78,7 +78,7 @@ class CategoriesController < ApplicationController
     @category.destroy!
 
     respond_to do |format|
-      format.html { redirect_to store_management_path, status: :see_other, notice: "La categoria se eliminó con exito" }
+      format.html { redirect_to store_management_path, status: :see_other, notice: I18n.t('categories.messages.destroy_success') }
       format.json { head :no_content }
     end
   end
@@ -88,9 +88,9 @@ class CategoriesController < ApplicationController
     category = Category.find(params[:id])
 
     if product.categories.delete(category)
-      redirect_to product_path(product), notice: "La etiqueta '#{category.name}' se desasoció del producto."
+      redirect_to product_path(product), notice: I18n.t('categories.messages.dissasociate_succes', category_name: @category.name)
     else
-      redirect_to product_path(product), alert: "No se pudo desasociar la etiqueta '#{category.name}' del producto."
+      redirect_to product_path(product), alert: I18n.t('categories.messages.dissasociate_fail', category_name: @category.name)
     end
   end
 

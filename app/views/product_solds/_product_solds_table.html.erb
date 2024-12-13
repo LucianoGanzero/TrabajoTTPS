@@ -1,13 +1,13 @@
 <div class=" text-center mt-5">
-    <h3>Productos añadidos</h3>
+    <h3><%= I18n.t("product_solds.attributes.products")%></h3>
     <% if product_solds.any? %>
     <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
-            <th>Producto</th>
-            <th>Talle</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
+            <th><%= I18n.t("products.product")%></th>
+            <th><%= I18n.t("sizes.size")%></th>
+            <th><%= I18n.t("product_solds.attributes.quantity")%></th>
+            <th><%= I18n.t("product_solds.attributes.sell_price")%></th>
         </tr>
         </thead>
         <tbody>
@@ -22,6 +22,6 @@
         </tbody>
     </table>
     <% else %>
-    <p>Esta venta aún no tiene productos.</p>
+    <p><%= I18n.t("product_solds.messages.empty")%></p>
     <% end %>
 </div>

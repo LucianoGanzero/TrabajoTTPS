@@ -1,14 +1,14 @@
 <div id="<%= dom_id color %>">
-  <h4>Nombre</h4>
+  <h4><%= I18n.t("colors.attributes.name") %></h4>
   <p><%= color.name %></p>
 
-  <h4>Codigo</h4>
+  <h4><%= I18n.t("colors.attributes.code") %></h4>
   <div style="display: flex; align-items: center;">
     <p class="mb-0 me-2"><%= color.code %></p>
     <div style="width: 30px; height: 30px; border-radius: 50%; background-color: <%= color.code %>;"></div>
   </div>
 
-  <h4 class="text-center mt-5">Productos asociados</h2>
+  <h4 class="text-center mt-5"><%= I18n.t("colors.attributes.products") %></h2>
   <% if color.products.any? %>
     <ul>
       <% color.products.each do |product| %>
@@ -16,6 +16,6 @@
       <% end %>
     </ul>
   <% else %>
-    <p>No hay productos asociados a este color.</p>
+    <p><%= I18n.t("colors.messages.products_empty") %></p>
   <% end %>
 </div>

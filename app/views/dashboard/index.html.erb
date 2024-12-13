@@ -2,13 +2,13 @@
     <h1 class="text-center mb-4">Dashboard</h1>
     <div class="dashboard-container">
         <div class="gap-3 mb-4" style="display: flex; width: 100%">
-            <%= link_to 'Inventario', products_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
-            <%= link_to 'Ventas', sales_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
+            <%= link_to I18n.t("buttons.inventory"), products_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
+            <%= link_to I18n.t("buttons.sales"), sales_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
         </div>
         <div class="gap-3" style="display: flex; width: 100%">
-            <%= link_to 'Gestión de Tienda', store_management_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
+            <%= link_to I18n.t("buttons.store_management"), store_management_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
             <% if Current.user.role.name != 'Empleado' %>
-                <%= link_to 'Usuarios', users_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
+                <%= link_to I18n.t("buttons.users"), users_path, class: 'btn dashboard-btn btn-outline-primary btn-lg' %>
             <% end %>
         </div>
     </div>

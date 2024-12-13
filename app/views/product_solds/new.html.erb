@@ -1,7 +1,7 @@
 
-<% content_for :title, "Agregar productos" %>
+<% content_for :title, I18n.t("product_solds.add") %>
 <div class="container">
-  <h1>Agregar productos</h1>
+  <h1><%= I18n.t("product_solds.add")%></h1>
   <div style="width: 60%; justify-content: center">
     <%= render "form", product_sold: @product_sold %>
   </div>
@@ -13,10 +13,10 @@
   <% end %>
 
   <div>
-    <p class="text-primary-emphasis text-start">Total de la venta: <%= number_to_currency(@sale.total_price)%></p>
+    <p class="text-primary-emphasis text-start"><%= I18n.t("product_solds.attributes.total")%> <%= number_to_currency(@sale.total_price)%></p>
   </div>
   <div class="mt-4">
-    <%= link_to "Volver a ventas", sales_path %>
+    <%= link_to I18n.t("buttons.back_to_sales"), sales_path %>
   </div>
 
 </div>

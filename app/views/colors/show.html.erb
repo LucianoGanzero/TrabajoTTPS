@@ -6,13 +6,13 @@
 
 <div class="mt-5 " style="width: 30%;">
   <div style="display: flex; justify-content: space-evenly;">
-    <%= link_to "Editar", edit_color_path(@color), class:"btn btn-primary" %> 
-    <%= button_to "Eliminar color", @color, method: :delete, class:"btn btn-outline-danger" %>
+    <%= link_to I18n.t("update"), edit_color_path(@color), class:"btn btn-primary" %> 
+    <%= button_to I18n.t("colors.destroy"), @color, method: :delete, class:"btn btn-outline-danger" %>
 
   </div>
   <div class="text-center mt-5">
 
-    <%= link_to "Volver a gestión", store_management_path, class:"btn btn-link" %>
+    <%= link_to I18n.t("buttons.back_to_manage"), store_management_path, class:"btn btn-link" %>
   </div>
   </div>
  </div>

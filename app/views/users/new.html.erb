@@ -1,13 +1,13 @@
-<% content_for :title, "Nuevo usuario" %>
+<% content_for :title, I18n.t("users.buttons.new") %>
 <div class="container">
-<h1>Nuevo usuario</h1>
+<h1><%= I18n.t("users.buttons.new")%></h1>
 <div style="width: 60%; justify-content: center">
 <%= render "form", user: @user %>
 </div>
 <br>
 
 <div class="mt-4">
-  <%= link_to "Volver a usuarios", users_path %>
+  <%= link_to I18n.t("users.buttons.back"), users_path %>
 </div>
 
 </div>

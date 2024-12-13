@@ -1,17 +1,17 @@
 <div class="container pt-5 pb-5">
   
-  <h1 class="text-center mb-5">Talle #<%= @size.id %></h1>
+  <h1 class="text-center mb-5"><%= I18n.t("sizes.size") %> #<%= @size.id %></h1>
 
   <%= render @size %>
 
   <div class="mt-5 " style="width: 30%;">
     
     <div class="text-center mt-5">
-      <%= button_to "Eliminar talle", @size, method: :delete, class:"btn btn-outline-danger" %>
-      <small id="sizeHel" class="form-text text-muted d-block mb-4">Eliminar el talle eliminará las entradas de stock de ese talle en todos los productos.</small>
+      <%= button_to I18n.t("sizes.delete"), @size, method: :delete, class:"btn btn-outline-danger" %>
+      <small id="sizeHel" class="form-text text-muted d-block mb-4"><%= I18n.t("sizes.delete") %></small>
     </div>
     <div style="display: flex; justify-content: space-evenly;">
-      <%= link_to "Volver a gestión", store_management_path, class:"btn btn-link" %>
+      <%= link_to I18n.t("buttons.back_to_manage"), store_management_path, class:"btn btn-link" %>
     </div>
   </div>
 </div>

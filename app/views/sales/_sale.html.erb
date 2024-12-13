@@ -1,25 +1,25 @@
 <div id="<%= dom_id @sale %>">
-  <h4 class="mt-3">Cliente</h4>
+  <h4 class="mt-3"><%= I18n.t("sales.attributes.client") %></h4>
   <p><%= @sale.client %></p>
 
-  <h4 class="mt-3">Vendedor</h4>
+  <h4 class="mt-3"><%= I18n.t("sales.attributes.salesman") %></h4>
   <% if @sale.salesman.present?%>    
     <p><%= @sale.salesman.username %> </p>
   <% else %>
-    <p>Sin asignar</p>
+    <p><<%= I18n.t("sales.messages.empty_salesman") %>></p>
   <% end %>
 
-  <h4 class="mt-3">Fecha de la venta</h4>
+  <h4 class="mt-3"><%= I18n.t("sales.labels.sale_date") %></h4>
   <p><%= @sale.sale_date.strftime("%d/%m/%Y %H:%M") if @sale.sale_date.present? %> </p>
 
-  <h4>Precio total</h4>
+  <h4><%= I18n.t("sales.attributes.total_price") %></h4>
   <p><%= number_to_currency(@sale.total_price) %></p>
 
   <% if @sale.cancelled %>
-    <h4 class="mt-3">Estado de la venta</h4>
-    <p>Cancelada</p>
+    <h4 class="mt-3"><%= I18n.t("sales.labels.sale_state") %></h4>
+    <p><%= I18n.t("sales.messages.cancelled") %></p>
 
-    <h4 class="mt-3">Fecha de cancelación</h4>
+    <h4 class="mt-3"><%= I18n.t("sales.attributes.cancel_date") %></h4>
     <p><%= @sale.cancel_date.strftime("%d/%m/%Y %H:%M") %> </p>
   <% end %>
 

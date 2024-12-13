@@ -8,29 +8,29 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :username, "Nombre de usuario", class: "form-label mt-4" %>
+    <%= form.label :username, I18n.t("users.attribute.username"), class: "form-label mt-4" %>
     <%= form.text_field :username, class: "form-control", id: "username" %>
-    <small id="usernameHelp" class="form-text text-muted">Requerido.</small>
+    <small id="usernameHelp" class="form-text text-muted"><%= I18n.t("required")%></small>
   </div>
 
   <div class="form-group">
-    <%= form.label :email_address, "Email", class: "form-label mt-4" %>
+    <%= form.label :email_address, I18n.t("users.attribute.email"), class: "form-label mt-4" %>
     <%= form.email_field :email_address, class: "form-control", id: "email_address" %>
-    <small id="emailHelp" class="form-text text-muted">Requerido.</small>
+    <small id="emailHelp" class="form-text text-muted"><%= I18n.t("required")%></small>
   </div>
 
   <div class="form-group">
-    <%= form.label :phone, "Teléfono", class: "form-label mt-4" %>
+    <%= form.label :phone, I18n.t("users.attribute.phone"), class: "form-label mt-4" %>
     <%= form.text_field :phone, class: "form-control", id: "phone" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :entry_date, "Fecha de entrada", class: "form-label mt-4" %>
+    <%= form.label :entry_date, I18n.t("users.attribute.entry_date"), class: "form-label mt-4" %>
     <%= form.date_field :entry_date, class: "form-control", id: "entry_date" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :role_id, "Rol", class: "form-label mt-4" %>
+    <%= form.label :role_id, I18n.t("users.attribute.role"), class: "form-label mt-4" %>
     <%= form.collection_select :role_id, @available_roles, :id, :name, { prompt: "Seleccione un rol" }, { class: "form-control", id: "role_id" } %>  
   </div>
 

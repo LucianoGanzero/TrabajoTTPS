@@ -1,7 +1,7 @@
 <%= form_with url: "/sales/search_products", method: :get, data: { turbo_frame: "product-results", controller: "search", action: "input->search#search" } do %>
   <div class="form-group">
-    <%= label_tag :search, "Buscar producto" %>
-    <%= text_field_tag :search, nil, id: "product-search", class: "form-control", placeholder: "Buscar por nombre de producto", autocomplete: "off", data: { search_target: "input" } %>
+    <%= label_tag :search, I18n.t("sales.labels.search_product") %>
+    <%= text_field_tag :search, nil, id: "product-search", class: "form-control", placeholder: I18n.t("sales.labels.search_product_by"), autocomplete: "off", data: { search_target: "input" } %>
   </div>
 <% end %>
 <%= turbo_frame_tag "product-results" do %>

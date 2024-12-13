@@ -6,12 +6,12 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :size, "Talle", for:"size", class: "form-label mt-4" %>
+    <%= form.label :size, I18n.t("sizes.size"), for:"size", class: "form-label mt-4" %>
     <%= form.text_field :size, class:"form-control", id:"name" %>
   </div>
 
   <div class="mt-4 text-center">
-    <%= form.submit (size.persisted? ? "Actualizar talle" : "Crear talle"), class: "btn btn-primary" %>
+    <%= form.submit (size.persisted? ? I18n.t("sizes.update") : I18n.t("sizes.create")), class: "btn btn-primary" %>
   </div>
 <% end %>
  

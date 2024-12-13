@@ -2,7 +2,7 @@
 
 <div class="container pt-5 pb-5">
   
-  <h1 class="text-center mb-5">Usuario #<%= @user.id %></h1>
+  <h1 class="text-center mb-5"><%= I18n.t("users.user")%> #<%= @user.id %></h1>
 
 <div class="elements-container">
     <%= render @user %>
@@ -11,7 +11,7 @@
 
    
 <div style="width: 30%;">
-  <% if @user.role.name == "Administrador" && Current.user.role.name == "Gerente" %>
+  <% if (@user.role.name == "Administrador" && Current.user.role.name == "Gerente") || Current.user.role.name == "Empleado" %>
   <div style="display: flex; justify-content: space-evenly;">
    
   </div>
@@ -19,13 +19,13 @@
   <div class="mt-5" style="display: flex; justify-content: space-evenly;">
     <%= link_to "Editar", edit_user_path(@user), class:"btn btn-outline-primary" %> 
     <% if @user.active %>
-      <%= button_to "Desactivar usuario", @user, method: :delete, class: "btn btn-outline-danger" %>
+      <%= button_to I18n.t("users.buttons.deactivate"), @user, method: :delete, class: "btn btn-outline-danger" %>
   <% end %>
   </div>
 <% end %>
   
   <div class="text-center mt-5">
-    <%= link_to "Volver a Usuarios", users_path, class:"btn btn-link" %>
+    <%= link_to I18n.t("users.buttons.back"), users_path, class:"btn btn-link" %>
    
   </div>
   </div>

@@ -7,8 +7,12 @@ class ApplicationController < ActionController::Base
   before_action :set_render_cart
   before_action :initialize_cart
 
-  def not_found 
-    render 'errors/not_found', status: 404
+  def default_url_options
+    { lang: I18n.locale }
+  end
+
+  def not_found
+    render "errors/not_found", status: 404
   end
 
   def set_render_cart

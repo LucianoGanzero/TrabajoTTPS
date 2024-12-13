@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     @user.password_confirmation = @user.username
 
     if creating_admin_user? && Current.user.role.name == "Gerente"
-      redirect_to users_path, alert: I18n.t("users.alerts.create_admin")
+        redirect_to users_path, alert: I18n.t("users.alerts.create_admin")
       return
     end
 
@@ -88,8 +88,13 @@ class UsersController < ApplicationController
       @render_cart = false
     end
     def restrict_employee_access
+      # Restrinjo el acceso a los empleados: si quiere destruir, lo prohibo. Otra acción, si es sobre el mismo, la permito
       if Current.user.role.name == "Empleado"
-        redirect_to dashboard_index_path, alert: I18n.t("users.alerts.restrict")
+        if action_name == "destroy"
+          redirect_to dashboard_index_path, alert: I18n.t("users.alerts.restrict_destroy")
+        elsif Current.user != @user
+          redirect_to dashboard_index_path, alert: I18n.t("users.alerts.restrict")
+        end
       end
     end
 

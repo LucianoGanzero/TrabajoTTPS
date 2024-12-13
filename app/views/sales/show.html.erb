@@ -7,12 +7,12 @@
 
 <div class="mt-5 " style="width: 30%;">
   <div style="display: flex; justify-content: center;">
-    <%= button_to "Cancelar venta", @sale, method: :delete, class:"btn btn-outline-danger" %>
+    <%= button_to I18n.t("sales.cancel"), @sale, method: :delete, class:"btn btn-outline-danger" %>
 
   </div>
   <div class="text-center mt-5">
 
-    <%= link_to "Volver a ventas", sales_path, class:"btn btn-link" %>
+    <%= link_to I18n.t("sales.back"), sales_path, class:"btn btn-link" %>
   </div>
   </div>
  </div>

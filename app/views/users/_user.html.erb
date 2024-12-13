@@ -1,23 +1,23 @@
 <div id="<%= dom_id user %>">
-    <h4>Nombre de usuario</h4>
+    <h4><%=  I18n.t("users.attribute.username")%></h4>
     <p><%= @user.username %></p>
 
-    <h4 class="mt-3">Email</h4>
+    <h4 class="mt-3"><%=  I18n.t("users.attribute.email")%></h4>
     <p ><%= @user.email_address %></p>
 
-    <h4 class="mt-3">Telefono</h4>
-    <p><%= @user.phone.present? ? user.phone : "No especificado" %></p>
+    <h4 class="mt-3"><%=  I18n.t("users.attribute.phone")%></h4>
+    <p><%= @user.phone.present? ? user.phone : I18n.t("users.attribute.no_phone") %></p>
 
-    <h4 class="mt-3">Fecha de entrada</h4>
+    <h4 class="mt-3"><%=  I18n.t("users.attribute.entry_date")%></h4>
     <p ><%= @user.entry_date.strftime('%d/%m/%Y') %></p>
 
-    <h4 class="mt-3">Rol</h4>
+    <h4 class="mt-3"><%=  I18n.t("users.attribute.role")%></h4>
     <p ><%= @user.role.name %></p>
 
-    <h4 class="mt-3">Estado</h4>
+    <h4 class="mt-3"><%=  I18n.t("users.attribute.state")%></h4>
     <p ><%= @user.active ? "Activo" : "Inactivo" %></p>
 
-    <h4 class="mt-3">Ventas</h4>
+    <h4 class="mt-3"><%=  I18n.t("users.attribute.sales.sales")%></h4>
     <p>
       <% if @user.sales.any? %>
         <% @user.sales.each do |sale| %>
@@ -26,7 +26,7 @@
           </span>
         <% end %>
       <% else %>
-        <span>El usuario no tiene ventas realizadas</span>
+        <span><%=  I18n.t("users.attribute.sales.message")%></span>
       <% end %>
     </p>
 </div>

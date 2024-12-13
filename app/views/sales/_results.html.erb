@@ -7,19 +7,19 @@
           <div style="display: flex; align-items: center; justify-content:space-around">
             <div style="width:70%">
                 <select class="form-control size-select" data-product-id="<%= product.id %>" data-size-select-id="<%= product.id %>">
-                  <option value="">Seleccionar talle</option>
+                  <option value=""><%= I18n.t("sales.labels.select_size")%></option>
                   <% product.sizes.each do |size| %>
                     <option value="<%= size.id %>"><%= size.size %></option>
                   <% end %>
                 </select>
-              <input type="number" name="quantity_<%= product.id %>" min="1" class="form-control mt-2" placeholder="Cantidad" required data-quantity-id="<%= product.id %>">
+              <input type="number" name="quantity_<%= product.id %>" min="1" class="form-control mt-2" placeholder=<%= I18n.t("sales.labels.quantity")%> required data-quantity-id="<%= product.id %>">
             </div>
             <div class="text-center" style="width: 30%;">
               <%= form_with model: [sale, ProductSold.new], url: sale_product_solds_path(sale), method: :post, local: true do |f| %>
                 <%= f.hidden_field :product_id, value: product.id %>
                 <%= f.hidden_field :size_id, id: "size_field_#{product.id}" %>
                 <%= f.hidden_field :quantity, id: "quantity_field_#{product.id}" %>
-                <%= f.submit "Seleccionar", class: "btn btn-outline-primary text-center", data: { product_id: product.id } %>
+                <%= f.submit I18n.t("sales.buttons.select"), class: "btn btn-outline-primary text-center", data: { product_id: product.id } %>
               <% end %>
             </div>
           </div>
@@ -27,7 +27,7 @@
       <% end %>
     </ul>
   <% else %>
-    <p>No se encontraron productos.</p>
+    <p><%= I18n.t("sales.messages.empty_products") %></p>
   <% end %>
 </turbo-frame>
 

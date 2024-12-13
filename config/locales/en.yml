@@ -28,4 +28,316 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  required: "Required."
+  views:
+    pagination:
+      next: ">"
+      last: ">>"
+      first: "<<"
+      prev: "<"
+  and: "and"
+  update: "Update"
+  errors:
+    not_found:
+      title: "Page not found"
+      message: "Sorry, the page you are looking for does not exist."
+    messages:
+      blank: "can't be blank"
+      invalid: "is not valid"
+      taken: "is already taken"
+      required: "is required"
+      record_invalid: "is invalid"
+  activerecord:
+    attributes:
+      user:
+        username: "Username"
+        email_address: "Email address"
+        phone: "Phone"
+        entry_date: "Entry date"
+        password: "Password"
+        role: "Role"
+  buttons:
+    back_to_dashboard: "Back to dashboard"
+    back_to_manage: "Back to management"
+    back_to_home: "Back to home page"
+    back_to_sales: "Back to sales"
+    sales: "Sales"
+    users: "Users"
+    store_management: "Store management"
+    inventory: "Inventory"
+    end: "End"
+    search: "Search"
+    add_to_cart: "Add to cart"
+    back: "Back"
+  users:
+    users: "Users"
+    user: "User"
+    inactive: "No active users"
+    alerts:
+      restrict: "You do not have permission to manage users"
+      restrict_manager: "You do not have permission to update Administrators"
+      create_admin: "You do not have permission to create admin users"
+    buttons:
+      show: "Go to user"
+      back: "Back to users"
+      edit: "Update user"
+      create: "Create user"
+      add: "Add user"
+      new: "New user"
+      deactivate: "Deactivate user"
+    attribute:
+      username: "Username"
+      email: "Email"
+      phone: "Phone"
+      no_phone: "Not specified"
+      entry_date: "Entry date"
+      role: "Role"
+      state: "State"
+      active: "Active"
+      sales:
+        sales: "Sales"
+        message: "The user has no completed sales"
+    create:
+      success: "User was successfully created"
+      admin_error: "Only an administrator can assign the Administrator role."
+    edit:
+      success: "User was successfully updated"
+    destroy:
+      success: "User was successfully deactivated"
+    phone:
+      size: "The phone number cannot exceed 10 digits"
+      digits: "Only numbers are allowed"
+      presence: "Phone number is required"
+    email:
+      format: "Email format is incorrect"
+  cart:
+    titles:
+      checkout: "Checkout"
+    messages:
+      empty: "Your cart is empty"
+      review: "This is the content of your cart"
+      success: "Congratulations! Your purchase was successful"
+      insufficient_stock: "Insufficient stock for %{quantity} units of %{product_name} (%{size})."
+      add_product: "Product %{product_name} was added to your cart."
+    labels:
+      name: "Name"
+      address: "Address"
+      first_name: "First name"
+      last_name: "Last name"
+      dni: "DNI"
+      payment_method: "Payment method"
+      phone: "Phone"
+    buttons:
+      buy: "Buy"
+      confirm: "Confirm"
+    payment_methods:
+      cash: "Cash"
+      transfer: "Transfer"
+      card: "Debit / Credit"
+  categories:
+    categories: "Categories"
+    category: "Category"
+    update: "Update category"
+    create: "Create category"
+    add: "Add category"
+    destroy: "Delete category"
+    messages:
+      success: "Category was successfully created"
+      edit_success: "Category was successfully updated"
+      destroy_success: "Category was successfully deleted"
+      dissasociate_success: "Tag '%{category_name}' was removed from the product."
+      dissasociate_fail: "Failed to dissociate tag '#{category_name}' from the product."
+      products_empty: "No products associated with this category."
+      sizes: "*Categories with sizes are mutually exclusive."
+      modify_sizes: "*Modifying sizes associated with a category will create/delete stock entries for all associated products."
+    attributes:
+      name: "Name"
+      sizes: "Sizes"
+      products: "Associated products"
+  colors:
+    colors: "Colors"
+    color: "Color"
+    update: "Update color"
+    create: "New color"
+    add: "Add color"
+    destroy: "Delete color"
+    attributes:
+      name: "Name"
+      code: "Code"
+      products: "Associated products"
+    messages:
+      success: "Color was successfully created"
+      edit_success: "Color was successfully updated"
+      destroy_success: "Color was successfully deleted"
+      dissasociate_success: "Color '%{color_name}' was removed from the product."
+      dissasociate_fail: "Failed to dissociate color '#{color_name}' from the product."
+      products_empty: "No products associated with this color."
+  product_solds:
+    add: "Add products"
+    label:
+      search: "Search product"
+      search_by: "Search by product name"
+    attributes:
+      products: "Added products"
+      quantity: "Quantity"
+      sell_price: "Price"
+      total: "Total sale"
+    messages:
+      success: "Product added successfully."
+      insufficient_stock: "Not enough stock of this product in that size."
+      empty: "This sale has no products yet."
+  products:
+    article: "Article"
+    products: "Products"
+    product: "Product"
+    update: "Update product"
+    create: "Create product"
+    new: "New product"
+    edit: "Edit product"
+    show: "Show product"
+    back: "Back to products"
+    add: "Add product"
+    active:
+      title: "Active products"
+      empty: "No active products"
+    inactive:
+      title: "Inactive products"
+      empty: "No inactive products"
+    buttons:
+      watch: "View"
+      suspend: "Discontinue"
+      reactivate: "Reactivate"
+    messages:
+      success: "Product was successfully created"
+      update: "Product was successfully updated"
+      destroy: "Product was successfully deleted"
+      deactivate: "Product successfully discontinued."
+      deactivate_error: "There was a problem discontinuing the product: %{message}"
+      activate: "Product successfully activated."
+      activate_error: "There was a problem activating the product."
+      category_error: "There must be at least one category with associated sizes."
+      category_size: "You must select only one of these categories to determine the sizes associated with the product."
+      colors_empty: "The product has no associated colors"
+      tags_empty: "The product has no associated tags"
+    attributes:
+      tags: "Tags"
+      name: "Name"
+      description: "Description"
+      unit_price: "Unit price"
+      price: "Price"
+      entry_date: "Entry date"
+      brand: "Brand"
+      images: "Images"
+      stock: "Total stock"
+      category_size: "Categories with sizes"
+      category_without_size: "Categories without sizes"
+  sales:
+    historic:
+      title: "Historic Sales"
+      message: "No historic sales"
+    unassigned:
+      title: "Unassigned Sales"
+      message: "No unassigned sales"
+    cancelled:
+      title: "Cancelled Sales"
+      message: "No cancelled sales"
+    create: "Create sale"
+    cancel: "Cancel sale"
+    add: "Add sale"
+    assign: "Assign seller"
+    new: "New sale"
+    back: "Back to sales"
+    buttons:
+      select: "Select"
+    labels:
+      select_size: "Select size"
+      quantity: "Quantity"
+      client_name: "Client name"
+      sale_date: "Sale date"
+      sale_state: "Sale state"
+      search_product: "Search product"
+      search_product_by: "Search by product name"
+    attributes:
+      client: "Client"
+      salesman: "Salesman"
+      total_price: "Total price"
+      cancel_date: "Cancellation date"
+      number: "Sale number"
+      total_products: "Total products"
+      total: "Total"
+      date: "Date"
+      time: "Time"
+    messages:
+      salesman: "Salesman assigned successfully."
+      salesman_error: "Error assigning salesman."
+      cancel: "Sale cancelled and stocks updated successfully."
+      cancel_error: "Error cancelling the sale: %{message}"
+      empty_products: "No products found."
+      empty_salesman: "Unassigned"
+      cancelled: "Cancelled"
+  sessions:
+    messages:
+      try_again: "Try again later"
+      error: "Email or password is incorrect"
+  size_stock:
+    actions:
+      add: "Add"
+      rmv: "Remove"
+    attributes:
+      stock: "Stock"
+    messages:
+      error: "Cannot modify the stock of a discontinued product."
+      decrement: "Stock cannot be less than 0."
+      problem: "There was a problem updating the stock."
+  sizes:
+    sizes: "Sizes"
+    size: "Size"
+    add: "Add size"
+    update: "Update size"
+    create: "Create size"
+    new: "New size"
+    delete: "Delete size"
+    message: "Deleting the size will remove stock entries of this size from all products."
+    attributes:
+      name: "Name"
+    messages:
+      success: "Size was successfully created"
+      update: "Size was successfully updated"
+      destroy: "Size was successfully deleted"
+  brands:
+    brands: "Brands"
+  shop_products:
+    index:
+      title: "Available products"
+      message: "No products available"
+      placeholder: "Search products by name or description"
+    attributes:
+      price: "Price"
+      stock: "Total stock"
+
+  welcome:
+    title: "Welcome to Avivas"
+    subtitle: "Your best choice in sportswear"
+  navbar:
+    buttons:
+      home: "Home"
+      products: "Products"
+      contact: "Contact"
+      about_us: "About us"
+      cart: "Cart"
+    cart:
+      title: "Your cart"
+      table:
+        name: "Name"
+        unit_price: "Unit Price"
+        quantity: "Qty."
+        size: "Size"
+        total: "Total"
+    user:
+      salute: "Hello"
+      profile: "My profile"
+      signin: "Sign in"
+      signout: "Sign out"
+  footer:
+    rights: "All rights reserved"
+

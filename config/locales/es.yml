@@ -1,4 +1,5 @@
 es:
+  required: "Requerido."
   views:
     pagination:
       next: ">"
@@ -36,7 +37,13 @@ es:
     store_management: "Gestión de tienda"
     inventory: "Inventario"
     end: "Terminar"
+    search: "Buscar"
+    add_to_cart: "Agregar al carrito"
+    back: "Volver"
   users:
+    users: "Usuarios"
+    user: "Usuario"
+    inactive: "No hay usuarios activos"
     alerts:
       restrict: "No tienes permiso para gestionar usuarios"
       restrict_manager: "No tienes permiso para actualizar Administradores"
@@ -46,6 +53,21 @@ es:
       back: "Volver a usuarios"
       edit: "Actualizar usuario"
       create: "Crear usuario"
+      add: "Agregar usuario"
+      new: "Nuevo usuario"
+      deactivate: "Desactivar usuario"
+    attribute:
+      username: "Nombre de usuario"
+      email: "Correo electrónico"
+      phone: "Telefono"
+      no_phone: "No especificado"
+      entry_date: "Fecha de entrada"
+      role: "Role"
+      state: "Estado"
+      active: "Activo"
+      sales:
+        sales: "Ventas"
+        message: "El usuario no tiene ventas realizadas"
     create:
       success: "El usuario se creó correctamente"
       admin_error: "Solo un administrador puede asignar el rol de Administrador."
@@ -136,6 +158,7 @@ es:
       insufficient_stock: "No hay suficiente stock de ese producto en ese talle."
       empty: "Esta venta aun no tiene productos."
   products:
+    article: "Artículo"
     products: "Productos"
     product: "Producto"
     update: "Actualizar producto"
@@ -165,7 +188,10 @@ es:
       activate_error: "Hubo un problema al activar el producto."
       category_error: "Debe haber al menos una categoría con talles asociados."
       category_size: "Debe seleccionar solo una de estas categorías para determinar los talles asociados al producto."
+      colors_empty: "El producto no tiene colores asociados"
+      tags_empty: "El producto no tiene etiquetas asociadas"
     attributes:
+      tags: "Etiquetas"
       name: "Nombre"
       description: "Descripción"
       unit_price: "Precio unitario"
@@ -177,16 +203,60 @@ es:
       category_size: "Categorías con talles"
       category_without_size: "Categorias sin talles"
   sales:
+    historic:
+      title: "Ventas Históricas"
+      message: "No hay ventas históricas"
+    unassigned:
+      title: "Ventas sin asignar"
+      message: "No hay ventas sin asignar"
+    cancelled:
+      title: "Ventas canceladas"
+      message: "No hay ventas canceladas"
+    create: "Crear venta"
+    cancel: "Cancelar venta"
+    add: "Agregar venta"
+    assign: "Asignar vendedor"
+    new: "Nueva venta"
+    back: "Volver a ventas"
+    buttons:
+      select: "Seleccionar"
+      
+    labels:
+      select_size: "Seleccionar talle"
+      quantity: "Cantidad"
+      client_name: "Nombre del cliente"
+      sale_date: "Fecha de la venta"
+      sale_state: "Estado de la venta"
+      search_product: "Buscar producto"
+      search_product_by: "Buscar por nombre de producto"
+    attributes:
+      client: "Cliente"
+      salesman: "Vendedor"
+      total_price: "Precio total"
+      cancel_date: "Fecha de cancelación"
+      number: "N° venta"
+      total_products: "Cantidad de productos"
+      total: "Total"
+      date: "Fecha"
+      time: "Hora"
     messages:
       salesman: "Vendedor asignado correctamente."
       salesman_error: "Error al asignar vendedor."
       cancel: "Venta cancelada y stocks actualizados correctamente."
       cancel_error: "Error al cancelar la venta: %{message}"
+      empty_products: "No se encontraron productos."
+      empty_salesman: "Sin asignar"
+      cancelled: "Cancelada"
   sessions:
     messages:
       try_again: "Intenta nuevamente mas tarde"
       error: "El mail o la contraseña son incorrectos"
   size_stock:
+    actions:
+      add: "Agregar"
+      rmv: "Quitar"
+    attributes:
+      stock: "Stock"
     messages:
       error: "No se puede modificar el stock de un producto discontinuado."
       decrement: "El stock no puede ser menor que 0."
@@ -195,7 +265,50 @@ es:
     sizes: "Talles"
     size: "Talle"
     add: "Agregar talle"
+    update: "Actualizar talle"
+    create: "Crear talle"
+    new: "Nuevo talle"
+    delete: "Eliminar talle"
+    message: "Eliminar el talle eliminará las entradas de stock de ese talle en todos los productos."
+    attributes:
+      name: "Nombre"
     messages:
       success: "El talle se creo correctamente"
       update: "El talle se actualizó correctamente"
       destroy: "El talle se eliminó con exito"
+  brands:
+    brands: "Marcas"
+  shop_products:
+    index:
+      title: "Productos disponibles"
+      message: "No hay productos disponibles"
+      placeholder: "Buscar productos por nombre o descripción"
+    attributes:
+      price: "Precio"
+      stock: "Stock total"
+
+  welcome:
+    title: "Bienvenidos a Avivas"
+    subtitle: "Tu mejor elección en ropa deportiva"
+  navbar:
+    buttons:
+      home: "Home"
+      products: "Productos"
+      contact: "Contacto"
+      about_us: "Sobre nosotros"
+      cart: "Carrito"
+    cart:
+      title: "Tu carrito"
+      table:
+        name: "Nombre"
+        unit_price: "P. uni"
+        quantity: "Cant."
+        size: "Talle"
+        total: "Total"
+    user:
+      salute: "Hola"
+      profile: "Mi perfil"
+      signin: "Iniciar sesión"
+      signout: "Cerrar sesión"
+  footer:
+    rights: "Todos los derechos reservados"

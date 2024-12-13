@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bienvenidos a Avivas</title>
+    <title><%= I18n.t("welcome.title")%></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -21,8 +21,8 @@
   <body>
     <div class="welcome-container">
       <div class="welcome-text">
-        <h1>Bienvenidos a Avivas</h1>
-        <p>Tu mejor elección para ropa deportiva</p>
+        <h1><%= I18n.t("welcome.title")%></h1>
+        <p><%= I18n.t("welcome.subtitle")%></p>
       </div>
     </div>
   </body>

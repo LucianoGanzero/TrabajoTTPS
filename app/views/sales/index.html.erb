@@ -1,18 +1,18 @@
 <div class="container pt-5 pb-5">
-  <h1 class="text-center mb-5">Ventas Históricas</h1>
+  <h1 class="text-center mb-5"><%I18n.t("sales.historic.title")%></h1>
   <% if @assigned_sales.empty? %>
-    <p class="text-center mb-4">No hay ventas históricas.</p>
+    <p class="text-center mb-4"><%I18n.t("sales.historic.message")%></p>
   <% else %>
     <table class="table table-bordered table-striped table-hover mb-5">
       <thead>
         <tr>
-          <th>N° Venta</th>
-          <th>Cantidad de Productos</th>
-          <th>Total</th>
-          <th>Cliente</th>
-          <th>Vendedor</th>
-          <th>Fecha</th>
-          <th>Hora</th>
+          <th><%I18n.t("sales.atributes.number")%></th>
+          <th><%I18n.t("sales.atributes.total_products")%></th>
+          <th><%I18n.t("sales.atributes.total")%></th>
+          <th><%I18n.t("sales.atributes.client")%></th>
+          <th><%I18n.t("sales.atributes.salesman")%></th>
+          <th><%I18n.t("sales.atributes.date")%></th>
+          <th><%I18n.t("sales.atributes.time")%></th>
           <th></th>
         </tr>
       </thead>
@@ -28,7 +28,7 @@
             <td><%= sale.sale_date.strftime('%H:%M') if sale.sale_date.present? %></td>
             <td style="padding-right: 0.01px">
               <%= form_with model: sale, url: sale_path(sale), method: :delete, local: true do |form| %>
-                <%= form.submit "Cancelar Venta", class: "btn btn-outline-danger btn-sm", data: { confirm: "¿Estás seguro de que deseas cancelar esta venta?" } %>
+                <%= form.submit I18n.t("sales.cancel"), class: "btn btn-outline-danger btn-sm", data: { confirm: "¿Estás seguro de que deseas cancelar esta venta?" } %>
               <% end %>
             </td>
           </tr>
@@ -37,21 +37,21 @@
     </table>
   <% end %>
 
-  <%= link_to "Agregar venta", new_sale_path, class: "btn btn-primary" %>
+  <%= link_to I18n.t("sales.add"), new_sale_path, class: "btn btn-primary" %>
 
-  <h1 class="text-center mb-5 mt-5">Ventas Sin Asignar</h1>
+  <h1 class="text-center mb-5 mt-5"><%I18n.t("sales.unassigned.title")%></h1>
   <% if @unassigned_sales.empty? %>
-    <p class="text-center mb-4">No hay ventas sin asignar.</p>
+    <p class="text-center mb-4"><%I18n.t("sales.unassigned.message")%></p>
   <% else %>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>N° Venta</th>
-          <th>Cantidad de Productos</th>
-          <th>Total</th>
-          <th>Cliente</th>
-          <th>Fecha</th>
-          <th>Hora</th>
+          <th><%I18n.t("sales.atributes.number")%></th>
+          <th><%I18n.t("sales.atributes.total_products")%></th>
+          <th><%I18n.t("sales.atributes.total")%></th>
+          <th><%I18n.t("sales.atributes.client")%></th>
+          <th><%I18n.t("sales.atributes.date")%></th>
+          <th><%I18n.t("sales.atributes.time")%></th>
           <th></th>
           <th></th>
         </tr>
@@ -68,12 +68,12 @@
             <td style="padding-right: 0.01px">
               <%= form_with model: sale, url: assign_salesman_sale_path(sale), method: :patch, local: true do |form| %>
                 <%= form.hidden_field :salesman_id, value: Current.user.id %>
-                <%= form.submit "Asignar Vendedor", class: "btn btn-outline-primary btn-sm" %>
+                <%= form.submit I18n.t("sales.assign"), class: "btn btn-outline-primary btn-sm" %>
               <% end %>              
             </td>
             <td>
               <%= form_with model: sale, url: sale_path(sale), method: :delete, local: true do |form| %>
-                <%= form.submit "Cancelar Venta", class: "btn btn-outline-danger btn-sm", data: { confirm: "¿Estás seguro de que deseas cancelar esta venta?" } %>
+                <%= form.submit I18n.t("sales.cancel"), class: "btn btn-outline-danger btn-sm", data: { confirm: "¿Estás seguro de que deseas cancelar esta venta?" } %>
               <% end %>
             </td>
           </tr>
@@ -82,21 +82,21 @@
     </table>
   <% end %>
   
-  <h1 class="text-center mb-5 mt-5">Ventas Canceladas</h1>
+  <h1 class="text-center mb-5 mt-5"><%I18n.t("sales.cancelled.title")%></h1>
   <% if @cancelled_sales.empty? %>
-    <p class="text-center mb-4">No hay ventas canceladas.</p>
+    <p class="text-center mb-4"><%I18n.t("sales.cancelled.message")%></p>
   <% else %>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>N° Venta</th>
-          <th>Cantidad de Productos</th>
-          <th>Total</th>
-          <th>Cliente</th>
-          <th>Vendedor</th>
-          <th>Fecha</th>
-          <th>Hora</th>
-          <th>Fecha de Cancelación</th>
+          <th><%I18n.t("sales.atributes.number")%></th>
+          <th><%I18n.t("sales.atributes.total_products")%></th>
+          <th><%I18n.t("sales.atributes.total")%></th>
+          <th><%I18n.t("sales.atributes.client")%></th>
+          <th><%I18n.t("sales.atributes.salesman")%></th>
+          <th><%I18n.t("sales.atributes.date")%></th>
+          <th><%I18n.t("sales.atributes.time")%></th>
+          <th><%I18n.t("sales.atributes.cancel_date")%></th>
         </tr>
       </thead>
       <tbody>
@@ -117,6 +117,6 @@
   <% end %>
 
   <div class="mt-4">
-    <%= link_to "Volver al dashboard", dashboard_index_path, class:"btn btn-link" %>
+    <%= link_to I18n.t("buttons.back_to_dashboard"), dashboard_index_path, class:"btn btn-link" %>
   </div>
 </div>

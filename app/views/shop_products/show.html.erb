@@ -38,7 +38,7 @@
             <%= form_with(url: cart_add_path) do |f| %>
             <%= f.hidden_field :id, value: @product.id %>
             <div class="element-container">
-            <h3>Talles</h3>
+            <h3><%= I18n.t("sizes.sizes")%></h3>
             <div class="d-flex flex-wrap mt-4" role="group" aria-label="Basic radio toggle button group">
                 <% @product.size_stocks.each do |size_stock| %>
                 <%= f.radio_button :size, size_stock.size.id, 
@@ -57,7 +57,7 @@
             </div>
 
             <div class="element-container">
-                <h3>Cantidad</h3>
+                <h3><%= I18n.t("sales.labels.quantity")%></h3>
                 <div class="d-flex mt-3">
                     <div>
                     <button class="btn btn-outline-secondary" type="button" id="decreaseQuantity-<%= @product.id %>">-</button>
@@ -73,14 +73,14 @@
 
             <div class="mt-4">
                 <%= f.hidden_field :quantity, id: "hiddenQuantity-#{@product.id}", value: 0, min: 1 %>
-                <%= f.submit "Agregar al carrito", class: "btn btn-lg btn-primary" %>
+                <%= f.submit I18n.t("buttons.add_to_cart"), class: "btn btn-lg btn-primary" %>
             </div>
             <% end %>
         </div>
     </div>
 
     <div class="mt-4">
-        <%= link_to 'Volver', shop_products_path, class:"btn btn-link" %>
+        <%= link_to I18n.t("buttons.back"), shop_products_path, class:"btn btn-link" %>
     </div>
 
 </div>

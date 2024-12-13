@@ -1,6 +1,6 @@
-<% content_for :title, "Actualizar usuario" %>
+<% content_for :title, I18n.t("users.buttons.update") %>
 <div class="container">
-<h1>Actualizar usuario</h1>
+<h1><%= I18n.t("users.buttons.update")%></h1>
 <div style="width: 60%; justify-content: center">
 <%= render "form", user: @user %>
 </div>

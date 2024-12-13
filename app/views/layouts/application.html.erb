@@ -37,16 +37,16 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <%= link_to 'Home', root_path, class: 'nav-link' %>
+          <%= link_to I18n.t("navbar.buttons.home"), root_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
-          <%= link_to 'Productos', shop_products_path, class: 'nav-link' %>
+          <%= link_to I18n.t("navbar.buttons.products"), shop_products_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contacto</a>
+          <a class="nav-link" href="#"><%= I18n.t("navbar.buttons.contact")%></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Sobre nosotros</a>
+          <a class="nav-link" href="#"><%= I18n.t("navbar.buttons.about_us")%></a>
         </li>
         <% if @render_cart %>
          <li class="nav-item dropdown">
@@ -57,17 +57,17 @@
             role="button" 
             data-bs-toggle="dropdown" 
             aria-expanded="false">
-            🛒 Carrito <%= render partial: "cart/cart_count" %>
+            🛒 <%= I18n.t("navbar.buttons.cart")%> <%= render partial: "cart/cart_count" %>
           </a>
           <ul class="dropdown-menu dropdown-menu-end p-3" style="min-width: 400px;" aria-labelledby="cartDropdown">
-            <h5 class="dropdown-header">Tu carrito</h5>
+            <h5 class="dropdown-header"><%= I18n.t("navbar.cart.title")%></h5>
             <hr class="dropdown-divider">
             <div class="d-flex justify-content-between text-muted fw-bold px-2">
-              <span class="text-truncate" style="width: 30%;">Nombre</span>
-              <span style="width: 20%;">P. Uni.</span>
-              <span style="width: 15%;">Cant.</span>
-              <span style="width: 15%;">Talle</span>
-              <span style="width: 20%;">Total</span>
+              <span class="text-truncate" style="width: 30%;"><%= I18n.t("navbar.cart.table.name")%></span>
+              <span style="width: 20%;"><%= I18n.t("navbar.cart.table.unit_price")%></span>
+              <span style="width: 15%;"><%= I18n.t("navbar.cart.table.quantity")%></span>
+              <span style="width: 15%;"><%= I18n.t("navbar.cart.table.size")%></span>
+              <span style="width: 20%;"><%= I18n.t("navbar.cart.table.total")%></span>
              
             </div>
             <hr class="dropdown-divider">
@@ -81,20 +81,20 @@
           <!-- Dropdown para usuario autenticado -->
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              Hola <%= Current.user.username %>
+              <%= I18n.t("navbar.user.salute")%> <%= Current.user.username %>
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item">Mi Perfil</a></li>
+              <li><%= link_to I18n.t("navbar.user.profile"), user_path(Current.user), class: 'dropdown-item' %></li>
               <li><%= link_to 'Dashboard', dashboard_index_path, class: 'dropdown-item' %></li>
               <div class="dropdown-divider"></div>
               <li>
-                <%= link_to 'Cerrar Sesion', session_path, data: { turbo_method: :delete }, class: 'dropdown-item' %>
+                <%= link_to I18n.t("navbar.user.signout"), session_path, data: { turbo_method: :delete }, class: 'dropdown-item' %>
               </li>
             </ul>
           </div>
         <% else %>
           <!-- Botón para iniciar sesión -->
-          <button type="button" class="btn btn-outline-secondary text-dark"><%= link_to 'Iniciar Sesión', new_session_path %></button>
+          <button type="button" class="btn btn-outline-secondary text-dark"><%= link_to I18n.t("navbar.user.sigin"), new_session_path %></button>
         <% end %>
       </div>
     </div>
@@ -123,6 +123,6 @@
 
   </body>
   <footer class="bg-dark fixed-bottom text-center text-white d-flex align-items-center justify-content-center py-1">    
-    <p class="fs-6">Avivas | Todos los derechos reservados | Luciano Ganzero</p>
+    <p class="fs-6">Avivas | <%= I18n.t("footer.rights")%> | Luciano Ganzero</p>
   </footer>
 </html>

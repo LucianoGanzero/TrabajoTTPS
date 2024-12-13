@@ -1,12 +1,12 @@
 <div class="shop-container pt-5 pb-5">
-  <h1 class="text-center mb-5">Productos Disponibles</h1>
+  <h1 class="text-center mb-5"><%= I18n.t("shop_products.index.title")%></h1>
   
   <div style="width: 100%; align-items: right; margin: 0;">
   <%= form_with url: shop_products_path, method: :get, local: true do %>
     <div class="input-group mb-3 ml-5"> 
-      <%= text_field_tag :query, params[:query], class: "form-control search-input", placeholder: "Buscar productos por nombre o descripción" %> 
+      <%= text_field_tag :query, params[:query], class: "form-control search-input", placeholder: I18n.t("shop_products.index.placeholder") %> 
       <div class="input-group-append search-button"> 
-        <%= submit_tag "Buscar", class: "btn btn-primary" %> 
+        <%= submit_tag I18n.t("buttons.search"), class: "btn btn-primary" %> 
         </div> 
       </div>
   <% end %>
@@ -14,7 +14,7 @@
 
   <div style="display: flex; width:100%; justify-content:space-between; gap:2;">
     <div class="col-md-3 sticky-top" style="width: 20%">
-        <h4>Categorías</h4>
+        <h4><%= I18n.t("categories.categories")%></h4>
         <ul class="list-group mb-3">
           <% @categories.each do |category| %>
             <li class="list-group-item <%= 'active' if params[:category].to_i == category.id %>">
@@ -26,7 +26,7 @@
           <% end %>
         </ul>
 
-        <h4>Colores</h4>
+        <h4><%= I18n.t("colors.colors")%></h4>
         <ul class="list-group mb-3">
           <% @colors.each do |color| %>
             <li class="list-group-item <%= 'active' if params[:color].to_i == color.id %>">
@@ -38,7 +38,7 @@
           <% end %>
         </ul>
 
-        <h4>Marcas</h4>
+        <h4><%= I18n.t("brands.brands")%></h4>
         <ul class="list-group mb-3">
           <% @brands.each do |brand| %>
             <li class="list-group-item <%= 'active' if params[:brand].to_i == brand.id %>">
@@ -66,11 +66,11 @@
                   <% end %>
                   <%= link_to shop_product_path(product), class: "text-decoration-none" do %>
                     <div class="card-body">
-                      <p class="card-text">Precio: <%= number_to_currency(product.unit_price) %></p>
+                      <p class="card-text"><%= I18n.t("shop_products.attributes.price")%> <%= number_to_currency(product.unit_price) %></p>
                     </div>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item"><%= product.description %></li>
-                      <li class="list-group-item">Stock total: <%= product.stock_total %></li>
+                      <li class="list-group-item"><%= I18n.t("shop_products.attributes.stock")%> <%= product.stock_total %></li>
                     </ul>
                   <% end %>
                 </div>
@@ -80,7 +80,7 @@
         <% else %>
           <div class="row">
             <div class="col-md-12 text-center mt-5">
-                <p>No hay productos disponibles.</p>
+                <p><%= I18n.t("shop_products.index.message")%></p>
             </div>
           </div>
         <% end %>

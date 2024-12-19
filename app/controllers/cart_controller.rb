@@ -56,8 +56,8 @@ class CartController < ApplicationController
 
     if size_stock.nil? || size_stock.stock_available < (current_order&.quantity.to_i + quantity)
       respond_to do |format|
-        format.html { redirect_to request.referer || root_path, alert: I18n.t('cart.messages.insufficient_stock', quantity: quantity, product_name: @product.name, size: @size.size) }
-        format.json { render json: { error: I18n.t('cart.messages.insufficient_stock', quantity: quantity, product_name: @product.name, size: @size.size) }, status: :unprocessable_entity }
+        format.html { redirect_to request.referer || root_path, alert: I18n.t("cart.messages.insufficient_stock", quantity: quantity, product_name: @product.name, size: @size.size) }
+        format.json { render json: { error: I18n.t("cart.messages.insufficient_stock", quantity: quantity, product_name: @product.name, size: @size.size) }, status: :unprocessable_entity }
       end
       return
     end
@@ -69,7 +69,7 @@ class CartController < ApplicationController
       @cart.orders.create(product: @product, size: @size, quantity:)
     end
 
-    flash[:notice] = I18n.t('cart.messages.add_product', product_name: @product.name)
+    flash[:notice] = I18n.t("cart.messages.add_product", product_name: @product.name)
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [

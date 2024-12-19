@@ -1,18 +1,18 @@
 <div class="container pt-5 pb-5">
-  <h1 class="text-center mb-5"><%I18n.t("sales.historic.title")%></h1>
+  <h1 class="text-center mb-5"><%= I18n.t("sales.historic.title")%></h1>
   <% if @assigned_sales.empty? %>
-    <p class="text-center mb-4"><%I18n.t("sales.historic.message")%></p>
+    <p class="text-center mb-4"><%= I18n.t("sales.historic.message")%></p>
   <% else %>
     <table class="table table-bordered table-striped table-hover mb-5">
       <thead>
         <tr>
-          <th><%I18n.t("sales.atributes.number")%></th>
-          <th><%I18n.t("sales.atributes.total_products")%></th>
-          <th><%I18n.t("sales.atributes.total")%></th>
-          <th><%I18n.t("sales.atributes.client")%></th>
-          <th><%I18n.t("sales.atributes.salesman")%></th>
-          <th><%I18n.t("sales.atributes.date")%></th>
-          <th><%I18n.t("sales.atributes.time")%></th>
+          <th><%= I18n.t("sales.attributes.number")%></th>
+          <th><%= I18n.t("sales.attributes.total_products")%></th>
+          <th><%= I18n.t("sales.attributes.total")%></th>
+          <th><%= I18n.t("sales.attributes.client")%></th>
+          <th><%= I18n.t("sales.attributes.salesman")%></th>
+          <th><%= I18n.t("sales.attributes.date")%></th>
+          <th><%= I18n.t("sales.attributes.time")%></th>
           <th></th>
         </tr>
       </thead>
@@ -39,19 +39,19 @@
 
   <%= link_to I18n.t("sales.add"), new_sale_path, class: "btn btn-primary" %>
 
-  <h1 class="text-center mb-5 mt-5"><%I18n.t("sales.unassigned.title")%></h1>
+  <h1 class="text-center mb-5 mt-5"><%= I18n.t("sales.unassigned.title")%></h1>
   <% if @unassigned_sales.empty? %>
-    <p class="text-center mb-4"><%I18n.t("sales.unassigned.message")%></p>
+    <p class="text-center mb-4"><%= I18n.t("sales.unassigned.message")%></p>
   <% else %>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th><%I18n.t("sales.atributes.number")%></th>
-          <th><%I18n.t("sales.atributes.total_products")%></th>
-          <th><%I18n.t("sales.atributes.total")%></th>
-          <th><%I18n.t("sales.atributes.client")%></th>
-          <th><%I18n.t("sales.atributes.date")%></th>
-          <th><%I18n.t("sales.atributes.time")%></th>
+          <th><%= I18n.t("sales.attributes.number")%></th>
+          <th><%= I18n.t("sales.attributes.total_products")%></th>
+          <th><%= I18n.t("sales.attributes.total")%></th>
+          <th><%= I18n.t("sales.attributes.client")%></th>
+          <th><%= I18n.t("sales.attributes.date")%></th>
+          <th><%= I18n.t("sales.attributes.time")%></th>
           <th></th>
           <th></th>
         </tr>
@@ -82,21 +82,21 @@
     </table>
   <% end %>
   
-  <h1 class="text-center mb-5 mt-5"><%I18n.t("sales.cancelled.title")%></h1>
+  <h1 class="text-center mb-5 mt-5"><%= I18n.t("sales.cancelled.title")%></h1>
   <% if @cancelled_sales.empty? %>
-    <p class="text-center mb-4"><%I18n.t("sales.cancelled.message")%></p>
+    <p class="text-center mb-4"><%= I18n.t("sales.cancelled.message")%></p>
   <% else %>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th><%I18n.t("sales.atributes.number")%></th>
-          <th><%I18n.t("sales.atributes.total_products")%></th>
-          <th><%I18n.t("sales.atributes.total")%></th>
-          <th><%I18n.t("sales.atributes.client")%></th>
-          <th><%I18n.t("sales.atributes.salesman")%></th>
-          <th><%I18n.t("sales.atributes.date")%></th>
-          <th><%I18n.t("sales.atributes.time")%></th>
-          <th><%I18n.t("sales.atributes.cancel_date")%></th>
+          <th><%= I18n.t("sales.attributes.number")%></th>
+          <th><%= I18n.t("sales.attributes.total_products")%></th>
+          <th><%= I18n.t("sales.attributes.total")%></th>
+          <th><%= I18n.t("sales.attributes.client")%></th>
+          <th><%= I18n.t("sales.attributes.salesman")%></th>
+          <th><%= I18n.t("sales.attributes.date")%></th>
+          <th><%= I18n.t("sales.attributes.time")%></th>
+          <th><%= I18n.t("sales.attributes.cancel_date")%></th>
         </tr>
       </thead>
       <tbody>

@@ -161,6 +161,7 @@ en:
     create: "New color"
     add: "Add color"
     destroy: "Delete color"
+    new: "Create color"
     attributes:
       name: "Name"
       code: "Code"
@@ -232,6 +233,8 @@ en:
       category_size: "Categories with sizes"
       category_without_size: "Categories without sizes"
   sales:
+    sales: "Sales"
+    sale: "Sale"
     historic:
       title: "Historic Sales"
       message: "No historic sales"
@@ -333,6 +336,7 @@ en:
         quantity: "Qty."
         size: "Size"
         total: "Total"
+      
     user:
       salute: "Hello"
       profile: "My profile"

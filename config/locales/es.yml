@@ -173,8 +173,8 @@ es:
       title: "Productos activos"
       empty: "No hay productos activos"
     inactive:
-      title: "Productos activos"
-      empty: "No hay productos activos"
+      title: "Productos discontinuados"
+      empty: "No hay productos discontinuados"
     buttons:
       watch: "Ver"
       suspend: "Discontinuar"

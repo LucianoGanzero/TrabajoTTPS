@@ -56,6 +56,9 @@ en:
         entry_date: "Entry date"
         password: "Password"
         role: "Role"
+      product:
+        name: "Nombre"
+        categories: "Categorías"
   buttons:
     back_to_dashboard: "Back to dashboard"
     back_to_manage: "Back to management"

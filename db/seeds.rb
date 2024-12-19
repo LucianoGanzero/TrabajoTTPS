@@ -224,15 +224,16 @@ productos.each do |product_name|
     product.images.attach(io: File.open(image_path), filename: File.basename(image_path))
   end
 
-  # Inicializar stock por talla, asegurando que solo se asocien talles válidos para cada categoría
+  # Ajustar stock por talla, asegurando que solo se actualicen talles válidos para cada categoría
   selected_sizes.each do |size|
     product_category.sizes.each do |category_size|
       if category_size.size == size
-        SizeStock.create!(
-          product: product,
-          size: category_size,
-          stock_available: rand(0..10)
-        )
+        size_stock = SizeStock.find_by(product: product, size: category_size)
+        if size_stock
+          size_stock.update!(stock_available: rand(0..10))
+        else
+          puts "SizeStock no encontrado para el producto #{product.name} y talla #{size}."
+        end
       end
     end
   end

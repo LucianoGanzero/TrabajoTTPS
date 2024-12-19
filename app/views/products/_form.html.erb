@@ -1,7 +1,7 @@
 <%= form_with(model: product) do |form| %>
   <% if @product.errors.any? %>
     <div class="alert alert-danger alert-dismissible fade show d-inline-block w-auto text-center" role="alert" id="error-message">
-      <%= @product.errors[:product].to_sentence %>
+      <%= @product.errors.full_messages.to_sentence %>
     </div>
   <% end %>
 
@@ -36,7 +36,7 @@
   </div>
 
 <div class="form-group">
-  <%= form.label :category_ids, I18n.t("products.attributes.category_sizes"), class: "form-label mt-4" %>
+  <%= form.label :category_ids, I18n.t("products.attributes.category_size"), class: "form-label mt-4" %>
   <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Categorías con talles">
     <%= form.collection_check_boxes :category_ids, Category.with_sizes, :id, :name do |b| %>
       <div class="form-check form-check-inline">
@@ -47,7 +47,7 @@
       </div>
     <% end %>
   </div>
-  <small id="sizeHel" class="form-text text-muted d-block mt-2"><%= I18n.t("products.attributes.category_sizes")%></small>
+  <small id="sizeHel" class="form-text text-muted d-block mt-2"><%= I18n.t("products.attributes.category_without_size")%></small>
 
   <div class="btn-group flex-wrap checkbox-group" role="group" aria-label="Categorías sin talles">
     <%= form.collection_check_boxes :category_ids, Category.without_sizes, :id, :name do |b| %>

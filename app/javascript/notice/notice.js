@@ -1,4 +1,4 @@
-document.addEventListener("turbo:load", function() {
+document.addEventListener("turbo:render", function() {
   // Selecciona todos los elementos de alerta
   var noticeMessage = document.getElementById("notice-message");
   var alertMessage = document.getElementById("alert-message");

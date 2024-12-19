@@ -52,9 +52,9 @@ class SalesController < ApplicationController
     @sale = Sale.find(params[:id])
     @salesman = User.find(params[:sale][:salesman_id])
     if @sale.update(salesman: @salesman)
-      redirect_to sales_path, notice: I18n.t('sales.messages.salesman')
+      redirect_to sales_path, notice: I18n.t("sales.messages.salesman")
     else
-      redirect_to sales_path, alert: I18n.t('sales.messages.salesman_error')
+      redirect_to sales_path, alert: I18n.t("sales.messages.salesman_error")
     end
   end
 
@@ -95,10 +95,10 @@ class SalesController < ApplicationController
 
 
       # Si todo va bien, redirigir
-      redirect_to sales_path, notice: I18n.t('sales.messages.cancel')
+      redirect_to sales_path, notice: I18n.t("sales.messages.cancel")
       rescue ActiveRecord::RecordInvalid, ActiveRecord::Rollback => e
         # Si ocurre un error, manejar el rollback
-        redirect_to sales_path, alert: I18n.t('sales.messages.cancel_error', message: e.message)
+        redirect_to sales_path, alert: I18n.t("sales.messages.cancel_error", message: e.message)
       end
   end
 

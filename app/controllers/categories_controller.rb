@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
       if @category.save
         @category.size_ids = params[:category][:size_ids]
         @category.save
-        format.html { redirect_to store_management_path, notice: I18n.t('categories.messages.success') }
+        format.html { redirect_to store_management_path, notice: I18n.t("categories.messages.success") }
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,32 +39,12 @@ class CategoriesController < ApplicationController
       # Guardamos los talles antes de la actualización
       previous_sizes = @category.sizes.to_a
 
-      # Actualizamos la categoría con los parámetros
       if @category.update(category_params)
-        # Obtenemos los talles actuales después de la actualización
-        current_sizes = @category.sizes.to_a
-
-        # Detectar los talles agregados
-        added_sizes = current_sizes - previous_sizes
-        added_sizes.each do |size|
-          @category.products.each do |product|
-            # Crear un size_stock con stock_available igual a 0 para los productos
-            SizeStock.create(product: product, size: size, stock_available: 0)
-          end
-        end
-
-        # Detectar los talles eliminados
-        removed_sizes = previous_sizes - current_sizes
-        removed_sizes.each do |size|
-          @category.products.each do |product|
-            # Eliminar el size_stock para el talle eliminado
-            SizeStock.where(product: product, size: size).destroy_all
-          end
-        end
+        @category.update_sizes_and_products(previous_sizes)
         @category.size_ids = params[:category][:size_ids]
 
         @category.save
-        format.html { redirect_to store_management_path, notice: I18n.t('categories.messages.edit_success') }
+        format.html { redirect_to store_management_path, notice: I18n.t("categories.messages.edit_success") }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -78,7 +58,7 @@ class CategoriesController < ApplicationController
     @category.destroy!
 
     respond_to do |format|
-      format.html { redirect_to store_management_path, status: :see_other, notice: I18n.t('categories.messages.destroy_success') }
+      format.html { redirect_to store_management_path, status: :see_other, notice: I18n.t("categories.messages.destroy_success") }
       format.json { head :no_content }
     end
   end
@@ -88,9 +68,9 @@ class CategoriesController < ApplicationController
     category = Category.find(params[:id])
 
     if product.categories.delete(category)
-      redirect_to product_path(product), notice: I18n.t('categories.messages.dissasociate_succes', category_name: @category.name)
+      redirect_to product_path(product), notice: I18n.t("categories.messages.dissasociate_succes", category_name: @category.name)
     else
-      redirect_to product_path(product), alert: I18n.t('categories.messages.dissasociate_fail', category_name: @category.name)
+      redirect_to product_path(product), alert: I18n.t("categories.messages.dissasociate_fail", category_name: @category.name)
     end
   end
 

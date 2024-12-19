@@ -22,7 +22,7 @@ class SizesController < ApplicationController
 
     respond_to do |format|
       if @size.save
-        format.html { redirect_to store_management_path, notice: I18n.t('sizes.messages.success') }
+        format.html { redirect_to store_management_path, notice: I18n.t("sizes.messages.success") }
         format.json { render :show, status: :created, location: @size }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,7 +35,7 @@ class SizesController < ApplicationController
   def update
     respond_to do |format|
       if @size.update(size_params)
-        format.html { redirect_to store_management_path, notice: I18n.t('sizes.messages.update') }
+        format.html { redirect_to store_management_path, notice: I18n.t("sizes.messages.update") }
         format.json { render :show, status: :ok, location: @size }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -49,7 +49,7 @@ class SizesController < ApplicationController
     @size.destroy!
 
     respond_to do |format|
-      format.html { redirect_to store_management_path, status: :see_other, notice: I18n.t('sizes.messages.destroy') }
+      format.html { redirect_to store_management_path, status: :see_other, notice: I18n.t("sizes.messages.destroy") }
       format.json { head :no_content }
     end
   end

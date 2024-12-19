@@ -22,7 +22,7 @@ class ColorsController < ApplicationController
 
     respond_to do |format|
       if @color.save
-        format.html { redirect_to store_management_path, notice: I18n.t('colors.messages.success') }
+        format.html { redirect_to store_management_path, notice: I18n.t("colors.messages.success") }
         format.json { render :show, status: :created, location: @color }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,7 +35,7 @@ class ColorsController < ApplicationController
   def update
     respond_to do |format|
       if @color.update(color_params)
-        format.html { redirect_to store_management_path, notice: I18n.t('colors.messages.edit_success') }
+        format.html { redirect_to store_management_path, notice: I18n.t("colors.messages.edit_success") }
         format.json { render :show, status: :ok, location: @color }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -49,7 +49,7 @@ class ColorsController < ApplicationController
     @color.destroy!
 
     respond_to do |format|
-      format.html { redirect_to store_management_path, status: :see_other, notice: I18n.t('colors.messages.destroy_success') }
+      format.html { redirect_to store_management_path, status: :see_other, notice: I18n.t("colors.messages.destroy_success") }
       format.json { head :no_content }
     end
   end
@@ -59,9 +59,9 @@ class ColorsController < ApplicationController
     color = Color.find(params[:id])
 
     if product.colors.delete(color)
-      redirect_to product_path(product), notice: I18n.t('colors.messages.dissasociate_succes', color_name: @color.name)
+      redirect_to product_path(product), notice: I18n.t("colors.messages.dissasociate_succes", color_name: @color.name)
     else
-      redirect_to product_path(product), alert: I18n.t('colors.messages.dissasociate_fail', color_name: @color.name)
+      redirect_to product_path(product), alert: I18n.t("colors.messages.dissasociate_fail", color_name: @color.name)
     end
   end
 

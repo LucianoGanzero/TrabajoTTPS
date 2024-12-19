@@ -52,7 +52,7 @@ class ProductSoldsController < ApplicationController
         @sale.update_total_price
 
         respond_to do |format|
-          format.html { redirect_to new_sale_product_sold_path(@sale), notice:  I18n.t('product_solds.messages.success')}
+          format.html { redirect_to new_sale_product_sold_path(@sale), notice:  I18n.t("product_solds.messages.success") }
           format.turbo_stream do
             render turbo_stream: [
               turbo_stream.replace(
@@ -65,8 +65,8 @@ class ProductSoldsController < ApplicationController
         end
       else
         respond_to do |format|
-          format.html { redirect_to new_sale_product_sold_path(@sale), alert:  I18n.t('product_solds.messages.insufficient_stock')}
-          format.turbo_stream { render turbo_stream: turbo_stream.append(:flash, partial: "layouts/flash", locals: { alert: I18n.t('product_solds.messages.insufficient_stock') }) }
+          format.html { redirect_to new_sale_product_sold_path(@sale), alert:  I18n.t("product_solds.messages.insufficient_stock") }
+          format.turbo_stream { render turbo_stream: turbo_stream.append(:flash, partial: "layouts/flash", locals: { alert: I18n.t("product_solds.messages.insufficient_stock") }) }
         end
       end
     rescue => e

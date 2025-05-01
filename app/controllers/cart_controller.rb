@@ -48,6 +48,14 @@ class CartController < ApplicationController
   end
 
   def add
+    unless params[:size].present? && params[:quantity].present? && params[:quantity].to_i > 0
+      respond_to do |format|
+        format.html { redirect_to request.referer || root_path, alert: I18n.t("cart.messages.missing_size_or_quantity") }
+        format.json { render json: { error: I18n.t("cart.messages.missing_size_or_quantity") }, status: :unprocessable_entity }
+      end
+      return
+    end
+
     @product = Product.find_by(id: params[:id])
     @size = Size.find_by(id: params[:size])
     quantity = params[:quantity].to_i

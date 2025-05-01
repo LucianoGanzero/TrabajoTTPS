@@ -122,6 +122,7 @@ en:
       success: "Congratulations! Your purchase was successful"
       insufficient_stock: "Insufficient stock for %{quantity} units of %{product_name} (%{size})."
       add_product: "Product %{product_name} was added to your cart."
+      missing_size_or_quantity: "Please select a size and quantity for the product."
     labels:
       name: "Name"
       address: "Address"

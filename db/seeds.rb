@@ -175,40 +175,27 @@ productos.each do |product_name|
     brand = brands.sample
   end
 
-  # Crear producto
-  product = Product.create!(
-    name: product_name,
-    description: description,
-    unit_price: unit_price,
-    entry_date: entry_date,
-    deactivation_date: nil,
-    brand: brand
-  )
 
-  # Asociar colores al azar
-  product_colors = colors.sample(2).map { |color| color[:name] }
-  product_colors.each do |color_name|
-    color = Color.find_or_create_by(name: color_name)
-    product.colors << color
-  end
+
+
 
   # Asociar con la categoría según el nombre del producto
-  if product.name.downcase.include?('pantalón') || product.name.downcase.include?('jeans')
+  if product_name.downcase.include?('pantalón') || product_name.downcase.include?('jeans')
     product_category = categories.find { |cat| cat.name == 'Pantalones' }
     selected_sizes = trousers_size
-  elsif product.name.downcase.include?('niño') || product.name.downcase.include?('niña') || product.name.downcase.include?('infantil')
+  elsif product_name.downcase.include?('niño') || product_name.downcase.include?('niña') || product_name.downcase.include?('infantil')
     product_category = categories.find { |cat| cat.name == 'Calzado Infantil' }
     selected_sizes = children_shoe_size
-  elsif product.name.downcase.include?('zapatilla') || product.name.downcase.include?('calzado')
+  elsif product_name.downcase.include?('zapatilla') || product_name.downcase.include?('calzado')
     product_category = categories.find { |cat| cat.name == 'Calzado' }
     selected_sizes = shoes_size
-  elsif product.name.downcase.include?('buzo') || product.name.downcase.include?('sudadera')
+  elsif product_name.downcase.include?('buzo') || product_name.downcase.include?('sudadera')
     product_category = categories.find { |cat| cat.name == 'Indumentaria' }
     selected_sizes = clothes_size
-  elsif product.name.downcase.include?('camiseta') || product.name.downcase.include?('remera')
+  elsif product_name.downcase.include?('camiseta') || product_name.downcase.include?('remera')
     product_category = categories.find { |cat| cat.name == 'Indumentaria' }
     selected_sizes = clothes_size
-  elsif product.name.downcase.include?('botines')
+  elsif product_name.downcase.include?('botines')
     product_category = categories.find { |cat| cat.name == 'Calzado' }
     selected_sizes = shoes_size
   else
@@ -216,8 +203,31 @@ productos.each do |product_name|
     selected_sizes = shoes_size
   end
 
+  # Crear el producto y asociar la categoría antes de guardar
+  product = Product.new(
+    name: product_name,
+    description: description,
+    unit_price: unit_price,
+    entry_date: entry_date,
+    deactivation_date: nil,
+    brand: brand
+  )
   # Asociar con la categoría
   product.categories << product_category
+
+  begin
+    product.save!
+  rescue ActiveRecord::RecordInvalid => e
+    puts "Error al guardar el producto #{product_name}: #{e.message}"
+    next
+  end
+
+  # Asociar colores al azar
+  product_colors = colors.sample(2).map { |color| color[:name] }
+  product_colors.each do |color_name|
+    color = Color.find_or_create_by(name: color_name)
+    product.colors << color
+  end
 
   image_paths = Dir[Rails.root.join("app/assets/images/seed/#{product_name}/*")]
   image_paths.each do |image_path|

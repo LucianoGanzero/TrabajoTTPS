@@ -123,6 +123,7 @@ en:
       insufficient_stock: "Insufficient stock for %{quantity} units of %{product_name} (%{size})."
       add_product: "Product %{product_name} was added to your cart."
       missing_size_or_quantity: "Please select a size and quantity for the product."
+      cleared: "Your cart has been emptied."
     labels:
       name: "Name"
       address: "Address"
@@ -134,6 +135,7 @@ en:
     buttons:
       buy: "Buy"
       confirm: "Confirm"
+      clear: "Empty cart"
     payment_methods:
       cash: "Cash"
       transfer: "Transfer"

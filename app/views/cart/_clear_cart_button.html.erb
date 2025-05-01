@@ -1,0 +1,7 @@
+<turbo-frame id="clear_cart_button">
+  <% if cart.orders.count > 0 %>
+    <%= button_to "Vaciar 🗑", clear_cart_path, method: :delete, data: { turbo_stream: true }, form: { data: { turbo: true } }, class: "btn btn-sm btn-outline-danger", id: "clear_cart_button" %>
+  <% else %>
+    <%= "" %>
+  <% end %>
+</turbo-frame>

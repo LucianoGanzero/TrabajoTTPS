@@ -87,8 +87,13 @@ class CartController < ApplicationController
           turbo_stream.replace("cart_count",
                               partial: "cart/cart_count",
                               locals: { cart: @cart }),
-          turbo_stream.replace(@product) ]
+          turbo_stream.replace("clear_cart_button",
+                              partial: "cart/clear_cart_button",
+                              locals: { cart: @cart }),
+          turbo_stream.replace(@product),
+          turbo_stream.update("flash-messages", html: flash_message_html.html_safe) ]
       end
+      flash.discard
     end
   end
 
@@ -106,4 +111,46 @@ class CartController < ApplicationController
       end
     end
   end
+
+  def clear
+    @cart.orders.destroy_all
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace("cart",
+                              partial: "cart/cart",
+                              locals: { cart: @cart }),
+          turbo_stream.replace("cart_count",
+                              partial: "cart/cart_count",
+                              locals: { cart: @cart }),
+          turbo_stream.replace("clear_cart_button",
+                              partial: "cart/clear_cart_button",
+                              locals: { cart: @cart })
+        ]
+      end
+    end
+  end
+end
+
+private
+
+def flash_message_html
+  html = ""
+  if flash[:notice].present?
+    html += <<~HTML
+      <div class="alert alert-success alert-dismissible fade show d-inline-block w-auto text-center" role="alert" id="notice-message">
+        #{ERB::Util.html_escape(flash[:notice])}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    HTML
+  end
+  if flash[:alert].present?
+    html += <<~HTML
+      <div class="alert alert-warning alert-dismissible fade show d-inline-block w-auto text-center" role="alert" id="alert-message">
+        #{ERB::Util.html_escape(flash[:alert])}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    HTML
+  end
+  html
 end

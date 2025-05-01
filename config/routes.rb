@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post "cart/add"
   post "cart/remove"
   post "cart/confirm", to: "cart#confirm", as: "confirm_cart"
-
+  delete "cart/clear", to: "cart#clear", as: "clear_cart"
 
   resources :shop_products, only: [ :index, :show ]
   resources :dashboard, only: [ :index ]

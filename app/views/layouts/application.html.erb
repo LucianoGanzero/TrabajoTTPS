@@ -60,7 +60,12 @@
             🛒 <%= I18n.t("navbar.buttons.cart")%> <%= render partial: "cart/cart_count" %>
           </a>
           <ul class="dropdown-menu dropdown-menu-end p-3" style="min-width: 400px;" aria-labelledby="cartDropdown">
-            <h5 class="dropdown-header"><%= I18n.t("navbar.cart.title")%></h5>
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="dropdown-header mb-0"><%= I18n.t("navbar.cart.title") %></h5>
+              <%= turbo_stream_from @cart %>
+              <%= render partial: "cart/clear_cart_button", locals: { cart: @cart } %>
+            </div>
+
             <hr class="dropdown-divider">
             <div class="d-flex justify-content-between text-muted fw-bold px-2">
               <span class="text-truncate" style="width: 30%;"><%= I18n.t("navbar.cart.table.name")%></span>
@@ -104,7 +109,7 @@
   <body>
 
     <div class="main-content">
-      <div class="text-center mt-5 position-absolute w-100" style="z-index: 1; top: 25px;">
+      <div id="flash-messages" class="text-center mt-5 position-absolute w-100" style="z-index: 1; top: 25px;">
         <% if notice %>
           <div class="alert alert-success alert-dismissible fade show d-inline-block w-auto text-center" role="alert" id="notice-message">
             <%= notice %>
